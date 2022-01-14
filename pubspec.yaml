@@ -31,7 +31,10 @@ dependencies:
   cupertino_icons:
   hexcolor: ^2.0.4
   font_awesome_flutter: ^9.1.0
+  http:
   otp_text_field: ^1.1.1
+  flutter_easyloading: ^3.0.3
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
@@ -49,8 +52,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/
+#  assets:
+#    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

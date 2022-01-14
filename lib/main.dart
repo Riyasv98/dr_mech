@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'pages/splash_screen.dart';
@@ -35,6 +36,7 @@ class LoginUiApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey.shade100,
         primarySwatch: Colors.grey,
       ),
+      builder: EasyLoading.init(),
       home: SplashScreen(title: 'Flutter Login UI'),
     );
   }
