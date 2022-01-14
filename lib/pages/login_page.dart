@@ -9,8 +9,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:dr_mech/common/theme_helper.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
-import 'forgot_password_page.dart';
 import 'profile_page.dart';
 import 'registration_page.dart';
 import 'widgets/header_widget.dart';
@@ -96,22 +94,14 @@ class _LoginPageState extends State<LoginPage>{
                             decoration: ThemeHelper().inputBoxDecorationShaddow(),
                           ),
                           SizedBox(height: 12.0),
-                          // Container(
-                          //   margin: EdgeInsets.fromLTRB(10,0,10,20),
-                          //   alignment: Alignment.topRight,
-                          //   child: GestureDetector(
-                          //     onTap: () {
-                          //       Navigator.push( context, MaterialPageRoute( builder: (context) => ForgotPasswordPage()), );
-                          //     },
-                          //     child: Text( "Forgot your password?", style: TextStyle( color: Colors.grey, ),
-                          //     ),
-                          //   ),
-                          // ),
+
                           GestureDetector(
                             onTap:(){
                               userLogin(companyIdController.text.toString(),userNameController.text.toString(),passwordController.text.toString());
+                              isLoading=true;
                             },
-                            child: Container(
+                            child:isLoading?Center(child: CircularProgressIndicator()):
+                            Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(10)),
                                   gradient: LinearGradient(
@@ -126,25 +116,6 @@ class _LoginPageState extends State<LoginPage>{
                               ),
                             ),
                           ),
-                          // Container(
-                          //   margin: EdgeInsets.fromLTRB(10,20,10,20),
-                          //   //child: Text('Don\'t have an account? Create'),
-                          //   child: Text.rich(
-                          //     TextSpan(
-                          //       children: [
-                          //         TextSpan(text: "Don\'t have an account? "),
-                          //         TextSpan(
-                          //           text: 'Create',
-                          //           recognizer: TapGestureRecognizer()
-                          //             ..onTap = (){
-                          //               Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()));
-                          //             },
-                          //           style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
-                          //         ),
-                          //       ]
-                          //     )
-                          //   ),
-                          // ),
                         ],
                       )
                   ),
@@ -158,33 +129,6 @@ class _LoginPageState extends State<LoginPage>{
 
   }
 
-  // Future userLogin(String companyId,String userName, String password) async {
-  //   isLoggedIn = true;
-  //   setState(() {});
-  //
-  //   String url = Apis.LOGIN_URL+companyId+"/"+userName+"/"+password+"/";
-  //   final response = await http.get(Uri.parse(url));
-  //
-  //   isLoggedIn = false;
-  //   setState(() {});
-  //   if (response.statusCode == 200) {
-  //     String responseString = response.body.toString();
-  //     var jsonObject = jsonDecode(responseString)["errorData"] as List;
-  //
-  //     if (jsonObject[0]["error"] == 0) {
-  //       setState(() {
-  //
-  //       });
-  //       EasyLoading.showSuccess(jsonObject[0]["message"]);
-  //       // getUniversityDetails();
-  //     } else {
-  //       EasyLoading.showSuccess(jsonObject[0]["message"]);
-  //     }
-  //   } else {
-  //     EasyLoading.showSuccess("Something went wrong");
-  //   }
-  // }
-
 
   Future userLogin(String companyId,String userName, String password ) async {
 
@@ -195,23 +139,13 @@ class _LoginPageState extends State<LoginPage>{
     isLoading=false;
       setState(() {});
       String responseData=response.body.toString();
-      // var jsonData=jsonDecode(responseData);
-      // if(jsonData['"BranchData Fetched Succesfully']) {
-      //   var data = jsonData['data'];
-      //   setState(() {
-      //
-      //   });
-      //
-      // }
-      // else {
-      //   EasyLoading.showError(jsonData['message']);
-      // }
+
     if (response.statusCode == 200) {
       String responseString = response.body.toString();
-      var dataObject = jsonDecode(responseString)["data"] as List;
       var errorObject = jsonDecode(responseString)["errorData"] as List;
 
-      if (null!=dataObject && dataObject.length>0) {
+      if (errorObject[0]["error"]==0) {
+        var dataObject = jsonDecode(responseString)["data"] as List;
         setState(() {
 
         });
@@ -219,8 +153,9 @@ class _LoginPageState extends State<LoginPage>{
         branchModel=BranchModel.fromJson(dataObject[0]);
         String branchJson=branchModelToJson(branchModel);
         PreferenceFile().setBranchData(branchJson);
-        EasyLoading.showSuccess("Login Successful");
-        Navigator.push( context, MaterialPageRoute( builder: (context) => ProfilePage()));
+        EasyLoading.showSuccess(errorObject[0]["message"]);
+
+        Navigator.push( context, MaterialPageRoute( builder: (context) => HomeScreen()));
 
       } else {
 

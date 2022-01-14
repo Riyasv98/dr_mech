@@ -7,19 +7,17 @@ import 'package:dr_mech/pages/splash_screen.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 
 import 'car_details_screen.dart';
-import 'forgot_password_page.dart';
-import 'forgot_password_verification_page.dart';
 import 'registration_page.dart';
 
-class ProfilePage extends StatefulWidget{
+class HomeScreen extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-     return _ProfilePageState();
+     return _HomeScreenState();
   }
 }
 
-class _ProfilePageState extends State<ProfilePage>{
+class _HomeScreenState extends State<HomeScreen>{
 
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
@@ -115,21 +113,7 @@ class _ProfilePageState extends State<ProfilePage>{
                 },
               ),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
-              ListTile(
-                leading: Icon(Icons.password_rounded, size: _drawerIconSize,color: Theme.of(context).accentColor,),
-                title: Text('Forgot Password Page',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).accentColor),),
-                onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => ForgotPasswordPage()),);
-                },
-              ),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
-              ListTile(
-                leading: Icon(Icons.verified_user_sharp, size: _drawerIconSize,color: Theme.of(context).accentColor,),
-                title: Text('Verification Page',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).accentColor),),
-                onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => ForgotPasswordVerificationPage()), );
-                },
-              ),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
               ListTile(
                 leading: Icon(Icons.logout_rounded, size: _drawerIconSize,color: Theme.of(context).accentColor,),
