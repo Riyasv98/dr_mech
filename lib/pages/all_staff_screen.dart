@@ -74,7 +74,9 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
                         ),
                         GestureDetector(
                           onTap: (){
-                            Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(new StaffModel(),1))).then((value){});
+                            Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(new StaffModel(),1))).then((value){
+                              getAllStaff();
+                            });
                           },
                           child: Align(
                             alignment: Alignment.topRight,
@@ -117,7 +119,9 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
                                               children: [
                                                 GestureDetector(
                                                   onTap: (){
-                                                    Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(staffList[index],2)));
+                                                    Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(staffList[index],2))).then((value){
+                                                      getAllStaff();
+                                                    });
                                                   },
                                                   child: Padding(
                                                     padding: const EdgeInsets.only(right: 8.0),

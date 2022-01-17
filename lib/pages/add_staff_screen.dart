@@ -2,11 +2,13 @@
 import 'dart:convert';
 
 import 'package:dr_mech/Api/Api.dart';
+import 'package:dr_mech/Utils/EmailValidater.dart';
 import 'package:dr_mech/models/StaffModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dr_mech/common/theme_helper.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -152,14 +154,6 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                                 "E-mail address", "Enter email"),
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
-                            validator: (val) {
-                              if (!(val!.isEmpty) && !RegExp(
-                                  r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-                                  .hasMatch(val)) {
-                                return "Enter a valid email address";
-                              }
-                              return null;
-                            },
                           ),
                           decoration: ThemeHelper()
                               .inputBoxDecorationShaddow(),
@@ -171,13 +165,10 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                                 'Mobile Number ', 'Enter phone number'),
                             controller: numberController,
                             keyboardType: TextInputType.phone,
-                            validator: (val) {
-                              if (!(val!.isEmpty) &&
-                                  !RegExp(r"^(\d+)*$").hasMatch(val)) {
-                                return "Enter a valid Mobile number";
-                              }
-                              return null;
-                            },
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9.]+')),
+                            ],
                           ),
                           decoration: ThemeHelper()
                               .inputBoxDecorationShaddow(),
@@ -237,6 +228,26 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                                           .bold),
                                   description:
                                   "Please type Email",
+                                  animationType:
+                                  ANIMATION
+                                      .FROM_LEFT,
+                                  position:
+                                  MOTION_TOAST_POSITION
+                                      .TOP,
+                                  width: 300)
+                                  .show(context);
+                            }else if (!EmailValidator
+                                .validate(
+                                emailController
+                                    .text)) {
+                              MotionToast.error(
+                                  title: "Error",
+                                  titleStyle: TextStyle(
+                                      fontWeight:
+                                      FontWeight
+                                          .bold),
+                                  description:
+                                  "Please enter valid Email",
                                   animationType:
                                   ANIMATION
                                       .FROM_LEFT,
