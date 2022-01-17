@@ -35,6 +35,9 @@ dependencies:
   otp_text_field: ^1.1.1
   flutter_easyloading: ^3.0.3
   shared_preferences:
+  fluttertoast: ^8.0.8
+  motion_toast: ^1.5.0
+
 
 dev_dependencies:
   flutter_test:

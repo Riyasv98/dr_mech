@@ -1,4 +1,5 @@
 
+import 'package:dr_mech/pages/all_staff_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,17 +8,17 @@ import 'package:dr_mech/pages/splash_screen.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 
 import 'car_details_screen.dart';
-import 'registration_page.dart';
+import 'add_staff_screen.dart';
 
-class HomeScreen extends StatefulWidget{
+class DashboardScreen extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-     return _HomeScreenState();
+     return _DashboardScreenState();
   }
 }
 
-class _HomeScreenState extends State<HomeScreen>{
+class _DashboardScreenState extends State<DashboardScreen>{
 
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
@@ -105,13 +106,6 @@ class _HomeScreenState extends State<HomeScreen>{
                 },
               ),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
-              ListTile(
-                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Theme.of(context).accentColor),
-                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).accentColor),),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
-                },
-              ),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
               Divider(color: Theme.of(context).primaryColor, height: 1,),
@@ -191,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen>{
                             ),
                             GestureDetector(
                               onTap: (){
-                                Navigator.push( context, MaterialPageRoute( builder: (context) => RegistrationPage()));
+                                Navigator.push( context, MaterialPageRoute( builder: (context) => AllStaffScreen()));
                               },
                               child: Container(
                                 height: MediaQuery.of(context).size.height/6,
@@ -209,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen>{
                                     Icon(
                                       Icons.people,size: 70,
                                     ),
-                                    Text("Add Staff",style: TextStyle(
+                                    Text("Staff",style: TextStyle(
                                         fontSize: 20,fontWeight: FontWeight.bold
                                     ),)
                                   ],

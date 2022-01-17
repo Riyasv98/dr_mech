@@ -9,8 +9,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:dr_mech/common/theme_helper.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'profile_page.dart';
-import 'registration_page.dart';
+import 'dashboard_screen.dart';
+import 'add_staff_screen.dart';
 import 'widgets/header_widget.dart';
 import 'package:http/http.dart' as http;
 
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage>{
         PreferenceFile().setBranchData(branchJson);
         EasyLoading.showSuccess(errorObject[0]["message"]);
 
-        Navigator.push( context, MaterialPageRoute( builder: (context) => HomeScreen()));
+        Navigator.push( context, MaterialPageRoute( builder: (context) => DashboardScreen()));
 
       } else {
 
