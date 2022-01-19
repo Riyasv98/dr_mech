@@ -1,4 +1,4 @@
-package com.r.drmech.dr_mech;
+package com.r.drmech;
 
 import io.flutter.embedding.android.FlutterActivity;
 

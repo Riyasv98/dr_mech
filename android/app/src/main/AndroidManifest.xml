@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.r.drmech.dr_mech">
-   <application
+    package="com.r.drmech">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
         android:label="dr_mech"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
