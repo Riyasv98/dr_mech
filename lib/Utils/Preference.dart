@@ -1,19 +1,20 @@
 import 'package:dr_mech/models/BranchModelFile.dart';
+import 'package:dr_mech/models/StaffModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 class PreferenceFile {
 
-  Future<bool> setBranchData(String branchModelJson) async {
+  Future<bool> setStaffData(String staffModelJson) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return await preferences.setString('branchModel',branchModelJson);
+    return await preferences.setString('staffModel',staffModelJson);
   }
-  Future<String> getBranchData() async {
-    BranchModel branchModel=new BranchModel();
+  Future<StaffModel> getStaffData() async {
+    StaffModel staffModel=new StaffModel();
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String jsonData=preferences.getString('branchModel')!;
-    branchModel=branchModelFromJson(jsonData);
-    return jsonData;
+    String jsonData=preferences.getString('staffModel')!;
+    staffModel=staffModelFromJson(jsonData);
+    return staffModel;
   }
 
 

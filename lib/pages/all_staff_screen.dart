@@ -48,186 +48,192 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              height: 150,
-              child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Stack(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Container(
+            child: Stack(
+              children: [
+                Container(
+                  height: 150,
+                  child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Form(
+                        key: _formKey,
+                        child: Column(
                           children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
-                              child: SizedBox(height: 20,),
+                            Stack(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+                                  child: SizedBox(height: 20,),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(new StaffModel(),1))).then((value){
-                              getAllStaff();
-                            });
-                          },
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0,bottom: 5),
-                              child: Icon(
-                                Icons.add_circle,color: Colors.grey,size: 40,
-                              ),
-                            ),
-                          ),
-                        ),
-
-
-
-                        isLoading
-                            ? Center(
-                          child:
-                          CircularProgressIndicator(),
-                        )
-                            :null!=staffList && staffList.length > 0?
-
-                        ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: staffList.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: MediaQuery.of(context).size.height/3.5,
-                                child: Card(
-                                  elevation: 2,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0,top:2),
-                                    child: Column(
-                                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.topRight,
-                                          child: Container(
-                                            width: MediaQuery.of(context).size.width/6,
-                                            child: Row(
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(staffList[index],2))).then((value){
-                                                      getAllStaff();
-                                                    });
-                                                  },
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(right: 8.0),
-                                                    child: Icon(
-                                                      Icons.edit,
-                                                      size: 20,
-                                                      color: Colors.grey,
-                                                    ),
-                                                  ),
-                                                ),
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    selectedStaff=staffList[index];
-                                                    Constants.deleteDialog(context,staffList[index].name.toString()).then((value) {
-                                                      if (value) {
-                                                        deleteStaff(selectedStaff.employeeId!.toInt());
-                                                      }
-                                                    });
-                                                  },
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    size: 20,
-                                                    color: Colors.red,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text("Name :"),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text("Email Address :"),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text("Mobile Number :"),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text("Address :"),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text(staffList[index].name.toString(),textAlign: TextAlign.left,),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text(staffList[index].email.toString(),textAlign: TextAlign.left,),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text(staffList[index].phone.toString(),textAlign: TextAlign.left,),
-                                                  ),
-
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                    child: Text(staffList[index].address.toString(),textAlign: TextAlign.left,),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-
-                                      ],
-                                    ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(new StaffModel(),1))).then((value){
+                                  getAllStaff();
+                                });
+                              },
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8.0,bottom: 5),
+                                  child: Icon(
+                                    Icons.add_circle,color: Colors.grey,size: 40,
                                   ),
                                 ),
-                              );
-                            })
-                            : Center(
-                          child: Text(
-                              "No document found"),
-                        )
+                              ),
+                            ),
+
+
+
+                            isLoading
+                                ? Center(
+                              child:
+                              CircularProgressIndicator(),
+                            )
+                                :null!=staffList && staffList.length > 0?
+
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: staffList.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height/4.5,
+                                    child: Card(
+                                      elevation: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 8.0,top:2),
+                                        child: Column(
+                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topRight,
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width/6,
+                                                child: Row(
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(staffList[index],2))).then((value){
+                                                          getAllStaff();
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(right: 8.0),
+                                                        child: Icon(
+                                                          Icons.edit,
+                                                          size: 20,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        selectedStaff=staffList[index];
+                                                        Constants.deleteDialog(context,staffList[index].name.toString()).then((value) {
+                                                          if (value) {
+                                                            deleteStaff(selectedStaff.employeeId!.toInt());
+                                                          }
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        Icons.delete,
+                                                        size: 20,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Row(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Name :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Email Address :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Mobile Number :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Address :"),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(staffList[index].name.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(staffList[index].email.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(staffList[index].phone.toString(),textAlign: TextAlign.left,),
+                                                      ),
+
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(staffList[index].address.toString(),textAlign: TextAlign.left,),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                })
+                                : Center(
+                              child: Text(
+                                  "No document found"),
+                            )
 
 
 
 
 
-                      ],
-                    ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

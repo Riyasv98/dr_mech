@@ -18,12 +18,11 @@ class CarDetailsPage extends  StatefulWidget{
 class _CarDetailsPageState extends State<CarDetailsPage>{
 
   final _formKey = GlobalKey<FormState>();
-  bool checkedValue = false;
-  bool checkboxValue = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(

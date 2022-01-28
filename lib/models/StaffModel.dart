@@ -10,52 +10,76 @@ String staffModelToJson(StaffModel data) => json.encode(data.toJson());
 
 class StaffModel {
   StaffModel({
+    this.brnId,
     this.employeeId,
+    this.imgUrl,
+    this.userName,
+    this.password,
+    this.cmpId,
+    this.isAdmin,
     this.name,
     this.email,
     this.phone,
     this.address,
-    this.imgUrl,
     this.status,
+    this.updatedBy,
+    this.createdBy,
     this.updatedOn,
     this.createdOn,
-    this.createdBy,
   });
 
-  int? employeeId;
-  String? name;
-  String? email;
+  int ?brnId;
+  int ?cmpId;
+  int ?employeeId;
+  String ?name;
+  String ?imgUrl;
+  String ?userName;
+  String ?password;
+  bool ?isAdmin;
+  String ?email;
   String ?phone;
   String ?address;
-  String ?imgUrl;
-  int ?status;
+  String ?status;
+  String ?updatedBy;
+  String ?createdBy;
   String ?updatedOn;
   String ?createdOn;
-  String ?createdBy;
 
   factory StaffModel.fromJson(Map<String, dynamic> json) => StaffModel(
+    brnId: null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
+    cmpId: null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     employeeId: null!=json["employeeId"]?json["employeeId"] is int ? json["employeeId"]: int.parse(json["employeeId"]):-1,
     name: json["name"],
+    isAdmin: json["isAdmin"]=="0",
+    userName: json["userName"],
+    password: json["password"],
     email: json["email"],
     phone: json["phone"],
-    address: json["address"],
     imgUrl: json["imgUrl"],
-    status:  null!=json["status"]?json["status"] is int ? json["status"]: int.parse(json["status"]):-1,
+    address: json["address"],
+    status: json["status"],
+    updatedBy: json["updatedBy"],
+    createdBy: json["createdBy"],
     updatedOn: json["updatedOn"],
     createdOn: json["createdOn"],
-    createdBy: json["createdBy"],
   );
 
   Map<String, dynamic> toJson() => {
+    "brnId": brnId,
     "employeeId": employeeId,
+    "cmpId": cmpId,
     "name": name,
+    "isAdmin": isAdmin,
+    "userName": userName,
+    "password": password,
     "email": email,
+    "imgUrl": imgUrl,
     "phone": phone,
     "address": address,
-    "imgUrl": imgUrl,
     "status": status,
+    "updatedBy": updatedBy,
+    "createdBy": createdBy,
     "updatedOn": updatedOn,
     "createdOn": createdOn,
-    "createdBy": createdBy,
   };
 }

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dr_mech/Api/Api.dart';
 import 'package:dr_mech/Utils/Preference.dart';
 import 'package:dr_mech/models/BranchModelFile.dart';
+import 'package:dr_mech/models/StaffModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _LoginPageState extends State<LoginPage>{
   Widget build(BuildContext context) {
 
     return Scaffold(
+      resizeToAvoidBottomInset:false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -69,14 +71,14 @@ class _LoginPageState extends State<LoginPage>{
                     key: _formKey,
                       child: Column(
                         children: [
-                          Container(
-                            child: TextField(
-                              controller: companyIdController,
-                              decoration: ThemeHelper().textInputDecoration('Company ID', 'Enter your company Id'),
-                            ),
-                            decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                          ),
-                          SizedBox(height: 15.0),
+                          // Container(
+                          //   child: TextField(
+                          //     controller: companyIdController,
+                          //     decoration: ThemeHelper().textInputDecoration('Company ID', 'Enter your company Id'),
+                          //   ),
+                          //   decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                          // ),
+                          // SizedBox(height: 15.0),
                           Container(
                             child: TextField(
                               controller: userNameController,
@@ -97,7 +99,7 @@ class _LoginPageState extends State<LoginPage>{
 
                           GestureDetector(
                             onTap:(){
-                              userLogin(companyIdController.text.toString(),userNameController.text.toString(),passwordController.text.toString());
+                              userLogin(userNameController.text,passwordController.text);
                               isLoading=true;
                             },
                             child:isLoading?Center(child: CircularProgressIndicator()):
@@ -130,15 +132,23 @@ class _LoginPageState extends State<LoginPage>{
   }
 
 
-  Future userLogin(String companyId,String userName, String password ) async {
+  Future userLogin(String username,String password) async {
 
-    String url=Apis.LOGIN_URL+companyId+"/"+userName+"/"+password+"/";
+    String url=Apis.LOGIN_URL;
+
+    var data=jsonEncode({
+      "jsonData":jsonEncode({
+        "userName":username,
+        "password":password
+      })
+    });
     isLoading=true;
     setState(() {});
-    var response = await http.get(Uri.parse(url));
+    var response = await http.post(Uri.parse(url),body: data);
     isLoading=false;
       setState(() {});
-      String responseData=response.body.toString();
+
+      // String responseData=response.body.toString();
 
     if (response.statusCode == 200) {
       String responseString = response.body.toString();
@@ -149,10 +159,11 @@ class _LoginPageState extends State<LoginPage>{
         setState(() {
 
         });
-        BranchModel branchModel=new BranchModel();
-        branchModel=BranchModel.fromJson(dataObject[0]);
-        String branchJson=branchModelToJson(branchModel);
-        PreferenceFile().setBranchData(branchJson);
+        StaffModel staffModel=new StaffModel();
+        staffModel=StaffModel.fromJson(dataObject[0]);
+        String staffJson=staffModelToJson(staffModel);
+
+        PreferenceFile().setStaffData(staffJson);
         EasyLoading.showSuccess(errorObject[0]["message"]);
 
         Navigator.push( context, MaterialPageRoute( builder: (context) => DashboardScreen()));

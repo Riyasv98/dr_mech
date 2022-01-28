@@ -77,6 +77,7 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(
@@ -135,14 +136,28 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                         Container(
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
+                                ' UserName', 'Enter username'),
+                            controller: nameController,
+                          ),
+                          decoration: ThemeHelper()
+                              .inputBoxDecorationShaddow(),
+                        ),
+                        SizedBox(height: 15,),
+                        Container(
+                          child: TextFormField(
+                            decoration: ThemeHelper().textInputDecoration(
+                                'Password', 'Enter password'),
+                            controller: nameController,
+                          ),
+                          decoration: ThemeHelper()
+                              .inputBoxDecorationShaddow(),
+                        ),
+                        SizedBox(height: 15,),
+                        Container(
+                          child: TextFormField(
+                            decoration: ThemeHelper().textInputDecoration(
                                 ' Name', 'Enter staff name'),
                             controller: nameController,
-                            validator: (val) {
-                              if (!(val!.isEmpty)) {
-                                return "Enter a staff name";
-                              }
-                              return null;
-                            },
                           ),
                           decoration: ThemeHelper()
                               .inputBoxDecorationShaddow(),
