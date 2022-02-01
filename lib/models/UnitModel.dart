@@ -22,16 +22,16 @@ class UnitModel {
   String ?name;
   String ?updatedBy;
   String ?createdBy;
-  DateTime ?updatedOn;
-  DateTime ?createdOn;
+  String ?updatedOn;
+  String ?createdOn;
 
   factory UnitModel.fromJson(Map<String, dynamic> json) => UnitModel(
     id: null!=json["id"]?json["id"] is int ? json["id"]: int.parse(json["id"]):-1,
     name: json["name"],
     updatedBy: json["updatedBy"],
     createdBy: json["createdBy"],
-    updatedOn: DateTime.parse(json["updatedOn"]),
-    createdOn: DateTime.parse(json["createdOn"]),
+    updatedOn: json["updatedOn"],
+    createdOn: json["createdOn"],
   );
 
   Map<String, dynamic> toJson() => {
