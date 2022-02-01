@@ -49,6 +49,8 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
   TextEditingController nameController = new TextEditingController();
   TextEditingController numberController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController userNameController = new TextEditingController();
 
   List<StaffModel> staffList = [];
 
@@ -64,6 +66,8 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
       addressController.text = selectedStaff.address.toString();
       numberController.text = selectedStaff.phone.toString();
       emailController.text = selectedStaff.email.toString();
+      passwordController.text = selectedStaff.password.toString();
+      userNameController.text = selectedStaff.userName.toString();
 
     }
 
@@ -137,7 +141,7 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
                                 ' UserName', 'Enter username'),
-                            controller: nameController,
+                            controller: userNameController,
                           ),
                           decoration: ThemeHelper()
                               .inputBoxDecorationShaddow(),
@@ -147,7 +151,7 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
                                 'Password', 'Enter password'),
-                            controller: nameController,
+                            controller: passwordController,
                           ),
                           decoration: ThemeHelper()
                               .inputBoxDecorationShaddow(),
@@ -212,8 +216,48 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                             selectedStaff.address=addressController.text;
                             selectedStaff.email=emailController.text;
                             selectedStaff.phone=numberController.text;
+                            selectedStaff.userName=userNameController.text;
+                            selectedStaff.password=passwordController.text;
 
-                            if (nameController
+                            if (userNameController
+                                .text.isEmpty) {
+                              MotionToast.error(
+                                  title: "Error",
+                                  titleStyle: TextStyle(
+                                      fontWeight:
+                                      FontWeight
+                                          .bold),
+                                  description:
+                                  "Please type User Name",
+                                  animationType:
+                                  ANIMATION
+                                      .FROM_LEFT,
+                                  position:
+                                  MOTION_TOAST_POSITION
+                                      .TOP,
+                                  width: 300)
+                                  .show(context);
+                            }
+                            else if (passwordController
+                                .text.isEmpty) {
+                              MotionToast.error(
+                                  title: "Error",
+                                  titleStyle: TextStyle(
+                                      fontWeight:
+                                      FontWeight
+                                          .bold),
+                                  description:
+                                  "Please type Password",
+                                  animationType:
+                                  ANIMATION
+                                      .FROM_LEFT,
+                                  position:
+                                  MOTION_TOAST_POSITION
+                                      .TOP,
+                                  width: 300)
+                                  .show(context);
+                            }
+                            else if (nameController
                                 .text.isEmpty) {
                               MotionToast.error(
                                   title: "Error",
@@ -415,6 +459,8 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
 
         selectedStaff = new StaffModel();
 
+        userNameController.text = "";
+        passwordController.text = "";
         nameController.text = "";
         emailController.text = "";
         addressController.text = "";

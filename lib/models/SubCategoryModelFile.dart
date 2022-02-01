@@ -33,7 +33,7 @@ class SubCategoryModel {
 
   factory SubCategoryModel.fromJson(Map<String, dynamic> json) => SubCategoryModel(
     subcategoryId: null!=json["subcategoryId"]?json["subcategoryId"] is int ? json["subcategoryId"]: int.parse(json["subcategoryId"]):-1,
-    categoryId: json["categoryId"]?json["categoryId"] is int ? json["categoryId"]: int.parse(json["categoryId"]):-1,
+    categoryId:  null!=json["categoryId"]?json["categoryId"] is int ? json["categoryId"]: int.parse(json["categoryId"]):-1,
     subcategoryName: json["subcategoryName"],
     brnId:null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
     cmpId:null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
