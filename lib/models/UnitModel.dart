@@ -30,7 +30,7 @@ class UnitModel {
     name: json["name"],
     updatedBy: json["updatedBy"],
     createdBy: json["createdBy"],
-    updatedOn:json["updatedOn"],
+    updatedOn: json["updatedOn"],
     createdOn: json["createdOn"],
   );
 
