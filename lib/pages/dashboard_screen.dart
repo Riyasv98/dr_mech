@@ -1,5 +1,8 @@
 
 import 'package:dr_mech/models/CategoryModelFile.dart';
+import 'package:dr_mech/models/UnitModel.dart';
+import 'package:dr_mech/pages/AllUnits.dart';
+import 'package:dr_mech/pages/add_unit_screen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
 import 'package:dr_mech/pages/subcategory_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -367,6 +370,68 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                         Icons.search,size: 70,
                                       ),
                                       Text("Subcategory",style: TextStyle(
+                                          fontSize: 15,fontWeight: FontWeight.bold
+                                      ),)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddUnitScreen(new UnitModel(),1)));
+                                },
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height/6,
+                                  width: MediaQuery.of(context).size.width/3,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                                      )
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.receipt,size: 70,
+                                      ),
+                                      Text("Add Unit",style: TextStyle(
+                                          fontSize: 15,fontWeight: FontWeight.bold
+                                      ),)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllUnitScreen()));
+
+                                },
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height/6,
+                                  width: MediaQuery.of(context).size.width/3,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                                      )
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.search,size: 70,
+                                      ),
+                                      Text("All Units",style: TextStyle(
                                           fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],

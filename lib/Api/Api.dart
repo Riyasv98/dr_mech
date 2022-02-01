@@ -25,6 +25,15 @@ class Apis {
   static const String ADD_SUBCATEGORY = BASE_URL+"subcategory/addsubcategory/";
 
 
+  static const String UNIT_URL = BASE_URL+"unit/getallunit/";
+
+  static const String ADD_UNIT = BASE_URL+"unit/addunit/";
+
+  static const String EDIT_UNIT = BASE_URL+"unit/editunit/";
+
+  static const String DELETE_UNIT = BASE_URL+"unit/deleteunit/";
+
+
   // static const String DELETE_STAFF_URL = BASE_URL+"employee/deleteemployee/";
   //
   // static const String DELETE_STAFF_URL = BASE_URL+"employee/deleteemployee/";
