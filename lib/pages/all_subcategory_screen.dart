@@ -6,6 +6,8 @@ import 'package:dr_mech/Utils/Preference.dart';
 import 'package:dr_mech/models/CategoryModelFile.dart';
 import 'package:dr_mech/common/Contants.dart';
 import 'package:dr_mech/models/StaffModel.dart';
+import 'package:dr_mech/models/SubCategoryModelFile.dart';
+import 'package:dr_mech/pages/subcategory_screen.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +19,14 @@ import 'package:hexcolor/hexcolor.dart';
 import 'category_screen.dart';
 
 
-class AllCategoryScreen extends  StatefulWidget{
+class AllSubCategoryScreen extends  StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return _AllCategoryScreenState();
+    return _AllSubCategoryScreenState();
   }
 }
 
-class _AllCategoryScreenState extends State<AllCategoryScreen>{
+class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
 
   final _formKey = GlobalKey<FormState>();
 
@@ -33,21 +35,21 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
   @override
 
   StaffModel selectedStaff =new StaffModel();
-  CategoryModel selectedCategory =new CategoryModel();
+  SubCategoryModel selectedSubCategory =new SubCategoryModel();
 
   bool isLoading = false;
 
   // List<StaffModel> staffList = [];
   StaffModel staffModel = new StaffModel();
 
-  List<CategoryModel> categoryList = [];
+  List<SubCategoryModel> subCategoryList = [];
 
   void initState() {
 
     PreferenceFile().getStaffData().then((value)
     {
       staffModel=value;
-      getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
       setState(() {
 
       });
@@ -94,12 +96,12 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
                               child:
                               CircularProgressIndicator(),
                             )
-                                :null!=categoryList && categoryList.length > 0?
+                                :null!=subCategoryList && subCategoryList.length > 0?
 
                             ListView.builder(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: categoryList.length,
+                                itemCount: subCategoryList.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: MediaQuery.of(context).size.height/3.5,
@@ -118,7 +120,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
                                                   children: [
                                                     GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push( context, MaterialPageRoute( builder: (context) => AddCategoryScreen(categoryList[index],2)));
+                                                        Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen(subCategoryList[index],2)));
                                                       },
                                                       child: Padding(
                                                         padding: const EdgeInsets.only(right: 8.0),
@@ -131,10 +133,10 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
                                                     ),
                                                     GestureDetector(
                                                       onTap: (){
-                                                        selectedCategory=categoryList[index];
-                                                        Constants.deleteDialog(context,categoryList[index].categoryName.toString()).then((value) {
+                                                        selectedSubCategory=subCategoryList[index];
+                                                        Constants.deleteDialog(context,subCategoryList[index].subcategoryName.toString()).then((value) {
                                                           if (value) {
-                                                            deleteCategory(selectedCategory.categoryId!.toInt(),selectedCategory.cmpId!.toInt(),selectedCategory.brnId!.toInt());
+                                                            deleteSubCategory(selectedSubCategory.subcategoryId!.toInt(),selectedSubCategory.cmpId!.toInt(),selectedSubCategory.brnId!.toInt());
                                                           }
                                                         });
                                                       },
@@ -170,7 +172,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
                                                     children: [
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                        child: Text(categoryList[index].categoryName.toString(),textAlign: TextAlign.left,),
+                                                        child: Text(subCategoryList[index].subcategoryName.toString(),textAlign: TextAlign.left,),
                                                       ),
                                                     ],
                                                   ),
@@ -207,12 +209,12 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
     );
   }
 
-  Future getAllCategory(String companyId, String branchId) async{
+  Future getAllSubCategory(String companyId, String branchId) async{
     isLoading=true;
     setState(() {
     });
 
-    String url=Apis.CATEGORY_URL+companyId+"/"+branchId;
+    String url=Apis.SUBCATEGORY_URL+companyId+"/"+branchId;
     var response = await http.get(Uri.parse(url));
 
     isLoading=false;
@@ -224,17 +226,17 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
     var jsonData=jsonDecode(responseData);//check response string
     // if(jsonData['success']) {
     var data = jsonData['data'];//based on response string give array name
-    categoryList = List<CategoryModel>.from(data.map((x) => CategoryModel.fromJson(x)));
+    subCategoryList = List<SubCategoryModel>.from(data.map((x) => SubCategoryModel.fromJson(x)));
     setState(() {
 
     });
   }
 
-  Future deleteCategory(int CategoryId, int CompanyId, int BranchId) async {
+  Future deleteSubCategory(int SubCategoryId, int CompanyId, int BranchId) async {
     isLoading = true;
     setState(() {});
     String? url;
-    url = Apis.DELETE_CATEGORY + CategoryId.toString()+"/"+CompanyId.toString()+"/"+BranchId.toString();
+    url = Apis.DELETE_SUBCATEGORY + SubCategoryId.toString()+"/"+CompanyId.toString()+"/"+BranchId.toString();
     final response =
     await http.get(Uri.parse(url));
 
@@ -249,7 +251,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
 
         });
         EasyLoading.showSuccess(jsonObject[0]["message"]);
-        getAllCategory(selectedCategory.cmpId.toString(),selectedCategory.brnId.toString());
+        getAllSubCategory(selectedSubCategory.cmpId.toString(),selectedSubCategory.brnId.toString());
       } else {
         EasyLoading.showSuccess(jsonObject[0]["message"]);
       }

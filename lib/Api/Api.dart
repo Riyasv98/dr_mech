@@ -27,6 +27,10 @@ class Apis {
 
   static const String ADD_SUBCATEGORY = BASE_URL+"subcategory/addsubcategory/";
 
+  static const String DELETE_SUBCATEGORY = BASE_URL+"subcategory/deletesubcategory/";
+
+  static const String EDIT_SUBCATEGORY = BASE_URL+"subcategory/editsubcategory/";
+
 
   static const String PRODUCT_URL = BASE_URL+"product/getallproduct/";
 

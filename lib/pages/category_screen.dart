@@ -52,13 +52,12 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
 
   List<CategoryModel> categoryList = [];
   bool isLoading = false;
-  String? mySelection;
 
   @override
   void initState() {
 
     if(widget.type==2 || widget.type==3) {
-      categoryNameController.text = selectedCategory.name.toString();
+      categoryNameController.text = selectedCategory.categoryName.toString();
 
     }
     PreferenceFile().getStaffData().then((value)
@@ -137,7 +136,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
                         SizedBox(height: 15,),
                         GestureDetector(
                           onTap: () {
-                            selectedCategory.name=categoryNameController.text;
+                            selectedCategory.categoryName=categoryNameController.text;
                             selectedCategory.brnId=staffModel.brnId;
                             selectedCategory.cmpId=staffModel.cmpId;
 

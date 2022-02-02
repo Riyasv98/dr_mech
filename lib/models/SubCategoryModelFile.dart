@@ -28,8 +28,8 @@ class SubCategoryModel {
   int ?cmpId;
   String ?updatedBy;
   String ?createdBy;
-  DateTime ?updatedOn;
-  DateTime ?createdOn;
+  String ?updatedOn;
+  String ?createdOn;
 
   factory SubCategoryModel.fromJson(Map<String, dynamic> json) => SubCategoryModel(
     subcategoryId: null!=json["subcategoryId"]?json["subcategoryId"] is int ? json["subcategoryId"]: int.parse(json["subcategoryId"]):-1,
@@ -39,8 +39,8 @@ class SubCategoryModel {
     cmpId:null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     updatedBy: json["updatedBy"],
     createdBy: json["createdBy"],
-    updatedOn: DateTime.parse(json["updatedOn"]),
-    createdOn: DateTime.parse(json["createdOn"]),
+    updatedOn: json["updatedOn"],
+    createdOn: json["createdOn"],
   );
 
   Map<String, dynamic> toJson() => {

@@ -21,14 +21,19 @@ import 'package:motion_toast/resources/arrays.dart';
 
 
 class AddSubCategoryScreen extends  StatefulWidget{
+  AddSubCategoryScreen(this.subCategryModel,this.type);
+
+  int?type;
+  SubCategoryModel subCategryModel = new SubCategoryModel();
 
   @override
   State<StatefulWidget> createState() {
-    return _AddSubCategoryScreenState();
+    return _AddSubCategoryScreenState(subCategryModel);
   }
 }
 
 class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
+  _AddSubCategoryScreenState(this.selectedSubCategory);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -38,6 +43,8 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
 
   List<CategoryModel> categoryList = [];
 
+  List<SubCategoryModel> subCategoryList = [];
+
   CategoryModel selectedCategory=new CategoryModel();
   SubCategoryModel selectedSubCategory=new SubCategoryModel();
   StaffModel staffModel = new StaffModel();
@@ -46,6 +53,11 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
 
   @override
   void initState() {
+
+    if(widget.type==2 || widget.type==3) {
+      subCategoryNameController.text = selectedSubCategory.subcategoryName.toString();
+
+    }
 
     PreferenceFile().getStaffData().then((value)
     {
@@ -128,7 +140,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                 });
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width/2.8,
+                                width: MediaQuery.of(context).size.width/2.5,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10)),
@@ -223,8 +235,13 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                               selectedSubCategory.cmpId=staffModel.cmpId;
 
 
-                              addCategory(
-                                  selectedSubCategory);
+                              addSubCategory(
+                                  selectedSubCategory,null !=
+                                  selectedSubCategory
+                                      .subcategoryId &&
+                                  selectedSubCategory
+                                      .subcategoryId! >
+                                      0);
                             }
                             isLoading = true;
                           },
@@ -245,7 +262,14 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                             ),
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                              child: Text("Add".toUpperCase(),
+                              child: Text(null !=
+                                  selectedSubCategory
+                                      .subcategoryId &&
+                                  selectedSubCategory
+                                      .subcategoryId! >
+                                      0
+                                  ? "Update".toUpperCase()
+                                  : "Add".toUpperCase(),
                                 style: TextStyle(fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),),
@@ -287,9 +311,37 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
     });
   }
 
-  Future<bool?> addCategory(
-      SubCategoryModel subcategoryDetailsModel) async {
-    String url = Apis.ADD_SUBCATEGORY;
+  Future getAllSubCategory(String companyId, String branchId) async{
+    isLoading=true;
+    setState(() {
+    });
+
+    String url=Apis.SUBCATEGORY_URL+companyId+"/"+branchId;
+    var response = await http.get(Uri.parse(url));
+
+    isLoading=false;
+    setState(() {
+
+    });
+
+    String responseData=response.body.toString();
+    var jsonData=jsonDecode(responseData);//check response string
+    // if(jsonData['success']) {
+    var data = jsonData['data'];//based on response string give array name
+    subCategoryList = List<SubCategoryModel>.from(data.map((x) => SubCategoryModel.fromJson(x)));
+    setState(() {
+
+    });
+  }
+
+  Future<bool?> addSubCategory(
+      SubCategoryModel subcategoryDetailsModel,isEdit) async {
+    String url = "";
+    if (isEdit) {
+      url = Apis.EDIT_SUBCATEGORY;
+    } else {
+      url = Apis.ADD_SUBCATEGORY;
+    }
     // branchDetailsModel.status = 1;
 
     String dataJson = subCategoryModelToJson(subcategoryDetailsModel);
@@ -314,7 +366,9 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
 
         subCategoryNameController.text = "";
 
+
         setState(() {});
+        getAllSubCategory(selectedSubCategory.cmpId.toString(), selectedSubCategory.brnId.toString());
         // getAllBranches();
       } else {
         EasyLoading.showError(jsonObject[0]["message"]);

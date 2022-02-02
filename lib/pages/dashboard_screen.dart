@@ -1,6 +1,7 @@
 
 import 'package:dr_mech/models/CategoryModelFile.dart';
 import 'package:dr_mech/models/ProductModelFile.dart';
+import 'package:dr_mech/models/SubCategoryModelFile.dart';
 import 'package:dr_mech/models/UnitModel.dart';
 import 'package:dr_mech/pages/Add_product.dart';
 import 'package:dr_mech/pages/AllUnits.dart';
@@ -15,6 +16,7 @@ import 'package:dr_mech/pages/splash_screen.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 
 import 'all_category_screen.dart';
+import 'all_subcategory_screen.dart';
 import 'car_details_screen.dart';
 import 'add_staff_screen.dart';
 import 'category_screen.dart';
@@ -293,7 +295,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen(new SubCategoryModel(),1)));
                                 },
                                 child: Container(
                                   height: MediaQuery.of(context).size.height/6,
@@ -320,7 +322,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                               GestureDetector(
                                 onTap: (){
-                                  // Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllSubCategoryScreen()));
 
                                 },
                                 child: Container(
