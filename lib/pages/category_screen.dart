@@ -21,14 +21,19 @@ import 'package:motion_toast/resources/arrays.dart';
 
 
 class AddCategoryScreen extends  StatefulWidget{
+  AddCategoryScreen(this.categoryModel,this.type);
+
+  int?type;
+  CategoryModel categoryModel = new CategoryModel();
 
   @override
   State<StatefulWidget> createState() {
-    return _AddCategoryScreenState();
+    return _AddCategoryScreenState(categoryModel);
   }
 }
 
 class _AddCategoryScreenState extends State<AddCategoryScreen>{
+  _AddCategoryScreenState(this.selectedCategory);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -51,9 +56,15 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
 
   @override
   void initState() {
+
+    if(widget.type==2 || widget.type==3) {
+      categoryNameController.text = selectedCategory.name.toString();
+
+    }
     PreferenceFile().getStaffData().then((value)
         {
           staffModel=value;
+          getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
         });
 
 
@@ -126,7 +137,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
                         SizedBox(height: 15,),
                         GestureDetector(
                           onTap: () {
-                            selectedCategory.categoryName=categoryNameController.text;
+                            selectedCategory.name=categoryNameController.text;
                             selectedCategory.brnId=staffModel.brnId;
                             selectedCategory.cmpId=staffModel.cmpId;
 
@@ -194,28 +205,28 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
     );
   }
 
-  // Future getAllStaff() async{
-  //   isLoading=true;
-  //   setState(() {
-  //   });
-  //
-  //   String url=Apis.STAFF_URL;
-  //   var response = await http.get(Uri.parse(url));
-  //
-  //   isLoading=false;
-  //   setState(() {
-  //
-  //   });
-  //
-  //   String responseData=response.body.toString();
-  //   var jsonData=jsonDecode(responseData);//check response string
-  //   // if(jsonData['success']) {
-  //   var data = jsonData['data'];//based on response string give array name
-  //   staffList = List<StaffModel>.from(data.map((x) => StaffModel.fromJson(x)));
-  //   setState(() {
-  //
-  //   });
-  // }
+  Future getAllCategory(String companyId, String branchId) async{
+    isLoading=true;
+    setState(() {
+    });
+
+    String url=Apis.CATEGORY_URL+companyId+"/"+branchId;
+    var response = await http.get(Uri.parse(url));
+
+    isLoading=false;
+    setState(() {
+
+    });
+
+    String responseData=response.body.toString();
+    var jsonData=jsonDecode(responseData);//check response string
+    // if(jsonData['success']) {
+    var data = jsonData['data'];//based on response string give array name
+    categoryList = List<CategoryModel>.from(data.map((x) => CategoryModel.fromJson(x)));
+    setState(() {
+
+    });
+  }
 
   Future<bool?> addEditCategory(
       CategoryModel categoryDetailsModel, bool isEdit) async {
