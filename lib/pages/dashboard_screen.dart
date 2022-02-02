@@ -5,6 +5,7 @@ import 'package:dr_mech/models/SubCategoryModelFile.dart';
 import 'package:dr_mech/models/UnitModel.dart';
 import 'package:dr_mech/pages/Add_product.dart';
 import 'package:dr_mech/pages/AllUnits.dart';
+import 'package:dr_mech/pages/All_product.dart';
 import 'package:dr_mech/pages/add_unit_screen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
 import 'package:dr_mech/pages/subcategory_screen.dart';
@@ -446,7 +447,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllUnitScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllProductScreen()));
 
                                 },
                                 child: Container(

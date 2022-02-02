@@ -47,7 +47,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   CategoryModel selectedCategory = new CategoryModel();
   SubCategoryModel selectedSubCategory = new SubCategoryModel();
-  UnitModel selectrdUnit = new UnitModel();
+  UnitModel selectedUnit = new UnitModel();
 
   List<ProductModel> productList = [];
   List<CategoryModel> categoryList = [];
@@ -60,22 +60,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   void initState() {
-
     getAllUnits();
 
-      PreferenceFile().getStaffData().then((value)
-      {
-        staffModel=value;
-        getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
-        getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
-        setState(() {
+    PreferenceFile().getStaffData().then((value)
+    {
+      staffModel=value;
+      getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      setState(() {
 
-        });
       });
+    });
 
 
-      super.initState();
-    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +144,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             });
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
+                            width: MediaQuery.of(context).size.width / 2.3,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -194,7 +194,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             });
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
+                            width: MediaQuery.of(context).size.width / 2.3,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -238,14 +238,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           onTap: () {
                             unitDialog(context, unitList).then((value) {
                               if (null != value) {
-                                selectrdUnit = value;
-                                selectedProduct.unitId = selectrdUnit.id;
+                                selectedUnit = value;
+                                selectedProduct.unitId = selectedUnit.id;
                                 setState(() {});
                               }
                             });
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
+                            width: MediaQuery.of(context).size.width / 2.3,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -269,8 +269,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           fontSize: 15, color: Colors.white),
                                     ),
                                     Icon(Icons.arrow_drop_down),
-                                    Text(null != selectrdUnit.id
-                                        ? selectrdUnit.id.toString()
+                                    Text(null != selectedUnit.id
+                                        ? selectedUnit.id.toString()
                                         : "")
                                   ],
                                 ),
@@ -384,19 +384,23 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             } else {
                               selectedProduct.productName =
                                   productNameController.text;
+
                               selectedProduct.salesRate =
                                   salesRateController.text;
+
                               selectedProduct.mrp = mrpController.text;
                               selectedProduct.barCode = barcodeController.text;
 
                               selectedProduct.categoryId =
                                   selectedCategory.categoryId;
+
                               selectedProduct.subCategoryId =
                                   selectedSubCategory.subcategoryId;
-                              selectedProduct.unitId = selectrdUnit.id;
 
-                              selectedSubCategory.brnId = staffModel.brnId;
-                              selectedSubCategory.cmpId = staffModel.cmpId;
+                              selectedProduct.unitId = selectedUnit.id;
+
+                              selectedProduct.brnId = staffModel.brnId;
+                              selectedProduct.cmpId = staffModel.cmpId;
 
                               addEditProduct(
                                   selectedProduct,
@@ -796,7 +800,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     });
   }
-
   Future getAllSubCategory(String companyId, String branchId) async{
     isLoading=true;
     setState(() {
