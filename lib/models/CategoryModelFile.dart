@@ -11,7 +11,7 @@ String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 class CategoryModel {
   CategoryModel({
     this.categoryId,
-    this.categoryName,
+    this.name,
     this.imageName,
     this.cmpId,
     this.brnId,
@@ -22,7 +22,7 @@ class CategoryModel {
   });
 
   int? categoryId;
-  String? categoryName;
+  String? name;
   String? imageName;
   int? cmpId;
   int? brnId;
@@ -33,7 +33,7 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
     categoryId: null!=json["categoryId"]?json["categoryId"] is int ? json["categoryId"]: int.parse(json["categoryId"]):-1,
-    categoryName: json["categoryName"],
+    name: json["categoryName"],
     imageName: json["imageName"],
     cmpId: null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     brnId: null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
@@ -45,7 +45,7 @@ class CategoryModel {
 
   Map<String, dynamic> toJson() => {
     "categoryId": categoryId,
-    "categoryName": categoryName,
+    "categoryName": name,
     "imageName": imageName,
     "cmpId": cmpId,
     "brnId": brnId,

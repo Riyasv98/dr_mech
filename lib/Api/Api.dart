@@ -13,12 +13,15 @@ class Apis {
 
   static const String DELETE_STAFF_URL = BASE_URL+"employee/deleteemployee/";
 
+
   static const String CATEGORY_URL = BASE_URL+"category/getallcategory/";
 
   static const String ADD_CATEGORY = BASE_URL+"category/addcategory/";
 
-
   static const String EDIT_CATEGORY = BASE_URL+"category/editcategory/";
+
+  static const String DELETE_CATEGORY = BASE_URL+"category/deletecategory/";
+
 
   static const String SUBCATEGORY_URL = BASE_URL+"subcategory/getallsubcategory/";
 
