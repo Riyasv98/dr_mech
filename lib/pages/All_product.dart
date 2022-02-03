@@ -61,7 +61,7 @@ class _AllProductScreenState extends State<AllProductScreen>{
     PreferenceFile().getStaffData().then((value)
     {
       staffModel=value;
-      getAllProduct(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      getAllProduct(staffModel.brnId.toString(),staffModel.cmpId.toString());
       // getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
       setState(() {
 
@@ -76,198 +76,205 @@ class _AllProductScreenState extends State<AllProductScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Container(
-            height: 150,
-            child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
-            alignment: Alignment.center,
-            child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Stack(
               children: [
-                Form(
-                  key: _formKey,
+                Container(
+                  height: 150,
+                  child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
+                  alignment: Alignment.center,
                   child: Column(
                     children: [
-                      Stack(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
-                            child: SizedBox(height: 20,),
-                          ),
-                        ],
-                      ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            Stack(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+                                  child: SizedBox(height: 20,),
+                                ),
+                              ],
+                            ),
 
-                      isLoading
-                          ? Center(
-                        child:
-                        CircularProgressIndicator(),
-                      )
-                          :null!=productList && productList.length > 0?
+                            isLoading
+                                ? Center(
+                              child:
+                              CircularProgressIndicator(),
+                            )
+                                :null!=productList && productList.length > 0?
 
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: productList.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              height: MediaQuery.of(context).size.height/3.5,
-                              child: Card(
-                                elevation: 2,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 8.0,top:2),
-                                  child: Column(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child: Container(
-                                          width: MediaQuery.of(context).size.width/6,
-                                          child: Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: (){
-                                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddProductScreen(productList[index],2)));
-                                                },
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(right: 8.0),
-                                                  child: Icon(
-                                                    Icons.edit,
-                                                    size: 20,
-                                                    color: Colors.grey,
+                            ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: productList.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height/3,
+                                    child: Card(
+                                      elevation: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 8.0,top:2),
+                                        child: Column(
+                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topRight,
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width/6,
+                                                child: Row(
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        Navigator.push( context, MaterialPageRoute( builder: (context) => AddProductScreen(productList[index],2)));
+                                                      },
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(right: 8.0),
+                                                        child: Icon(
+                                                          Icons.edit,
+                                                          size: 20,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        selectedProduct=productList[index];
+                                                        Constants.deleteDialog(context,productList[index].productName.toString()).then((value) {
+
+                                                          if (value) {
+                                                            deleteProduct(selectedProduct.productId!.toInt(),selectedProduct.cmpId!.toInt(),selectedProduct.brnId!.toInt());
+                                                          }
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        Icons.delete,
+                                                        size: 20,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Row(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Category :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("SubCategory :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Unit :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Product Name :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("SalesRate :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Mrp :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("Barcode :"),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: (){
-                                                  selectedProduct=productList[index];
-                                                  Constants.deleteDialog(context,productList[index].productName.toString()).then((value) {
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].categoryId.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].subCategoryId.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].unitId.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].productName.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].salesRate.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].mrp.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(productList[index].barCode.toString(),textAlign: TextAlign.left,),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
 
-                                                    if (value) {
-                                                      deleteProduct(selectedProduct.productId!.toInt(),selectedProduct.cmpId!.toInt(),selectedProduct.brnId!.toInt());
-                                                    }
-                                                  });
-                                                },
-                                                child: Icon(
-                                                  Icons.delete,
-                                                  size: 20,
-                                                  color: Colors.red,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                          ],
                                         ),
                                       ),
-                                      Row(
-                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("Category Id :"),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("SubCategory Id :"),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("Unit Id :"),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("Product Name :"),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("SalesRate :"),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("Mrp :"),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("Barcode :"),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].categoryId.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].subCategoryId.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].unitId.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].productName.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].salesRate.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].mrp.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(productList[index].barCode.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          })
-                          : Center(
-                        child: Text(
-                            "No document found"),
-                      )
+                                    ),
+                                  );
+                                })
+                                : Center(
+                              child: Text(
+                                  "No document found"),
+                            )
 
 
 
 
 
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Future getAllProduct(String companyId, String branchId) async {
+  Future getAllProduct(String branchId, String companyId) async {
     isLoading = true;
     setState(() {});
 
-    String url = Apis.PRODUCT_URL + companyId + "/" + branchId;
+    String url = Apis.PRODUCT_URL + branchId + "/" + companyId;
     var response = await http.get(Uri.parse(url));
 
     isLoading = false;
@@ -277,8 +284,7 @@ class _AllProductScreenState extends State<AllProductScreen>{
     var jsonData = jsonDecode(responseData); //check response string
     // if(jsonData['success']) {
     var data = jsonData['data']; //based on response string give array name
-    productList =
-    List<ProductModel>.from(data.map((x) => ProductModel.fromJson(x)));
+    productList = List<ProductModel>.from(data.map((x) => ProductModel.fromJson(x)));
     setState(() {});
   }
 

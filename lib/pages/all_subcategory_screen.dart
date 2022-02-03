@@ -160,7 +160,11 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                                                     children: [
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                        child: Text("Category Name :"),
+                                                        child: Text("Category Id :"),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text("SubCategory Name :"),
                                                       ),
                                                     ],
                                                   ),
@@ -170,6 +174,10 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                                        child: Text(subCategoryList[index].categoryId.toString(),textAlign: TextAlign.left,),
+                                                      ),
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
                                                         child: Text(subCategoryList[index].subcategoryName.toString(),textAlign: TextAlign.left,),

@@ -60,6 +60,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   void initState() {
+
+    if(widget.type==2 || widget.type==3) {
+      productNameController.text = selectedProduct.productName.toString();
+      salesRateController.text = selectedProduct.salesRate.toString();
+      mrpController.text = selectedProduct.mrp.toString();
+      barcodeController.text = selectedProduct.barCode.toString();
+
+    }
     getAllUnits();
 
     PreferenceFile().getStaffData().then((value)
@@ -137,8 +145,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             categoryDialog(context, categoryList).then((value) {
                               if (null != value) {
                                 selectedCategory = value;
-                                selectedProduct.categoryId =
-                                    selectedCategory.categoryId;
+                                // selectedProduct.categoryId =
+                                //     selectedCategory.categoryId;
                                 setState(() {});
                               }
                             });
@@ -163,13 +171,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Category Id ",
+                                      "Category ",
                                       style: TextStyle(
                                           fontSize: 15, color: Colors.white),
                                     ),
                                     Icon(Icons.arrow_drop_down),
-                                    Text(null != selectedCategory.categoryId
-                                        ? selectedCategory.categoryId.toString()
+                                    Text(null != selectedCategory.categoryName
+                                        ? selectedCategory.categoryName.toString()
                                         : "")
                                   ],
                                 ),
@@ -187,8 +195,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 .then((value) {
                               if (null != value) {
                                 selectedSubCategory = value;
-                                selectedProduct.subCategoryId =
-                                    selectedSubCategory.subcategoryId;
+                                // selectedProduct.subCategoryId =
+                                //     selectedSubCategory.subcategoryId;
                                 setState(() {});
                               }
                             });
@@ -213,14 +221,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "SubCategory Id ",
+                                      "SubCategory ",
                                       style: TextStyle(
                                           fontSize: 15, color: Colors.white),
                                     ),
                                     Icon(Icons.arrow_drop_down),
                                     Text(null !=
-                                            selectedSubCategory.subcategoryId
-                                        ? selectedSubCategory.subcategoryId
+                                            selectedSubCategory.subcategoryName
+                                        ? selectedSubCategory.subcategoryName
                                             .toString()
                                         : "")
                                   ],
@@ -239,7 +247,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             unitDialog(context, unitList).then((value) {
                               if (null != value) {
                                 selectedUnit = value;
-                                selectedProduct.unitId = selectedUnit.id;
+                                // selectedProduct.unitId = selectedUnit.id;
                                 setState(() {});
                               }
                             });
@@ -264,13 +272,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Unit Id ",
+                                      "Unit ",
                                       style: TextStyle(
                                           fontSize: 15, color: Colors.white),
                                     ),
                                     Icon(Icons.arrow_drop_down),
-                                    Text(null != selectedUnit.id
-                                        ? selectedUnit.id.toString()
+                                    Text(null != selectedUnit.name
+                                        ? selectedUnit.name.toString()
                                         : "")
                                   ],
                                 ),
@@ -485,7 +493,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Select Category Id",
+                    "Select Category",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -530,7 +538,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              categoryList[position].categoryId.toString(),
+                              categoryList[position].categoryName.toString(),
                               style: const TextStyle(
                                 color: Colors.black,
                               ),
@@ -572,7 +580,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Select SubCategory Id",
+                    "Select SubCategory",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -618,7 +626,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
                               subCategoryList[position]
-                                  .subcategoryId
+                                  .subcategoryName
                                   .toString(),
                               style: const TextStyle(
                                 color: Colors.black,
@@ -661,7 +669,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Select Unit Id",
+                    "Select Unit",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -706,7 +714,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              UnitList[position].id.toString(),
+                              UnitList[position].name.toString(),
                               style: const TextStyle(
                                 color: Colors.black,
                               ),

@@ -132,7 +132,6 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                 categoryDialog(context, categoryList).then((value) {
                                   if(null!=value){
                                     selectedCategory=value;
-                                    selectedSubCategory.categoryId=selectedCategory.categoryId;
                                     setState(() {
 
                                     });
@@ -162,7 +161,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Category Id ",
+                                          "Category ",
                                           style:
                                           TextStyle(fontSize: 15, color: Colors.white),
                                         ),
@@ -170,7 +169,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                             Icons.arrow_drop_down
                                         ),
 
-                                        Text(null!=selectedCategory.categoryId?selectedCategory.categoryId.toString():"")
+                                        Text(null!=selectedCategory.categoryName?selectedCategory.categoryName.toString():"")
 
                                       ],
                                     ),
@@ -409,7 +408,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Select Category Id",
+                    "Select Category",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -454,7 +453,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              categoryList[position].categoryId.toString(),
+                              categoryList[position].categoryName.toString(),
                               style: const TextStyle(
                                 color: Colors.black,
                               ),

@@ -32,7 +32,7 @@ class Apis {
   static const String EDIT_SUBCATEGORY = BASE_URL+"subcategory/editsubcategory/";
 
 
-  static const String PRODUCT_URL = BASE_URL+"product/getallproduct/";
+  static const String PRODUCT_URL = BASE_URL+"product/getallproducts/";
 
   static const String EDIT_PRODUCT_URL = BASE_URL+"product/editproduct/";
 
