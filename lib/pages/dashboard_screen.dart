@@ -6,7 +6,6 @@ import 'package:dr_mech/models/UnitModel.dart';
 import 'package:dr_mech/pages/Add_product.dart';
 import 'package:dr_mech/pages/AllUnits.dart';
 import 'package:dr_mech/pages/All_product.dart';
-import 'package:dr_mech/pages/SalesScreen.dart';
 import 'package:dr_mech/pages/add_unit_screen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
 import 'package:dr_mech/pages/subcategory_screen.dart';
@@ -483,7 +482,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddSalesScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>AllStaffScreen()));
                                 },
                                 child: Container(
                                   height: MediaQuery.of(context).size.height/6,
@@ -510,7 +509,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>AddSalesScreen ()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>AllStaffScreen ()));
 
                                 },
                                 child: Container(

@@ -237,11 +237,11 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                               child: TextField(
                                 // controller: descriptionController,
                                 textAlign: TextAlign.left,
-                                maxLines: 10,
-                                maxLength: 500,
+                                maxLines: 7,
+                                maxLength: 200,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "Description",
+                                  hintText: "Complaints",
                                   hintStyle: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 15,
