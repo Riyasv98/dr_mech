@@ -331,7 +331,7 @@ class _AllProductScreenState extends State<AllProductScreen>{
 
         });
         EasyLoading.showSuccess(jsonObject[0]["message"]);
-        // getAllStaff(CompanyId,BranchId);
+        getAllProduct(selectedProduct.brnId.toString(),selectedProduct.cmpId.toString());
       } else {
         EasyLoading.showSuccess(jsonObject[0]["message"]);
       }
