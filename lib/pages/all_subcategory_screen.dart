@@ -261,10 +261,10 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
         EasyLoading.showSuccess(jsonObject[0]["message"]);
         getAllSubCategory(selectedSubCategory.cmpId.toString(),selectedSubCategory.brnId.toString());
       } else {
-        EasyLoading.showSuccess(jsonObject[0]["message"]);
+        EasyLoading.showError(jsonObject[0]["message"]);
       }
     } else {
-      EasyLoading.showSuccess("Something went wrong");
+      EasyLoading.showError("Something went wrong");
     }
   }
 
