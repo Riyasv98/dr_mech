@@ -90,6 +90,22 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                                 ),
                               ],
                             ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen(new SubCategoryModel(),1))).then((value){
+                                  getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+                                });
+                              },
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8.0,bottom: 5),
+                                  child: Icon(
+                                    Icons.add_circle,color: Colors.grey,size: 40,
+                                  ),
+                                ),
+                              ),
+                            ),
 
                             isLoading
                                 ? Center(
@@ -104,7 +120,7 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                                 itemCount: subCategoryList.length,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height/3.5,
+                                    height: MediaQuery.of(context).size.height/8,
                                     child: Card(
                                       elevation: 2,
                                       child: Padding(
@@ -160,11 +176,11 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                                                     children: [
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                        child: Text("Category Id :"),
+                                                        child: Text("Category :"),
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                        child: Text("SubCategory Name :"),
+                                                        child: Text("SubCategory :"),
                                                       ),
                                                     ],
                                                   ),
@@ -176,7 +192,7 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                                                     children: [
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                        child: Text(subCategoryList[index].categoryId.toString(),textAlign: TextAlign.left,),
+                                                        child: Text(subCategoryList[index].categoryName.toString(),textAlign: TextAlign.left,),
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),

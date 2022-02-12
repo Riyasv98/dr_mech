@@ -14,6 +14,9 @@ class ProductModel {
     this.brnId,
     this.cmpId,
     this.productName,
+    this.categoryName,
+    this.subCategoryName,
+    this.unitName,
     this.categoryId,
     this.subCategoryId,
     this.unitId,
@@ -32,6 +35,9 @@ class ProductModel {
   int ?brnId;
   int ?cmpId;
   String ?productName;
+  String ?categoryName;
+  String ?subCategoryName;
+  String ?unitName;
   int ?categoryId;
   int ?subCategoryId;
   int ?unitId;
@@ -50,6 +56,9 @@ class ProductModel {
     brnId:  null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
     cmpId:  null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     productName: json["productName"],
+    categoryName: json["categoryName"],
+    subCategoryName: json["subCategoryName"],
+    unitName: json["unitName"],
     categoryId: null!=json["categoryId"]?json["categoryId"] is int ? json["categoryId"]: int.parse(json["categoryId"]):-1,
     subCategoryId: null!=json["subCategoryId"]?json["subCategoryId"] is int ? json["subCategoryId"]: int.parse(json["subCategoryId"]):-1,
     unitId: null!=json["unitId"]?json["unitId"] is int ? json["unitId"]: int.parse(json["unitId"]):-1,
@@ -69,6 +78,9 @@ class ProductModel {
     "brnId": brnId,
     "cmpId": cmpId,
     "productName": productName,
+    "categoryName": categoryName,
+    "subCategoryName": subCategoryName,
+    "unitName": unitName,
     "categoryId": categoryId,
     "subCategoryId": subCategoryId,
     "unitId": unitId,
