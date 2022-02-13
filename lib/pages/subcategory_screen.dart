@@ -139,7 +139,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                 });
                               },
                               child: Container(
-                                width: MediaQuery.of(context).size.width/2.5,
+                                width: MediaQuery.of(context).size.width/1.25,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(10)),
@@ -156,23 +156,21 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(5, 8, 5, 8),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Category ",
-                                          style:
-                                          TextStyle(fontSize: 15, color: Colors.white),
-                                        ),
-                                        Icon(
-                                            Icons.arrow_drop_down
-                                        ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Category ",
+                                        style:
+                                        TextStyle(fontSize: 15, color: Colors.white),
+                                      ),
+                                      Icon(
+                                          Icons.arrow_drop_down
+                                      ),
 
-                                        Text(null!=selectedCategory.categoryName?selectedCategory.categoryName.toString():"")
+                                      Text(null!=selectedCategory.categoryName?selectedCategory.categoryName.toString():"")
 
-                                      ],
-                                    ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -230,6 +228,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                               selectedSubCategory.subcategoryName=subCategoryNameController.text;
 
                               selectedSubCategory.categoryId=selectedCategory.categoryId;
+                              selectedSubCategory.categoryName=selectedCategory.categoryName;
                               selectedSubCategory.brnId=staffModel.brnId;
                               selectedSubCategory.cmpId=staffModel.cmpId;
 
@@ -393,8 +392,8 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
       builder: (BuildContext context) {
         return SimpleDialog(
           insetPadding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width/4,
-            right: MediaQuery.of(context).size.width/4,
+            left: MediaQuery.of(context).size.width/9,
+            right: MediaQuery.of(context).size.width/9,
             // bottom: MediaQuery.of(context).size.height/5,
             // top: MediaQuery.of(context).size.height/5
             // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,

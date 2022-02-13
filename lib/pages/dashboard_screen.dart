@@ -59,10 +59,6 @@ class _DashboardScreenState extends State<DashboardScreen>{
                       ),
                       child: Icon(Icons.person, size: 80, color: Colors.grey.shade300,),
                     ),
-                    SizedBox(height: 20,),
-                    Text('Mr. Owner Name', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                    SizedBox(height: 20,),
-                    Text('Workshop Name', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                     SizedBox(height: 10,),
                     Container(
                       padding: EdgeInsets.all(10),
@@ -235,33 +231,6 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddCategoryScreen(new CategoryModel(),1)));
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.receipt,size: 70,
-                                      ),
-                                      Text("Add Category",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllCategoryScreen()));
 
                                 },
@@ -281,46 +250,14 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                       Icon(
                                         Icons.search,size: 70,
                                       ),
-                                      Text("All Category",style: TextStyle(
+                                      Text("Category",style: TextStyle(
                                           fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen(new SubCategoryModel(),1)));
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.receipt,size: 70,
-                                      ),
-                                      Text("Add SubCategory",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
+
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllSubCategoryScreen()));
@@ -342,7 +279,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                       Icon(
                                         Icons.search,size: 70,
                                       ),
-                                      Text("All Subcategory",style: TextStyle(
+                                      Text("Subcategory",style: TextStyle(
                                           fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
@@ -351,38 +288,10 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                             ],
                           ),
-
                           SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddUnitScreen(new UnitModel(),1)));
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.receipt,size: 70,
-                                      ),
-                                      Text("Add Unit",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllUnitScreen()));
@@ -404,47 +313,14 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                       Icon(
                                         Icons.search,size: 70,
                                       ),
-                                      Text("All Units",style: TextStyle(
+                                      Text("Units",style: TextStyle(
                                           fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
 
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AddProductScreen(new ProductModel(),1)));
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.receipt,size: 70,
-                                      ),
-                                      Text("Add Product",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllProductScreen()));
@@ -466,7 +342,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                       Icon(
                                         Icons.search,size: 70,
                                       ),
-                                      Text("All Product",style: TextStyle(
+                                      Text("Products",style: TextStyle(
                                           fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
@@ -475,7 +351,6 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                             ],
                           ),
-
                           SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -500,35 +375,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                       Icon(
                                         Icons.receipt,size: 70,
                                       ),
-                                      Text("Add Sales",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>AllStaffScreen ()));
-
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.search,size: 70,
-                                      ),
-                                      Text("All Sales",style: TextStyle(
+                                      Text("Sales",style: TextStyle(
                                           fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],

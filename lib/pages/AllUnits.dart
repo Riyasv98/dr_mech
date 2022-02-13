@@ -71,6 +71,22 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
                           ),
                         ],
                       ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push( context, MaterialPageRoute( builder: (context) => AddUnitScreen(new UnitModel(),1))).then((value){
+                            getAllUnits();
+                          });
+                        },
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0,bottom: 5),
+                            child: Icon(
+                              Icons.add_circle,color: Colors.grey,size: 40,
+                            ),
+                          ),
+                        ),
+                      ),
 
                       isLoading
                           ? Center(
@@ -84,7 +100,7 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
                           itemCount: unitList.length,
                           itemBuilder: (context, index) {
                             return Container(
-                              height: MediaQuery.of(context).size.height/3.5,
+                              height: MediaQuery.of(context).size.height/10,
                               child: Card(
                                 elevation: 2,
                                 child: Padding(

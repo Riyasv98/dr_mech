@@ -22,7 +22,7 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:false,
+      resizeToAvoidBottomInset:true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(

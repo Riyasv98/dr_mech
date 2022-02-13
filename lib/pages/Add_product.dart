@@ -89,7 +89,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(
@@ -146,14 +146,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             categoryDialog(context, categoryList).then((value) {
                               if (null != value) {
                                 selectedCategory = value;
-                                // selectedProduct.categoryId =
-                                //     selectedCategory.categoryId;
+                                // selectedCategory.categoryName =
+                                //     selectedProduct.categoryName;
                                 setState(() {});
                               }
                             });
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2.3,
+                            width: MediaQuery.of(context).size.width /1.25,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -169,7 +169,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               child: Center(
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Category ",
@@ -203,7 +203,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             });
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2.3,
+                            width: MediaQuery.of(context).size.width / 1.25,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -219,7 +219,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               child: Center(
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "SubCategory ",
@@ -254,7 +254,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             });
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 2.3,
+                            width: MediaQuery.of(context).size.width / 1.25,
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -270,7 +270,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               child: Center(
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       "Unit ",
@@ -402,6 +402,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
                               selectedProduct.categoryId =
                                   selectedCategory.categoryId;
+
+                              selectedProduct.categoryName =
+                                  selectedCategory.categoryName;
+
+                              selectedProduct.subCategoryName =
+                                  selectedSubCategory.subcategoryName;
+
+                              selectedProduct.unitName =
+                                  selectedUnit.name;
 
                               selectedProduct.subCategoryId =
                                   selectedSubCategory.subcategoryId;

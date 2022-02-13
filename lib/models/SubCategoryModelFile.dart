@@ -12,6 +12,7 @@ class SubCategoryModel {
   SubCategoryModel({
     this.subcategoryId,
     this.categoryId,
+    this.categoryName,
     this.subcategoryName,
     this.brnId,
     this.cmpId,
@@ -24,6 +25,7 @@ class SubCategoryModel {
   int ?subcategoryId;
   int ?categoryId;
   String ?subcategoryName;
+  String ?categoryName;
   int ?brnId;
   int ?cmpId;
   String ?updatedBy;
@@ -35,6 +37,7 @@ class SubCategoryModel {
     subcategoryId: null!=json["subcategoryId"]?json["subcategoryId"] is int ? json["subcategoryId"]: int.parse(json["subcategoryId"]):-1,
     categoryId:  null!=json["categoryId"]?json["categoryId"] is int ? json["categoryId"]: int.parse(json["categoryId"]):-1,
     subcategoryName: json["subcategoryName"],
+    categoryName: json["categoryName"],
     brnId:null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
     cmpId:null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     updatedBy: json["updatedBy"],
@@ -47,6 +50,7 @@ class SubCategoryModel {
     "subcategoryId": subcategoryId,
     "categoryId": categoryId,
     "subcategoryName": subcategoryName,
+    "categoryName": categoryName,
     "brnId": brnId,
     "cmpId": cmpId,
     "updatedBy": updatedBy,
