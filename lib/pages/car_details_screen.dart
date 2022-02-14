@@ -44,35 +44,35 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                         GestureDetector(
                           child: Stack(
                             children: [
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                      width: 5, color: Colors.white),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 20,
-                                      offset: const Offset(5, 5),
-                                    ),
-                                  ],
-                                ),
-                                child: Icon(
-                                  Icons.directions_car,
-                                  color: Colors.grey.shade300,
-                                  size: 80.0,
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
-                                child: Icon(
-                                  Icons.add_circle,
-                                  color: Colors.grey.shade700,
-                                  size: 25.0,
-                                ),
-                              ),
+                              // Container(
+                              //   padding: EdgeInsets.all(10),
+                              //   decoration: BoxDecoration(
+                              //     borderRadius: BorderRadius.circular(100),
+                              //     border: Border.all(
+                              //         width: 5, color: Colors.white),
+                              //     color: Colors.white,
+                              //     boxShadow: [
+                              //       BoxShadow(
+                              //         color: Colors.black12,
+                              //         blurRadius: 20,
+                              //         offset: const Offset(5, 5),
+                              //       ),
+                              //     ],
+                              //   ),
+                              //   child: Icon(
+                              //     Icons.directions_car,
+                              //     color: Colors.grey.shade300,
+                              //     size: 80.0,
+                              //   ),
+                              // ),
+                              // Container(
+                              //   padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
+                              //   child: Icon(
+                              //     Icons.add_circle,
+                              //     color: Colors.grey.shade700,
+                              //     size: 25.0,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -127,87 +127,87 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         ),
-                        SizedBox(height: 15.0),
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                        Text("Brand",),
-                                      Icon(
-                                        Icons.arrow_drop_down
-                                      )
-                                    ],
-                                  ),
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Model",),
-                                    Icon(
-                                        Icons.arrow_drop_down
-                                    )
-                                  ],
-                                ),
-                                height: 40,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                    )
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("Color",),
-                                      Icon(
-                                          Icons.arrow_drop_down
-                                      )
-                                    ],
-                                  ),
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        // SizedBox(height: 15.0),
+                        //
+                        // Row(
+                        //   children: [
+                        //     Expanded(
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.only(right: 8.0),
+                        //         child: Container(
+                        //           child: Row(
+                        //             mainAxisAlignment: MainAxisAlignment.center,
+                        //             children: [
+                        //                 Text("Brand",),
+                        //               Icon(
+                        //                 Icons.arrow_drop_down
+                        //               )
+                        //             ],
+                        //           ),
+                        //           height: 40,
+                        //           width: MediaQuery.of(context).size.width,
+                        //           decoration: BoxDecoration(
+                        //               borderRadius: BorderRadius.all(Radius.circular(5)),
+                        //               gradient: LinearGradient(
+                        //                   begin: Alignment.topLeft,
+                        //                   end: Alignment.bottomRight,
+                        //                   colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                        //               )
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     Expanded(
+                        //       child: Container(
+                        //         child: Row(
+                        //           mainAxisAlignment: MainAxisAlignment.center,
+                        //           children: [
+                        //             Text("Model",),
+                        //             Icon(
+                        //                 Icons.arrow_drop_down
+                        //             )
+                        //           ],
+                        //         ),
+                        //         height: 40,
+                        //         width: MediaQuery.of(context).size.width,
+                        //         decoration: BoxDecoration(
+                        //             borderRadius: BorderRadius.all(Radius.circular(5)),
+                        //             gradient: LinearGradient(
+                        //                 begin: Alignment.topLeft,
+                        //                 end: Alignment.bottomRight,
+                        //                 colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                        //             )
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     Expanded(
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.only(left: 8.0),
+                        //         child: Container(
+                        //           child: Row(
+                        //             mainAxisAlignment: MainAxisAlignment.center,
+                        //             children: [
+                        //               Text("Color",),
+                        //               Icon(
+                        //                   Icons.arrow_drop_down
+                        //               )
+                        //             ],
+                        //           ),
+                        //           height: 40,
+                        //           width: MediaQuery.of(context).size.width,
+                        //           decoration: BoxDecoration(
+                        //               borderRadius: BorderRadius.all(Radius.circular(5)),
+                        //               gradient: LinearGradient(
+                        //                   begin: Alignment.topLeft,
+                        //                   end: Alignment.bottomRight,
+                        //                   colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                        //               )
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(height: 15.0),
 
                         Container(
@@ -215,6 +215,40 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                             decoration: ThemeHelper().textInputDecoration(
                                 "Kilometers Driven",
                                 "Enter kilometers driven"),
+                            // keyboardType: TextInputType.phone,
+                            // validator: (val) {
+                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
+                            //     return "Enter a valid phone number";
+                            //   }
+                            //   return null;
+                            // },
+                          ),
+                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                        ),
+                        SizedBox(height: 15.0),
+
+                        Container(
+                          child: TextFormField(
+                            decoration: ThemeHelper().textInputDecoration(
+                                "Vehicle Model",
+                                "Enter vehicle model"),
+                            // keyboardType: TextInputType.phone,
+                            // validator: (val) {
+                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
+                            //     return "Enter a valid phone number";
+                            //   }
+                            //   return null;
+                            // },
+                          ),
+                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                        ),
+                        SizedBox(height: 15.0),
+
+                        Container(
+                          child: TextFormField(
+                            decoration: ThemeHelper().textInputDecoration(
+                                "Vehicle Color",
+                                "Enter vehicle color"),
                             // keyboardType: TextInputType.phone,
                             // validator: (val) {
                             //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){

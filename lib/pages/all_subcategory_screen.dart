@@ -43,6 +43,7 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
   StaffModel staffModel = new StaffModel();
 
   List<SubCategoryModel> subCategoryList = [];
+  List<CategoryModel> categoryList = [];
 
   void initState() {
 
@@ -94,6 +95,7 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
                               onTap: (){
                                 Navigator.push( context, MaterialPageRoute( builder: (context) => AddSubCategoryScreen(new SubCategoryModel(),1))).then((value){
                                   getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+                                   //getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
                                 });
                               },
                               child: Align(
@@ -231,6 +233,29 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
         ),
       ),
     );
+  }
+
+  Future getAllCategory(String companyId, String branchId) async{
+    isLoading=true;
+    setState(() {
+    });
+
+    String url=Apis.CATEGORY_URL+companyId+"/"+branchId;
+    var response = await http.get(Uri.parse(url));
+
+    isLoading=false;
+    setState(() {
+
+    });
+
+    String responseData=response.body.toString();
+    var jsonData=jsonDecode(responseData);//check response string
+    // if(jsonData['success']) {
+    var data = jsonData['data'];//based on response string give array name
+    categoryList = List<CategoryModel>.from(data.map((x) => CategoryModel.fromJson(x)));
+    setState(() {
+
+    });
   }
 
   Future getAllSubCategory(String companyId, String branchId) async{
