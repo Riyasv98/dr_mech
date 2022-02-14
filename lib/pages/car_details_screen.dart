@@ -3,10 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dr_mech/common/theme_helper.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hexcolor/hexcolor.dart';
-
-import 'dashboard_screen.dart';
 
 class CarDetailsPage extends  StatefulWidget{
   @override
@@ -127,138 +123,6 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         ),
-                        // SizedBox(height: 15.0),
-                        //
-                        // Row(
-                        //   children: [
-                        //     Expanded(
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.only(right: 8.0),
-                        //         child: Container(
-                        //           child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment.center,
-                        //             children: [
-                        //                 Text("Brand",),
-                        //               Icon(
-                        //                 Icons.arrow_drop_down
-                        //               )
-                        //             ],
-                        //           ),
-                        //           height: 40,
-                        //           width: MediaQuery.of(context).size.width,
-                        //           decoration: BoxDecoration(
-                        //               borderRadius: BorderRadius.all(Radius.circular(5)),
-                        //               gradient: LinearGradient(
-                        //                   begin: Alignment.topLeft,
-                        //                   end: Alignment.bottomRight,
-                        //                   colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                        //               )
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     Expanded(
-                        //       child: Container(
-                        //         child: Row(
-                        //           mainAxisAlignment: MainAxisAlignment.center,
-                        //           children: [
-                        //             Text("Model",),
-                        //             Icon(
-                        //                 Icons.arrow_drop_down
-                        //             )
-                        //           ],
-                        //         ),
-                        //         height: 40,
-                        //         width: MediaQuery.of(context).size.width,
-                        //         decoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.all(Radius.circular(5)),
-                        //             gradient: LinearGradient(
-                        //                 begin: Alignment.topLeft,
-                        //                 end: Alignment.bottomRight,
-                        //                 colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                        //             )
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     Expanded(
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.only(left: 8.0),
-                        //         child: Container(
-                        //           child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment.center,
-                        //             children: [
-                        //               Text("Color",),
-                        //               Icon(
-                        //                   Icons.arrow_drop_down
-                        //               )
-                        //             ],
-                        //           ),
-                        //           height: 40,
-                        //           width: MediaQuery.of(context).size.width,
-                        //           decoration: BoxDecoration(
-                        //               borderRadius: BorderRadius.all(Radius.circular(5)),
-                        //               gradient: LinearGradient(
-                        //                   begin: Alignment.topLeft,
-                        //                   end: Alignment.bottomRight,
-                        //                   colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                        //               )
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        SizedBox(height: 15.0),
-
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                "Kilometers Driven",
-                                "Enter kilometers driven"),
-                            // keyboardType: TextInputType.phone,
-                            // validator: (val) {
-                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
-                            //     return "Enter a valid phone number";
-                            //   }
-                            //   return null;
-                            // },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                        ),
-                        SizedBox(height: 15.0),
-
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                "Vehicle Model",
-                                "Enter vehicle model"),
-                            // keyboardType: TextInputType.phone,
-                            // validator: (val) {
-                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
-                            //     return "Enter a valid phone number";
-                            //   }
-                            //   return null;
-                            // },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                        ),
-                        SizedBox(height: 15.0),
-
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                "Vehicle Color",
-                                "Enter vehicle color"),
-                            // keyboardType: TextInputType.phone,
-                            // validator: (val) {
-                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
-                            //     return "Enter a valid phone number";
-                            //   }
-                            //   return null;
-                            // },
-                          ),
-                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                        ),
 
                         SizedBox(height: 15.0),
                         Container(
@@ -269,7 +133,7 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Center(
                               child: TextField(
-                                // controller: descriptionController,
+                                // controller: descriptionController,z
                                 textAlign: TextAlign.left,
                                 maxLines: 7,
                                 maxLength: 200,
@@ -329,89 +193,5 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
       ),
     );
   }
-  // Future<CountryModel> countryDialog(
-  //     BuildContext context, List<CountryModel> countryList) async {
-  //   return await showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return SimpleDialog(
-  //         insetPadding: EdgeInsets.only(
-  //           left: MediaQuery.of(context).size.width/4,
-  //           right: MediaQuery.of(context).size.width/4,
-  //           // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
-  //           // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
-  //         ),
-  //         shape: const RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.all(Radius.circular(15.0))),
-  //         title: Row(
-  //           children: [
-  //             Expanded(
-  //               child: Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Text(
-  //                   "Select a country",
-  //                   textAlign: TextAlign.center,
-  //                   style: const TextStyle(
-  //                       color: Colors.black,
-  //                       fontWeight: FontWeight.bold,
-  //                       fontSize: 25),
-  //                 ),
-  //               ),
-  //             ),
-  //             GestureDetector(
-  //               child: const Align(
-  //                 child: Padding(
-  //                   padding: EdgeInsets.all(5.0),
-  //                   child: CircleAvatar(
-  //                     radius: 20,
-  //                     backgroundColor: Colors.blueGrey,
-  //                     child: Icon(Icons.close, color: Colors.white),
-  //                   ),
-  //                 ),
-  //                 alignment: Alignment.topRight,
-  //               ),
-  //               onTap: () {
-  //                 Navigator.pop(context);
-  //               },
-  //             ),
-  //           ],
-  //         ),
-  //         children: [
-  //           SizedBox(
-  //             width: MediaQuery.of(context).size.width,
-  //             child: ListView.builder(
-  //               physics: const NeverScrollableScrollPhysics(),
-  //               shrinkWrap: true,
-  //               itemCount: countryList.length,
-  //               itemBuilder: (ctx, position) {
-  //                 return SimpleDialogOption(
-  //                   child: GestureDetector(
-  //                     child: Card(
-  //                         color: Colors.grey[100],
-  //                         elevation:0,
-  //                         shape: RoundedRectangleBorder(
-  //                             borderRadius: BorderRadius.circular(3)),
-  //                         child: Padding(
-  //                           padding: const EdgeInsets.all(10.0),
-  //                           child: Text(
-  //                             countryList[position].name.toString(),
-  //                             style: const TextStyle(
-  //                               color: Colors.black,
-  //                             ),
-  //                           ),
-  //                         )),
-  //                     onTap: () {
-  //                       Navigator.of(context).pop(countryList[position]);
-  //                     },
-  //                   ),
-  //                 );
-  //               },
-  //             ),
-  //           )
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
 
 }
