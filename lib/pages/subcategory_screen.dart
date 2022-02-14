@@ -69,7 +69,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
       });
     });
 
-
+   getAllSubCategory(selectedSubCategory.cmpId.toString(),selectedSubCategory.brnId.toString());
     super.initState();
   }
 
@@ -233,7 +233,6 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                               selectedSubCategory.brnId=staffModel.brnId;
                               selectedSubCategory.cmpId=staffModel.cmpId;
 
-
                               addSubCategory(
                                   selectedSubCategory,null !=
                                   selectedSubCategory
@@ -305,6 +304,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
     // if(jsonData['success']) {
     var data = jsonData['data'];//based on response string give array name
     categoryList = List<CategoryModel>.from(data.map((x) => CategoryModel.fromJson(x)));
+
     setState(() {
 
     });

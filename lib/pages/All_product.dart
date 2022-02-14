@@ -62,11 +62,12 @@ class _AllProductScreenState extends State<AllProductScreen>{
     {
       staffModel=value;
       getAllProduct(staffModel.brnId.toString(),staffModel.cmpId.toString());
-      // getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+
       setState(() {
 
       });
     });
+    // getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
 
 
 
