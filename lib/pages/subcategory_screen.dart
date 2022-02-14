@@ -56,6 +56,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
 
     if(widget.type==2 || widget.type==3) {
       subCategoryNameController.text = selectedSubCategory.subcategoryName.toString();
+      selectedCategory.categoryName=selectedSubCategory.categoryName.toString();
 
     }
 
@@ -258,7 +259,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                 )
                             ),
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                               child: Text(null !=
                                   selectedSubCategory
                                       .subcategoryId &&
@@ -363,6 +364,7 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
         selectedSubCategory = new SubCategoryModel();
 
         subCategoryNameController.text = "";
+        selectedCategory.categoryName="";
 
 
         setState(() {});

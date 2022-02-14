@@ -185,7 +185,14 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
                             ),
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                              child: Text("Add".toUpperCase(),
+                              child: Text(null !=
+                                  selectedCategory
+                                      .categoryId &&
+                                  selectedCategory
+                                      .categoryId! >
+                                      0
+                                  ? "Update".toUpperCase()
+                                  : "Add".toUpperCase(),
                                 style: TextStyle(fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),),

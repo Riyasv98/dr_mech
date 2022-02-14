@@ -55,6 +55,7 @@ class _AllSubCategoryScreenState extends State<AllSubCategoryScreen>{
 
       });
     });
+    // getAllSubCategory(companyId, branchId)
 
 
 

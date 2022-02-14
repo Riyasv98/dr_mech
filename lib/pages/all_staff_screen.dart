@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dr_mech/Api/Api.dart';
 import 'package:dr_mech/Models/BranchModelFile.dart';
+import 'package:dr_mech/Utils/Preference.dart';
 import 'package:dr_mech/models/StaffModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,20 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
 
   List<StaffModel> staffList = [];
 
+  StaffModel staffModel = new StaffModel();
+
   StaffModel selectedStaff =new StaffModel();
 
   void initState() {
 
-    getAllStaff();
+    PreferenceFile().getStaffData().then((value)
+    {
+      staffModel=value;
+      getAllStaff(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      setState(() {
+
+      });
+    });
 
     super.initState();
   }
@@ -78,7 +88,7 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
                             GestureDetector(
                               onTap: (){
                                 Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(new StaffModel(),1))).then((value){
-                                  getAllStaff();
+                                  getAllStaff(staffModel.cmpId.toString(),staffModel.brnId.toString());
                                 });
                               },
                               child: Align(
@@ -123,9 +133,7 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
                                                   children: [
                                                     GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(staffList[index],2))).then((value){
-                                                          getAllStaff();
-                                                        });
+                                                        Navigator.push( context, MaterialPageRoute( builder: (context) => AddStaffScreen(staffList[index],2)));
                                                       },
                                                       child: Padding(
                                                         padding: const EdgeInsets.only(right: 8.0),
@@ -141,7 +149,7 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
                                                         selectedStaff=staffList[index];
                                                         Constants.deleteDialog(context,staffList[index].name.toString()).then((value) {
                                                           if (value) {
-                                                            deleteStaff(selectedStaff.employeeId!.toInt());
+                                                            deleteStaff(selectedStaff.employeeId!.toInt(),selectedStaff.cmpId!.toString(),selectedStaff.brnId!.toString());
                                                           }
                                                         });
                                                       },
@@ -239,12 +247,12 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
     );
   }
 
-  Future getAllStaff() async{
+  Future getAllStaff(String CompanyId, String BranchId) async{
     isLoading=true;
     setState(() {
     });
 
-    String url=Apis.STAFF_URL;
+    String url=Apis.STAFF_URL+CompanyId+"/"+BranchId;
     var response = await http.get(Uri.parse(url));
 
     isLoading=false;
@@ -262,11 +270,11 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
     });
   }
 
-  Future deleteStaff(int EmployeeId) async {
+  Future deleteStaff(int EmployeeId, String CompanyId, String BranchId) async {
     isLoading = true;
     setState(() {});
     String? url;
-    url = Apis.DELETE_STAFF_URL + EmployeeId.toString();
+    url = Apis.DELETE_STAFF_URL + EmployeeId.toString()+"/"+ CompanyId.toString()+"/"+ CompanyId.toString();
     final response =
     await http.get(Uri.parse(url));
 
@@ -281,12 +289,12 @@ class _AllStaffScreenState extends State<AllStaffScreen>{
 
         });
         EasyLoading.showSuccess(jsonObject[0]["message"]);
-        getAllStaff();
+        getAllStaff(staffModel.cmpId.toString(),staffModel.brnId.toString());
       } else {
-        EasyLoading.showSuccess(jsonObject[0]["message"]);
+        EasyLoading.showError(jsonObject[0]["message"]);
       }
     } else {
-      EasyLoading.showSuccess("Something went wrong");
+      EasyLoading.showError("Something went wrong");
     }
   }
 
