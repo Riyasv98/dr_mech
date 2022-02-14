@@ -3,6 +3,9 @@ import 'dart:convert';
 
 import 'package:dr_mech/Api/Api.dart';
 import 'package:dr_mech/Utils/EmailValidater.dart';
+import 'package:dr_mech/Utils/Preference.dart';
+import 'package:dr_mech/models/BranchModelFile.dart';
+import 'package:dr_mech/models/CompanyModel.dart';
 import 'package:dr_mech/models/StaffModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +56,11 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
   TextEditingController userNameController = new TextEditingController();
 
   List<StaffModel> staffList = [];
+  List<CompanyModel> companyList = [];
+  List<BranchModel> branchList = [];
+  BranchModel selectedBranch=new BranchModel();
+  CompanyModel selectedCompany=new CompanyModel();
+  StaffModel staffModel = new StaffModel();
 
   String? mySelection;
   bool isStaffAdding=false;
@@ -61,17 +69,28 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
   @override
   void initState() {
 
+    PreferenceFile().getStaffData().then((value)
+    {
+      staffModel=value;
+      getAllStaff(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      setState(() {
+
+      });
+    });
+
     if(widget.type==2 || widget.type==3) {
       nameController.text = selectedStaff.name.toString();
       addressController.text = selectedStaff.address.toString();
       numberController.text = selectedStaff.phone.toString();
       emailController.text = selectedStaff.email.toString();
-      passwordController.text = selectedStaff.password.toString();
-      userNameController.text = selectedStaff.userName.toString();
+      selectedBranch.name=selectedStaff.branchName.toString();
+      selectedCompany.name=selectedStaff.companyName.toString();
+      // passwordController.text = selectedStaff.password.toString();
+      // userNameController.text = selectedStaff.userName.toString();
 
     }
-
-    getAllStaff();
+    getAllBranches();
+    getCompanyDetails();
 
     super.initState();
   }
@@ -136,27 +155,139 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                             ],
                           ),
                         ),
-                        SizedBox(height: 30,),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                ' UserName', 'Enter username'),
-                            controller: userNameController,
-                          ),
-                          decoration: ThemeHelper()
-                              .inputBoxDecorationShaddow(),
-                        ),
                         SizedBox(height: 15,),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                'Password', 'Enter password'),
-                            controller: passwordController,
-                          ),
-                          decoration: ThemeHelper()
-                              .inputBoxDecorationShaddow(),
+
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                companyDialog(context, companyList).then((value) {
+                                  if(null!=value){
+                                    selectedCompany=value;
+                                    selectedStaff.cmpId=selectedCompany.companyId;
+                                    selectedStaff.companyName=selectedCompany.name;
+                                    setState(() {
+
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width/1.25,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10)),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: <Color>[Theme
+                                            .of(context)
+                                            .primaryColor, Theme
+                                            .of(context)
+                                            .accentColor,
+                                        ]
+                                    )
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 8, 5, 8),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Company",
+                                          style:
+                                          TextStyle(fontSize: 15, color: Colors.white),
+                                        ),
+                                        Icon(
+                                            Icons.arrow_drop_down
+                                        ),
+
+                                        Text(null!=selectedCompany.name?selectedCompany.name.toString():"")
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 15,),
+                            GestureDetector(
+                              onTap: (){
+                                branchDialog(context, branchList).then((value) {
+                                  if(null!=value){
+                                    selectedBranch=value;
+                                    selectedStaff.brnId=selectedBranch.branchId;
+                                    selectedStaff.branchName=selectedBranch.name;
+                                    setState(() {
+
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width/1.25,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10)),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: <Color>[Theme
+                                            .of(context)
+                                            .primaryColor, Theme
+                                            .of(context)
+                                            .accentColor,
+                                        ]
+                                    )
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 8, 5, 8),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Branch",
+                                          style:
+                                          TextStyle(fontSize: 15, color: Colors.white),
+                                        ),
+                                        Icon(
+                                            Icons.arrow_drop_down
+                                        ),
+
+                                        Text(null!=selectedBranch.name?selectedBranch.name.toString():"")
+
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+
                         SizedBox(height: 15,),
+                        // Container(
+                        //   child: TextFormField(
+                        //     decoration: ThemeHelper().textInputDecoration(
+                        //         ' UserName', 'Enter username'),
+                        //     controller: userNameController,
+                        //   ),
+                        //   decoration: ThemeHelper()
+                        //       .inputBoxDecorationShaddow(),
+                        // ),
+                        // SizedBox(height: 15,),
+                        // Container(
+                        //   child: TextFormField(
+                        //     decoration: ThemeHelper().textInputDecoration(
+                        //         'Password', 'Enter password'),
+                        //     controller: passwordController,
+                        //   ),
+                        //   decoration: ThemeHelper()
+                        //       .inputBoxDecorationShaddow(),
+                        // ),
+                        // SizedBox(height: 15,),
                         Container(
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
@@ -216,48 +347,51 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                             selectedStaff.address=addressController.text;
                             selectedStaff.email=emailController.text;
                             selectedStaff.phone=numberController.text;
-                            selectedStaff.userName=userNameController.text;
-                            selectedStaff.password=passwordController.text;
 
-                            if (userNameController
-                                .text.isEmpty) {
-                              MotionToast.error(
-                                  title: "Error",
-                                  titleStyle: TextStyle(
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
-                                  description:
-                                  "Please type User Name",
-                                  animationType:
-                                  ANIMATION
-                                      .FROM_LEFT,
-                                  position:
-                                  MOTION_TOAST_POSITION
-                                      .TOP,
-                                  width: 300)
-                                  .show(context);
-                            }
-                            else if (passwordController
-                                .text.isEmpty) {
-                              MotionToast.error(
-                                  title: "Error",
-                                  titleStyle: TextStyle(
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
-                                  description:
-                                  "Please type Password",
-                                  animationType:
-                                  ANIMATION
-                                      .FROM_LEFT,
-                                  position:
-                                  MOTION_TOAST_POSITION
-                                      .TOP,
-                                  width: 300)
-                                  .show(context);
-                            }
-                            else if (nameController
+
+
+                            // selectedStaff.userName=userNameController.text;
+                            // selectedStaff.password=passwordController.text;
+
+                            // if (userNameController
+                            //     .text.isEmpty) {
+                            //   MotionToast.error(
+                            //       title: "Error",
+                            //       titleStyle: TextStyle(
+                            //           fontWeight:
+                            //           FontWeight
+                            //               .bold),
+                            //       description:
+                            //       "Please type User Name",
+                            //       animationType:
+                            //       ANIMATION
+                            //           .FROM_LEFT,
+                            //       position:
+                            //       MOTION_TOAST_POSITION
+                            //           .TOP,
+                            //       width: 300)
+                            //       .show(context);
+                            // }
+                            // else if (passwordController
+                            //     .text.isEmpty) {
+                            //   MotionToast.error(
+                            //       title: "Error",
+                            //       titleStyle: TextStyle(
+                            //           fontWeight:
+                            //           FontWeight
+                            //               .bold),
+                            //       description:
+                            //       "Please type Password",
+                            //       animationType:
+                            //       ANIMATION
+                            //           .FROM_LEFT,
+                            //       position:
+                            //       MOTION_TOAST_POSITION
+                            //           .TOP,
+                            //       width: 300)
+                            //       .show(context);
+                            // }
+                             if (nameController
                                 .text.isEmpty) {
                               MotionToast.error(
                                   title: "Error",
@@ -354,14 +488,31 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                                   width: 300)
                                   .show(context);
                             }
-                            else {
-                              addEditStaff(selectedStaff,null !=
-                                  selectedStaff
-                                      .employeeId &&
-                                  selectedStaff
-                                      .employeeId! >
-                                      0);
-                            }
+                             else {
+                               selectedStaff.name=nameController.text;
+                               selectedStaff.email=emailController.text;
+                               selectedStaff.address=addressController.text;
+                               selectedStaff.phone=numberController.text;
+
+                               selectedStaff.brnId=selectedBranch.branchId;
+                               selectedStaff.branchName=selectedBranch.name;
+
+                               selectedStaff.cmpId=selectedCompany.companyId;
+                               selectedStaff.companyName=selectedCompany.name;
+
+                               selectedStaff.brnId=staffModel.brnId;
+                               selectedStaff.cmpId=staffModel.cmpId;
+
+
+                               addEditStaff(
+                                   selectedStaff,null !=
+                                   selectedStaff
+                                       .employeeId &&
+                                   selectedStaff
+                                       .employeeId! >
+                                       0);
+                             }
+                            isLoading = true;
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -406,12 +557,12 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
     );
   }
 
-  Future getAllStaff() async{
+  Future getAllStaff(String companyId, String branchId) async{
     isLoading=true;
     setState(() {
     });
 
-    String url=Apis.STAFF_URL;
+    String url=Apis.STAFF_URL+companyId+"/"+branchId;
     var response = await http.get(Uri.parse(url));
 
     isLoading=false;
@@ -456,18 +607,21 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
       var jsonObject = jsonDecode(responseString)['errorData'] as List;
       if (jsonObject[0]["error"] == 0) {
         EasyLoading.showSuccess(jsonObject[0]["message"]);
+        getAllStaff(selectedStaff.cmpId.toString(),selectedStaff.brnId.toString());
 
         selectedStaff = new StaffModel();
 
-        userNameController.text = "";
-        passwordController.text = "";
+        // userNameController.text = "";
+        // passwordController.text = "";
         nameController.text = "";
         emailController.text = "";
         addressController.text = "";
         numberController.text = "";
+        selectedCompany.name="";
+        selectedBranch.name="";
+
 
         setState(() {});
-        getAllStaff();
       } else {
         EasyLoading.showError(jsonObject[0]["message"]);
       }
@@ -484,4 +638,227 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
     // locationList = List<LocationModel>.from(data.map((x) => LocationModel.fromJson(x)));
     setState(() {});
   }
+
+  Future<CompanyModel> companyDialog(
+      BuildContext context, List<CompanyModel> companyList) async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          insetPadding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width/9,
+            right: MediaQuery.of(context).size.width/9,
+            // bottom: MediaQuery.of(context).size.height/5,
+            // top: MediaQuery.of(context).size.height/5
+            // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
+            // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
+          ),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          title: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Select Company",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: const Align(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.blueGrey,
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ),
+                  alignment: Alignment.topRight,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: companyList.length,
+                itemBuilder: (ctx, position) {
+                  return SimpleDialogOption(
+                    child: GestureDetector(
+                      child: Card(
+                          color: Colors.grey[100],
+                          elevation:0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              companyList[position].name.toString(),
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          )),
+                      onTap: () {
+                        Navigator.of(context).pop(companyList[position]);
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  Future<BranchModel> branchDialog(
+      BuildContext context, List<BranchModel> branchList) async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          insetPadding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width/9,
+            right: MediaQuery.of(context).size.width/9,
+            // bottom: MediaQuery.of(context).size.height/5,
+            // top: MediaQuery.of(context).size.height/5
+            // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
+            // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
+          ),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          title: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Select Branch",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: const Align(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.blueGrey,
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ),
+                  alignment: Alignment.topRight,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: branchList.length,
+                itemBuilder: (ctx, position) {
+                  return SimpleDialogOption(
+                    child: GestureDetector(
+                      child: Card(
+                          color: Colors.grey[100],
+                          elevation:0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              branchList[position].name.toString(),
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          )),
+                      onTap: () {
+                        Navigator.of(context).pop(branchList[position]);
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  Future getCompanyDetails() async{
+    isLoading=true;
+    setState(() {
+
+    });
+
+    String url=Apis.COMPANY_URL;
+    var response = await http.get(Uri.parse(url));
+
+    isLoading=false;
+    setState(() {
+
+    });
+
+    String responseData=response.body.toString();
+    var jsonData=jsonDecode(responseData);//check response string
+    // if(jsonData['success']) {
+    var data = jsonData['data'];//based on response string give array name
+    companyList = List<CompanyModel>.from(data.map((x) => CompanyModel.fromJson(x)));
+    setState(() {
+
+    });
+
+  }
+
+  Future getAllBranches() async{
+    isLoading=true;
+    setState(() {
+    });
+
+    String url=Apis.BRANCH_URL;
+    var response = await http.get(Uri.parse(url));
+
+    isLoading=false;
+    setState(() {
+
+    });
+
+    String responseData=response.body.toString();
+    var jsonData=jsonDecode(responseData);//check response string
+    // if(jsonData['success']) {
+    var data = jsonData['data'];//based on response string give array name
+    branchList = List<BranchModel>.from(data.map((x) => BranchModel.fromJson(x)));
+    setState(() {
+
+    });
+  }
+
 }

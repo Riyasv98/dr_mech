@@ -66,6 +66,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
       salesRateController.text = selectedProduct.salesRate.toString();
       mrpController.text = selectedProduct.mrp.toString();
       barcodeController.text = selectedProduct.barCode.toString();
+      selectedCategory.categoryName=selectedProduct.categoryName.toString();
+      selectedSubCategory.subcategoryName=selectedProduct.subCategoryName.toString();
+      selectedUnit.name=selectedProduct.unitName.toString();
 
     }
     getAllUnits();
@@ -439,14 +442,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       Theme.of(context).accentColor,
                                     ])),
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                              child: Text(
-                                "Add".toUpperCase(),
-                                style: TextStyle(
-                                    fontSize: 15,
+                              padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                              child: Text(null !=
+                                  selectedProduct
+                                      .productId &&
+                                  selectedProduct
+                                      .productId! >
+                                      0
+                                  ? "Update".toUpperCase()
+                                  : "Add".toUpperCase(),
+                                style: TextStyle(fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
+                                    color: Colors.white),),
                             ),
                           ),
                         ),
@@ -776,7 +783,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
         salesRateController.text = "";
         mrpController.text = "";
         barcodeController.text = "";
-
+        selectedCategory.categoryName="";
+        selectedSubCategory.subcategoryName="";
+        selectedProduct.productName = "";
+        selectedUnit.name="";
         setState(() {});
 
         getAllProduct(selectedProduct.brnId.toString(),selectedProduct.cmpId.toString());

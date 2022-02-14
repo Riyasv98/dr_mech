@@ -11,6 +11,8 @@ String staffModelToJson(StaffModel data) => json.encode(data.toJson());
 class StaffModel {
   StaffModel({
     this.brnId,
+    this.branchName,
+    this.companyName,
     this.employeeId,
     this.imgUrl,
     this.userName,
@@ -32,6 +34,8 @@ class StaffModel {
   int ?cmpId;
   int ?employeeId;
   String ?name;
+  String ?branchName;
+  String ?companyName;
   String ?imgUrl;
   String ?userName;
   String ?password;
@@ -50,6 +54,8 @@ class StaffModel {
     cmpId: null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     employeeId: null!=json["employeeId"]?json["employeeId"] is int ? json["employeeId"]: int.parse(json["employeeId"]):-1,
     name: json["name"],
+    branchName: json["branchName"],
+    companyName: json["companyName"],
     isAdmin: json["isAdmin"]=="0",
     userName: json["userName"],
     password: json["password"],
@@ -69,6 +75,8 @@ class StaffModel {
     "employeeId": employeeId,
     "cmpId": cmpId,
     "name": name,
+    "companyName": companyName,
+    "branchName": branchName,
     "isAdmin": isAdmin,
     "userName": userName,
     "password": password,

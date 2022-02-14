@@ -132,7 +132,7 @@ class _AllProductScreenState extends State<AllProductScreen>{
                                 itemCount: productList.length,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height/3.5,
+                                    height: MediaQuery.of(context).size.height/3,
                                     child: Card(
                                       elevation: 2,
                                       child: Padding(
@@ -356,28 +356,6 @@ class _AllProductScreenState extends State<AllProductScreen>{
     }
   }
 
-  Future getAllSubCategory(String companyId, String branchId) async{
-    isLoading=true;
-    setState(() {
-    });
-
-    String url=Apis.SUBCATEGORY_URL+companyId+"/"+branchId;
-    var response = await http.get(Uri.parse(url));
-
-    isLoading=false;
-    setState(() {
-
-    });
-
-    String responseData=response.body.toString();
-    var jsonData=jsonDecode(responseData);//check response string
-    // if(jsonData['success']) {
-    var data = jsonData['data'];//based on response string give array name
-    subCategoryList = List<SubCategoryModel>.from(data.map((x) => SubCategoryModel.fromJson(x)));
-    setState(() {
-
-    });
-  }
 
   Future getAllUnits() async{
     isLoading=true;
