@@ -356,7 +356,6 @@ class _AllProductScreenState extends State<AllProductScreen>{
     }
   }
 
-
   Future getAllUnits() async{
     isLoading=true;
     setState(() {

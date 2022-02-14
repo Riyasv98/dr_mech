@@ -72,7 +72,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     }
     getAllUnits();
-    getAllProduct(selectedProduct.brnId.toString(),selectedProduct.cmpId.toString());
+
 
     PreferenceFile().getStaffData().then((value)
     {
