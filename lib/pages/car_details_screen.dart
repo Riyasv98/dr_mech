@@ -72,12 +72,47 @@ class _CarDetailsPageState extends State<CarDetailsPage>{
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         ),
-                        SizedBox(height: 15.0),
+                        SizedBox(height: 20.0),
+                        Text("Vehicle Details",
+                        ),
+
                         Container(
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
                                 "Vehicle Number",
                                 "Enter vehicle number"),
+                            // keyboardType: TextInputType.phone,
+                            // validator: (val) {
+                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
+                            //     return "Enter a valid phone number";
+                            //   }
+                            //   return null;
+                            // },
+                          ),
+                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                        ),
+                        SizedBox(height: 15.0),
+                        Container(
+                          child: TextFormField(
+                            decoration: ThemeHelper().textInputDecoration(
+                                "Vehicle Model",
+                                "Enter vehicle model"),
+                            // keyboardType: TextInputType.phone,
+                            // validator: (val) {
+                            //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
+                            //     return "Enter a valid phone number";
+                            //   }
+                            //   return null;
+                            // },
+                          ),
+                          decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                        ),
+                        SizedBox(height: 15.0),
+                        Container(
+                          child: TextFormField(
+                            decoration: ThemeHelper().textInputDecoration(
+                                "Vehicle Color",
+                                "Enter vehicle color"),
                             // keyboardType: TextInputType.phone,
                             // validator: (val) {
                             //   if(!(val!.isEmpty) && !RegExp(r"^(\d+)*$").hasMatch(val)){
