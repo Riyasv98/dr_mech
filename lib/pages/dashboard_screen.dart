@@ -231,7 +231,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllCategoryScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => CategoryScreen()));
 
                                 },
                                 child: Container(

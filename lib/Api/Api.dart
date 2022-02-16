@@ -18,13 +18,13 @@ class Apis {
   static const String BRANCH_URL = BASE_URL+"branch/getallbranch/";
 
 
-  static const String CATEGORY_URL = BASE_URL+"category/getallcategory/";
+  static const String GROUP_URL = BASE_URL+"group/getallgroup/";
 
-  static const String ADD_CATEGORY = BASE_URL+"category/addcategory/";
+  static const String ADD_GROUP = BASE_URL+"group/addgroup/";
 
-  static const String EDIT_CATEGORY = BASE_URL+"category/editcategory/";
+  static const String EDIT_GROUP = BASE_URL+"group/editgroup/";
 
-  static const String DELETE_CATEGORY = BASE_URL+"category/deletecategory/";
+  static const String DELETE_GROUP = BASE_URL+"group/deletegroup/";
 
 
   static const String SUBCATEGORY_URL = BASE_URL+"subcategory/getallsubcategory/";

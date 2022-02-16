@@ -56,7 +56,7 @@ class _AllProductScreenState extends State<AllProductScreen>{
 
   void initState() {
 
-    getAllUnits();
+    // getAllUnits();
 
     PreferenceFile().getStaffData().then((value)
     {
@@ -311,7 +311,7 @@ class _AllProductScreenState extends State<AllProductScreen>{
     setState(() {
     });
 
-    String url=Apis.CATEGORY_URL+companyId+"/"+branchId;
+    String url=Apis.GROUP_URL+companyId+"/"+branchId;
     var response = await http.get(Uri.parse(url));
 
     isLoading=false;

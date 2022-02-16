@@ -1,10 +1,11 @@
-
 import 'dart:convert';
 
 import 'package:dr_mech/Api/Api.dart';
 import 'package:dr_mech/Utils/EmailValidater.dart';
 import 'package:dr_mech/Utils/Preference.dart';
+import 'package:dr_mech/common/Contants.dart';
 import 'package:dr_mech/models/CategoryModelFile.dart';
+import 'package:dr_mech/models/GroupModel.dart';
 import 'package:dr_mech/models/StaffModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,54 +19,38 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 
+class CategoryScreen extends StatefulWidget {
 
-
-class AddCategoryScreen extends  StatefulWidget{
-  AddCategoryScreen(this.categoryModel,this.type);
-
-  int?type;
-  CategoryModel categoryModel = new CategoryModel();
 
   @override
   State<StatefulWidget> createState() {
-    return _AddCategoryScreenState(categoryModel);
+    return _CategoryScreenState();
   }
 }
 
-class _AddCategoryScreenState extends State<AddCategoryScreen>{
-  _AddCategoryScreenState(this.selectedCategory);
+class _CategoryScreenState extends State<CategoryScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
 
-
-
-
-  @override
-
-  CategoryModel selectedCategory=new CategoryModel();
-
+  GroupModel selectedGroupModel = new GroupModel();
   StaffModel staffModel = new StaffModel();
 
-  TextEditingController categoryNameController = new TextEditingController();
+  TextEditingController groupNameController = new TextEditingController();
+  TextEditingController groupUnderController = new TextEditingController();
 
-
-  List<CategoryModel> categoryList = [];
+  List<GroupModel> groupModelList = [];
+  List<GroupModel> subgroupModelList = [];
+  List<GroupModel> selectedgroupModelList = [];
   bool isLoading = false;
 
   @override
   void initState() {
 
-    if(widget.type==2 || widget.type==3) {
-      categoryNameController.text = selectedCategory.categoryName.toString();
-
-    }
-    PreferenceFile().getStaffData().then((value)
-        {
-          staffModel=value;
-          getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
-        });
-
+    PreferenceFile().getStaffData().then((value) {
+      staffModel = value;
+      getAllGroup(staffModel.cmpId.toString(), staffModel.brnId.toString());
+    });
 
     // getAllCategory();
 
@@ -73,185 +58,349 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
   }
 
   @override
-
-
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:false,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor.withOpacity(0.4),
+        title: Text("Group"),
+      ),
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
               height: 150,
-              child: HeaderWidget(
-                  150, false, Icons.person_add_alt_1_rounded),
+              child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(25, 50, 25, 10),
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
-                          child: SizedBox(height: 30,),
-                        ),
-                        // GestureDetector(
-                        //   child: Stack(
-                        //     children: [
-                        //       Container(
-                        //         padding: EdgeInsets.all(10),
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(100),
-                        //           border: Border.all(
-                        //               width: 5, color: Colors.white),
-                        //           color: Colors.white,
-                        //           boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black12,
-                        //               blurRadius: 20,
-                        //               offset: const Offset(5, 5),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        SizedBox(height: 15,),
-                        Container(
-                          child: TextFormField(
-                            decoration: ThemeHelper().textInputDecoration(
-                                ' Category Name', 'Enter category name'),
-                            controller: categoryNameController,
-                          ),
-                          decoration: ThemeHelper()
-                              .inputBoxDecorationShaddow(),
-                        ),
-                        SizedBox(height: 15,),
-                        GestureDetector(
-                          onTap: () {
-                            selectedCategory.categoryName=categoryNameController.text;
-                            selectedCategory.brnId=staffModel.brnId;
-                            selectedCategory.cmpId=staffModel.cmpId;
+            Column(
+              children: [
 
-                            if (categoryNameController
-                                .text.isEmpty) {
-                              MotionToast.error(
-                                  title: "Error",
-                                  titleStyle: TextStyle(
-                                      fontWeight:
-                                      FontWeight
-                                          .bold),
-                                  description:
-                                  "Please type Staff Name",
-                                  animationType:
-                                  ANIMATION
-                                      .FROM_LEFT,
-                                  position:
-                                  MOTION_TOAST_POSITION
-                                      .TOP,
-                                  width: 300)
-                                  .show(context);
-                            }
-                            else {
-                              addEditCategory(selectedCategory,null !=
-                                  selectedCategory
-                                      .categoryId &&
-                                  selectedCategory
-                                      .categoryId! >
-                                      0);
-                            }
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(10)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: <Color>[Theme
-                                        .of(context)
-                                        .primaryColor, Theme
-                                        .of(context)
-                                        .accentColor,
-                                    ]
-                                )
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                              child: Text(null !=
-                                  selectedCategory
-                                      .categoryId &&
-                                  selectedCategory
-                                      .categoryId! >
-                                      0
-                                  ? "Update".toUpperCase()
-                                  : "Add".toUpperCase(),
-                                style: TextStyle(fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),),
-                            ),
-                          ),
-                        ),
-                      ],
+                Container(
+                  margin: EdgeInsets.fromLTRB(25, 50, 25, 10),
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: TextFormField(
+                    decoration: ThemeHelper().textInputDecoration(
+                        ' Group Name', 'Enter group name'),
+                    controller: groupNameController,
+                  ),
+                  decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: TextFormField(
+                    controller: groupUnderController,
+                    readOnly: true,
+                    decoration: ThemeHelper().textInputDecoration(
+                        ' Group under', ),
+                    onTap: (){
+                      groupDialog(context, selectedgroupModelList).then((value) {
+                        if(null!=value){
+                          selectedGroupModel.groupUnder=value.groupId;
+                          groupUnderController.text=value.groupName!;
+                          setState(() {
+
+                          });
+                        }
+                      });
+                    },
+                  ),
+                  decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    selectedGroupModel.groupName = groupNameController.text;
+                    selectedGroupModel.brnId = staffModel.brnId;
+                    selectedGroupModel.cmpId = staffModel.cmpId;
+
+                    if (groupNameController.text.isEmpty) {
+                      MotionToast.error(
+                              title: "Error",
+                              titleStyle: TextStyle(
+                                  fontWeight: FontWeight.bold),
+                              description: "Please type group Name",
+                              animationType: ANIMATION.FROM_LEFT,
+                              position: MOTION_TOAST_POSITION.TOP,
+                              width: 300)
+                          .show(context);
+                    } else {
+                      addEditGroup(
+                          selectedGroupModel,
+                          null != selectedGroupModel.groupId &&
+                              selectedGroupModel.groupId! > 0);
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(10)),
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: <Color>[
+                              Theme.of(context).primaryColor,
+                              Theme.of(context).accentColor,
+                            ])),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                      child: Text(
+                        null != selectedGroupModel.groupId &&
+                                selectedGroupModel.groupId! > 0
+                            ? "Update".toUpperCase()
+                            : "Add".toUpperCase(),
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                isLoading
+                    ? Center(
+                  child:
+                  CircularProgressIndicator(),
+                )
+                    :null!=groupModelList && groupModelList.length > 0?
+
+                ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: groupModelList.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height/10,
+                        child: Card(
+                          elevation: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 0,top:2),
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width/6,
+                                    child: Row(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: (){
+
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 8.0),
+                                            child: Icon(
+                                              Icons.edit,
+                                              size: 20,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: (){
+                                            selectedGroupModel=groupModelList[index];
+                                            // Constants.deleteDialog(context,categoryList[index].categoryName.toString()).then((value) {
+                                            //   if (value) {
+                                            //     deleteCategory(selectedCategory.categoryId!.toInt(),selectedCategory.cmpId!.toInt(),selectedCategory.brnId!.toInt());
+                                            //   }
+                                            // });
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            size: 20,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                            child: Text("Category Name :"),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                            child: Text(groupModelList[index].groupName.toString(),textAlign: TextAlign.left,),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    })
+                    : Center(
+                  child: Text(
+                      "No data found"),
+                )
+              ],
             ),
           ],
         ),
       ),
     );
   }
+  Future<GroupModel> groupDialog(
+      BuildContext context, List<GroupModel> groupModelList) async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          // insetPadding: EdgeInsets.only(
+          //   left: MediaQuery.of(context).size.width/9,
+          //   right: MediaQuery.of(context).size.width/9,
+          //   // bottom: MediaQuery.of(context).size.height/5,
+          //   // top: MediaQuery.of(context).size.height/5
+          //   // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
+          //   // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
+          // ),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          title: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Select group",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: const Align(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.blueGrey,
+                      child: Icon(Icons.close, color: Colors.white),
+                    ),
+                  ),
+                  alignment: Alignment.topRight,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: groupModelList.length,
+                itemBuilder: (ctx, position) {
+                  return SimpleDialogOption(
+                    child: GestureDetector(
+                      child: Card(
+                          color: Colors.grey[100],
+                          elevation:0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              groupModelList[position].groupName.toString(),
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          )),
+                      onTap: () {
+                        Navigator.of(context).pop(groupModelList[position]);
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+  Future getAllGroup(String companyId, String branchId) async {
+    isLoading = true;
+    setState(() {});
 
-  Future getAllCategory(String companyId, String branchId) async{
-    isLoading=true;
-    setState(() {
-    });
-
-    String url=Apis.CATEGORY_URL+companyId+"/"+branchId;
+    String url = Apis.GROUP_URL + companyId + "/" + branchId;
     var response = await http.get(Uri.parse(url));
 
-    isLoading=false;
-    setState(() {
+    isLoading = false;
+    setState(() {});
 
-    });
+    String responseData = response.body.toString();
+    var jsonData = jsonDecode(responseData);
+    var data = jsonData['data'];
+    selectedgroupModelList = [];
+    subgroupModelList = [];
+    groupModelList =
+        List<GroupModel>.from(data.map((x) => GroupModel.fromJson(x)));
+    for (GroupModel groupModel in groupModelList) {
+      if (groupModel.groupUnder == 0) {
+        selectedgroupModelList.add(groupModel);
+      } else if (groupModel.groupUnder! >0) {
+        subgroupModelList.add(groupModel);
+      }
+    }
+    selectedgroupModelList.insert(0,GroupModel(groupId: 0,groupUnder: -1,groupName: "Primary"));
 
-    String responseData=response.body.toString();
-    var jsonData=jsonDecode(responseData);//check response string
-    // if(jsonData['success']) {
-    var data = jsonData['data'];//based on response string give array name
-    categoryList = List<CategoryModel>.from(data.map((x) => CategoryModel.fromJson(x)));
-    setState(() {
-
-    });
+    setState(() {});
   }
 
-  Future<bool?> addEditCategory(
-      CategoryModel categoryDetailsModel, bool isEdit) async {
+  Future<bool?> addEditGroup(
+      GroupModel groupModel, bool isEdit) async {
     String url = "";
     if (isEdit) {
-      url = Apis.EDIT_CATEGORY;
+      url = Apis.EDIT_GROUP;
     } else {
-      url = Apis.ADD_CATEGORY;
+      url = Apis.ADD_GROUP;
     }
     // staffDetailsModel.status = 1;
 
-    String dataJson = categoryModelToJson(categoryDetailsModel);
+    String dataJson = groupModelToJson(groupModel);
 
     var data = jsonEncode({"jsonData": dataJson});
 
     EasyLoading.show(status: "Please wait");
 
-    final response =
-    await http.post(Uri.parse(url), body: data);
+    final response = await http.post(Uri.parse(url), body: data);
     // isUniversityAdding=false;
     setState(() {});
 
@@ -262,12 +411,12 @@ class _AddCategoryScreenState extends State<AddCategoryScreen>{
       if (jsonObject[0]["error"] == 0) {
         EasyLoading.showSuccess(jsonObject[0]["message"]);
 
-        selectedCategory = new CategoryModel();
+        selectedGroupModel = new GroupModel();
 
-        categoryNameController.text = "";
+        groupNameController.text = "";
 
         setState(() {});
-        // getAllStaff();
+        getAllGroup(staffModel.cmpId.toString(), staffModel.brnId.toString());
       } else {
         EasyLoading.showError(jsonObject[0]["message"]);
       }
