@@ -34,11 +34,26 @@ class _LoginPageState extends State<LoginPage>{
 
   TextEditingController passwordController=new TextEditingController();
 
+  StaffModel staffModel = new StaffModel();
 
   // BranchModel selectedBranch =new BranchModel();
 
   double _headerHeight = 250;
   Key _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    PreferenceFile().getStaffData().then((value)
+    {
+      staffModel=value;
+      userNameController.text=staffModel.userName!;
+      passwordController.text=staffModel.password!;
+      setState(() {
+
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
