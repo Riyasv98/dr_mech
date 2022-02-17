@@ -225,6 +225,25 @@ class _AddSubCategoryScreenState extends State<AddSubCategoryScreen>{
                                   width: 300)
                                   .show(context);
                             }
+
+                            // else if (selectedCategory.categoryName = ) {
+                            //   MotionToast.error(
+                            //       title: "Error",
+                            //       titleStyle: TextStyle(
+                            //           fontWeight:
+                            //           FontWeight
+                            //               .bold),
+                            //       description:
+                            //       "Please type Subcategory Name",
+                            //       animationType:
+                            //       ANIMATION
+                            //           .FROM_LEFT,
+                            //       position:
+                            //       MOTION_TOAST_POSITION
+                            //           .TOP,
+                            //       width: 300)
+                            //       .show(context);
+                            // }
                             else {
                               selectedSubCategory.subcategoryName=subCategoryNameController.text;
 

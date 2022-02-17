@@ -46,86 +46,89 @@ class _LoginPageState extends State<LoginPage>{
     return Scaffold(
       resizeToAvoidBottomInset:false,
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Container(
-            height: _headerHeight,
-            child: HeaderWidget(_headerHeight, true, Icons.settings), //let's create a common header widget
-          ),
-          SafeArea(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(20,0, 20, 10),
-                margin: EdgeInsets.fromLTRB(20, 0, 20, 10),// This will be the login form
-              child: Column(
-                children: [
-                  Text(
-                    'Hello',
-                    style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold,color: Colors.grey),
-                  ),
-                  Text(
-                    'Sign in into your account',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  SizedBox(height: 30.0),
-                  Form(
-                    key: _formKey,
-                      child: Column(
-                        children: [
-                          // Container(
-                          //   child: TextField(
-                          //     controller: companyIdController,
-                          //     decoration: ThemeHelper().textInputDecoration('Company ID', 'Enter your company Id'),
-                          //   ),
-                          //   decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                          // ),
-                          // SizedBox(height: 15.0),
-                          Container(
-                            child: TextField(
-                              controller: userNameController,
-                              decoration: ThemeHelper().textInputDecoration('User Name', 'Enter your user name'),
-                            ),
-                            decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                          ),
-                          SizedBox(height: 15.0),
-                          Container(
-                            child: TextField(
-                              controller: passwordController,
-                              obscureText: true,
-                              decoration: ThemeHelper().textInputDecoration('Password', 'Enter your password'),
-                            ),
-                            decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                          ),
-                          SizedBox(height: 12.0),
-
-                          GestureDetector(
-                            onTap:(){
-                              userLogin(userNameController.text,passwordController.text);
-                              isLoading=true;
-                            },
-                            child:isLoading?Center(child: CircularProgressIndicator()):
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                  )
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                                child: Text('Sign In'.toUpperCase(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                  ),
-                ],
-              )
+      body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true, Icons.settings), //let's create a common header widget
             ),
-          ),
-        ],
+            SafeArea(
+              child: Container(
+                padding: EdgeInsets.fromLTRB(20,0, 20, 10),
+                  margin: EdgeInsets.fromLTRB(20, 0, 20, 10),// This will be the login form
+                child: Column(
+                  children: [
+                    Text(
+                      'Hello',
+                      style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold,color: Colors.grey),
+                    ),
+                    Text(
+                      'Sign in into your account',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(height: 30.0),
+                    Form(
+                      key: _formKey,
+                        child: Column(
+                          children: [
+                            // Container(
+                            //   child: TextField(
+                            //     controller: companyIdController,
+                            //     decoration: ThemeHelper().textInputDecoration('Company ID', 'Enter your company Id'),
+                            //   ),
+                            //   decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                            // ),
+                            // SizedBox(height: 15.0),
+                            Container(
+                              child: TextField(
+                                controller: userNameController,
+                                decoration: ThemeHelper().textInputDecoration('User Name', 'Enter your user name'),
+                              ),
+                              decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                            ),
+                            SizedBox(height: 15.0),
+                            Container(
+                              child: TextField(
+                                controller: passwordController,
+                                obscureText: true,
+                                decoration: ThemeHelper().textInputDecoration('Password', 'Enter your password'),
+                              ),
+                              decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                            ),
+                            SizedBox(height: 12.0),
+
+                            GestureDetector(
+                              onTap:(){
+                                userLogin(userNameController.text,passwordController.text);
+                                isLoading=true;
+                              },
+                              child:isLoading?Center(child: CircularProgressIndicator()):
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                                    )
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                  child: Text('Sign In'.toUpperCase(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                    ),
+                  ],
+                )
+              ),
+            ),
+          ],
+        ),
       ),
     );
 

@@ -100,7 +100,7 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
 
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:false,
+      resizeToAvoidBottomInset:true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(

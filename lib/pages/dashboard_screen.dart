@@ -16,6 +16,7 @@ import 'package:dr_mech/pages/login_page.dart';
 import 'package:dr_mech/pages/splash_screen.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 
+import 'SalesScreen.dart';
 import 'all_category_screen.dart';
 import 'all_subcategory_screen.dart';
 import 'car_details_screen.dart';
@@ -36,6 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Stack(
@@ -357,7 +359,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>AllStaffScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
                                 },
                                 child: Container(
                                   height: MediaQuery.of(context).size.height/6,
