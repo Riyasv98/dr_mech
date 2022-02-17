@@ -268,26 +268,7 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                         ),
 
                         SizedBox(height: 15,),
-                        // Container(
-                        //   child: TextFormField(
-                        //     decoration: ThemeHelper().textInputDecoration(
-                        //         ' UserName', 'Enter username'),
-                        //     controller: userNameController,
-                        //   ),
-                        //   decoration: ThemeHelper()
-                        //       .inputBoxDecorationShaddow(),
-                        // ),
-                        // SizedBox(height: 15,),
-                        // Container(
-                        //   child: TextFormField(
-                        //     decoration: ThemeHelper().textInputDecoration(
-                        //         'Password', 'Enter password'),
-                        //     controller: passwordController,
-                        //   ),
-                        //   decoration: ThemeHelper()
-                        //       .inputBoxDecorationShaddow(),
-                        // ),
-                        // SizedBox(height: 15,),
+
                         Container(
                           child: TextFormField(
                             decoration: ThemeHelper().textInputDecoration(
@@ -348,49 +329,6 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
                             selectedStaff.email=emailController.text;
                             selectedStaff.phone=numberController.text;
 
-
-
-                            // selectedStaff.userName=userNameController.text;
-                            // selectedStaff.password=passwordController.text;
-
-                            // if (userNameController
-                            //     .text.isEmpty) {
-                            //   MotionToast.error(
-                            //       title: "Error",
-                            //       titleStyle: TextStyle(
-                            //           fontWeight:
-                            //           FontWeight
-                            //               .bold),
-                            //       description:
-                            //       "Please type User Name",
-                            //       animationType:
-                            //       ANIMATION
-                            //           .FROM_LEFT,
-                            //       position:
-                            //       MOTION_TOAST_POSITION
-                            //           .TOP,
-                            //       width: 300)
-                            //       .show(context);
-                            // }
-                            // else if (passwordController
-                            //     .text.isEmpty) {
-                            //   MotionToast.error(
-                            //       title: "Error",
-                            //       titleStyle: TextStyle(
-                            //           fontWeight:
-                            //           FontWeight
-                            //               .bold),
-                            //       description:
-                            //       "Please type Password",
-                            //       animationType:
-                            //       ANIMATION
-                            //           .FROM_LEFT,
-                            //       position:
-                            //       MOTION_TOAST_POSITION
-                            //           .TOP,
-                            //       width: 300)
-                            //       .show(context);
-                            // }
                              if (nameController
                                 .text.isEmpty) {
                               MotionToast.error(
@@ -692,7 +630,7 @@ class _AddStaffScreenState extends State<AddStaffScreen>{
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: companyList.length,
                 itemBuilder: (ctx, position) {

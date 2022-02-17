@@ -2,12 +2,15 @@
 
 import 'package:dr_mech/pages/AllUnits.dart';
 import 'package:dr_mech/pages/All_product.dart';
+import 'package:dr_mech/pages/UnitScreen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
 import 'package:dr_mech/pages/car_details_screen.dart';
 import 'package:dr_mech/pages/group_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
+
+import 'SalesScreen.dart';
 
 
 class DashboardScreen extends StatefulWidget{
@@ -248,7 +251,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllUnitScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => UnitScreen()));
 
                                 },
                                 child: Container(
@@ -311,7 +314,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
+                                  // Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
                                 },
                                 child: Container(
                                   height: MediaQuery.of(context).size.height/6,

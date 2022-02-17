@@ -47,6 +47,35 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor:
+        Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("All products"),
+            GestureDetector(
+              onTap: () {
+                Navigator.push( context, MaterialPageRoute( builder: (context) => AddUnitScreen(new UnitModel(),1))).then((value){
+                  getAllUnits();
+                });
+              },
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      right: 0, bottom: 5),
+                  child: Icon(
+                    Icons.add_circle,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Stack(
         children: [
@@ -55,7 +84,7 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
             child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
             alignment: Alignment.center,
             child: Column(
               children: [
@@ -66,26 +95,10 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
                       Stack(
                         children: [
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                             child: SizedBox(height: 20,),
                           ),
                         ],
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push( context, MaterialPageRoute( builder: (context) => AddUnitScreen(new UnitModel(),1))).then((value){
-                            getAllUnits();
-                          });
-                        },
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 8.0,bottom: 5),
-                            child: Icon(
-                              Icons.add_circle,color: Colors.grey,size: 40,
-                            ),
-                          ),
-                        ),
                       ),
 
                       isLoading
@@ -100,16 +113,42 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
                           itemCount: unitList.length,
                           itemBuilder: (context, index) {
                             return Container(
-                              height: MediaQuery.of(context).size.height/10,
+                              height: MediaQuery.of(context).size.height/11,
                               child: Card(
                                 elevation: 2,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8.0,top:2),
-                                  child: Column(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                              child: Text("Unit Name :"),
+                                            ),
+
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+                                              child: Text(unitList[index].unitName.toString(),textAlign: TextAlign.left,),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                       Align(
-                                        alignment: Alignment.topRight,
+                                        alignment: Alignment.centerRight,
                                         child: Container(
                                           width: MediaQuery.of(context).size.width/6,
                                           child: Row(
@@ -146,38 +185,6 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
                                           ),
                                         ),
                                       ),
-                                      Row(
-                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text("Unit Name :"),
-                                                ),
-
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(unitList[index].unitName.toString(),textAlign: TextAlign.left,),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-
                                     ],
                                   ),
                                 ),

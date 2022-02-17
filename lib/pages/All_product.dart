@@ -82,7 +82,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       right: 0, bottom: 5),
                   child: Icon(
                     Icons.add_circle,
-                    color: Colors.grey,
+                    color: Colors.white,
                     size: 40,
                   ),
                 ),
@@ -136,17 +136,239 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 8.0, top: 2),
-                                              child: Column(
-                                                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              child: Row(
+                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8,top: 5),
+                                                          child: Text(
+                                                              "Product Name :"),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                              "Unit :"),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                              "Group :"),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                              "SalesRate :"),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                              "Mrp :"),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                              "Barcode :"),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8,top: 5),
+                                                          child: Text(
+                                                            productList[
+                                                                    index]
+                                                                .productName
+                                                                .toString(),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                            productList[
+                                                                    index]
+                                                                .unitName
+                                                                .toString(),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                            productList[
+                                                                    index]
+                                                                .groupName
+                                                                .toString(),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                            productList[
+                                                                    index]
+                                                                .salesRate
+                                                                .toString(),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                            productList[
+                                                                    index]
+                                                                .mrp
+                                                                .toString(),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left:
+                                                                      8.0,
+                                                                  right:
+                                                                      8,
+                                                                  bottom:
+                                                                      8),
+                                                          child: Text(
+                                                            productList[
+                                                                    index]
+                                                                .barCode
+                                                                .toString(),
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                                   Align(
                                                     alignment:
-                                                        Alignment.topRight,
+                                                    Alignment.topRight,
                                                     child: Container(
                                                       width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width /
+                                                          context)
+                                                          .size
+                                                          .width /
                                                           6,
                                                       child: Row(
                                                         children: [
@@ -161,10 +383,10 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                                             },
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          8.0),
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right:
+                                                                  8.0),
                                                               child: Icon(
                                                                 Icons.edit,
                                                                 size: 20,
@@ -176,266 +398,39 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                                           GestureDetector(
                                                             onTap: () {
                                                               selectedProduct =
-                                                                  productList[
-                                                                      index];
+                                                              productList[
+                                                              index];
                                                               Constants.deleteDialog(
-                                                                      context,
-                                                                      productList[index]
-                                                                          .productName
-                                                                          .toString())
+                                                                  context,
+                                                                  productList[index]
+                                                                      .productName
+                                                                      .toString())
                                                                   .then(
                                                                       (value) {
-                                                                if (value) {
-                                                                  deleteProduct(
-                                                                      selectedProduct
-                                                                          .productId!
-                                                                          .toInt(),
-                                                                      selectedProduct
-                                                                          .cmpId!
-                                                                          .toInt(),
-                                                                      selectedProduct
-                                                                          .brnId!
-                                                                          .toInt());
-                                                                }
-                                                              });
+                                                                    if (value) {
+                                                                      deleteProduct(
+                                                                          selectedProduct
+                                                                              .productId!
+                                                                              .toInt(),
+                                                                          selectedProduct
+                                                                              .cmpId!
+                                                                              .toInt(),
+                                                                          selectedProduct
+                                                                              .brnId!
+                                                                              .toInt());
+                                                                    }
+                                                                  });
                                                             },
                                                             child: Icon(
                                                               Icons.delete,
                                                               size: 20,
                                                               color:
-                                                                  Colors.red,
+                                                              Colors.red,
                                                             ),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
-                                                  ),
-                                                  Row(
-                                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                  "Product Name :"),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                  "Unit :"),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                  "Group :"),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                  "SalesRate :"),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                  "Mrp :"),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                  "Barcode :"),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                productList[
-                                                                        index]
-                                                                    .productName
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                productList[
-                                                                        index]
-                                                                    .unitName
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                productList[
-                                                                        index]
-                                                                    .groupName
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                productList[
-                                                                        index]
-                                                                    .salesRate
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                productList[
-                                                                        index]
-                                                                    .mrp
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left:
-                                                                          8.0,
-                                                                      right:
-                                                                          8,
-                                                                      bottom:
-                                                                          8),
-                                                              child: Text(
-                                                                productList[
-                                                                        index]
-                                                                    .barCode
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
                                                   ),
                                                 ],
                                               ),
