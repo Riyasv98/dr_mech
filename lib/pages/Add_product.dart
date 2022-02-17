@@ -1,15 +1,14 @@
 import 'dart:convert';
 
-import 'package:dr_mech/models/CategoryModelFile.dart';
 import 'package:dr_mech/Api/Api.dart';
 import 'package:dr_mech/common/theme_helper.dart';
+import 'package:dr_mech/models/GroupModel.dart';
 import 'package:dr_mech/models/ProductModelFile.dart';
 import 'package:dr_mech/models/StaffModel.dart';
 import 'package:dr_mech/models/UnitModel.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 import 'package:dr_mech/Utils/Preference.dart';
 
-import 'package:dr_mech/models/SubCategoryModelFile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -45,13 +44,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController mrpController = new TextEditingController();
   TextEditingController barcodeController = new TextEditingController();
 
-  CategoryModel selectedCategory = new CategoryModel();
-  SubCategoryModel selectedSubCategory = new SubCategoryModel();
-  UnitModel selectedUnit = new UnitModel();
-
   List<ProductModel> productList = [];
-  List<CategoryModel> categoryList = [];
-  List<SubCategoryModel> subCategoryList = [];
+  List<GroupModel> groupModelList = [];
   List<UnitModel> unitList = [];
 
   StaffModel staffModel = new StaffModel();
@@ -66,9 +60,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       salesRateController.text = selectedProduct.salesRate.toString();
       mrpController.text = selectedProduct.mrp.toString();
       barcodeController.text = selectedProduct.barCode.toString();
-      selectedCategory.categoryName=selectedProduct.categoryName.toString();
-      selectedSubCategory.subcategoryName=selectedProduct.subCategoryName.toString();
-      selectedUnit.name=selectedProduct.unitName.toString();
 
     }
     getAllUnits();
@@ -77,8 +68,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     PreferenceFile().getStaffData().then((value)
     {
       staffModel=value;
-      getAllCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
-      getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
+      getAllGroup(staffModel.cmpId.toString(),staffModel.brnId.toString());
       setState(() {
 
       });
@@ -146,11 +136,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         // null != selectedCompany.companyId?
                         GestureDetector(
                           onTap: () {
-                            categoryDialog(context, categoryList).then((value) {
+                            groupDialog(context, groupModelList).then((value) {
                               if (null != value) {
-                                selectedCategory = value;
-                                // selectedCategory.categoryName =
-                                //     selectedProduct.categoryName;
+                                selectedProduct.groupId = value.groupId;
+                                selectedProduct.groupName = value.groupName;
+
                                 setState(() {});
                               }
                             });
@@ -165,7 +155,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     end: Alignment.bottomRight,
                                     colors: <Color>[
                                       Theme.of(context).primaryColor,
-                                      Theme.of(context).accentColor,
+                                      Theme.of(context).colorScheme.secondary,
                                     ])),
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(5, 8, 5, 8),
@@ -175,13 +165,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Category ",
+                                      "Group",
                                       style: TextStyle(
                                           fontSize: 15, color: Colors.white),
                                     ),
                                     Icon(Icons.arrow_drop_down),
-                                    Text(null != selectedCategory.categoryName
-                                        ? selectedCategory.categoryName.toString()
+                                    Text(null != selectedProduct.groupName
+                                        ? selectedProduct.groupName.toString()
                                         : "")
                                   ],
                                 ),
@@ -193,65 +183,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           height: 15,
                         ),
 
-                        GestureDetector(
-                          onTap: () {
-                            subCategoryDialog(context, subCategoryList)
-                                .then((value) {
-                              if (null != value) {
-                                selectedSubCategory = value;
-                                // selectedProduct.subCategoryId =
-                                //     selectedSubCategory.subcategoryId;
-                                setState(() {});
-                              }
-                            });
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 1.25,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: <Color>[
-                                      Theme.of(context).primaryColor,
-                                      Theme.of(context).accentColor,
-                                    ])),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(5, 8, 5, 8),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "SubCategory ",
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white),
-                                    ),
-                                    Icon(Icons.arrow_drop_down),
-                                    Text(null !=
-                                            selectedSubCategory.subcategoryName
-                                        ? selectedSubCategory.subcategoryName
-                                            .toString()
-                                        : "")
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 15,
-                        ),
 
                         GestureDetector(
                           onTap: () {
                             unitDialog(context, unitList).then((value) {
                               if (null != value) {
-                                selectedUnit = value;
-                                // selectedProduct.unitId = selectedUnit.id;
+                                selectedProduct.unitName = value.unitName;
+                                selectedProduct.unitId = value.unitId;
                                 setState(() {});
                               }
                             });
@@ -281,8 +219,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           fontSize: 15, color: Colors.white),
                                     ),
                                     Icon(Icons.arrow_drop_down),
-                                    Text(null != selectedUnit.name
-                                        ? selectedUnit.name.toString()
+                                    Text(null != selectedProduct.unitName
+                                        ? selectedProduct.unitName.toString()
                                         : "")
                                   ],
                                 ),
@@ -396,33 +334,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             } else {
                               selectedProduct.productName =
                                   productNameController.text;
-
                               selectedProduct.salesRate =
                                   salesRateController.text;
-
                               selectedProduct.mrp = mrpController.text;
                               selectedProduct.barCode = barcodeController.text;
-
-                              selectedProduct.categoryId =
-                                  selectedCategory.categoryId;
-
-                              selectedProduct.categoryName =
-                                  selectedCategory.categoryName;
-
-                              selectedProduct.subCategoryName =
-                                  selectedSubCategory.subcategoryName;
-
-                              selectedProduct.unitName =
-                                  selectedUnit.name;
-
-                              selectedProduct.subCategoryId =
-                                  selectedSubCategory.subcategoryId;
-
-                              selectedProduct.unitId = selectedUnit.id;
-
                               selectedProduct.brnId = staffModel.brnId;
                               selectedProduct.cmpId = staffModel.cmpId;
-
                               addEditProduct(
                                   selectedProduct,
                                   null != selectedProduct.productId &&
@@ -488,29 +405,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
     setState(() {});
   }
 
-  Future<CategoryModel> categoryDialog(
-      BuildContext context, List<CategoryModel> categoryList) async {
+  Future<GroupModel> groupDialog(
+      BuildContext context, List<GroupModel> groupModelList) async {
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          insetPadding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 4,
-            right: MediaQuery.of(context).size.width / 4,
-            // bottom: MediaQuery.of(context).size.height/5,
-            // top: MediaQuery.of(context).size.height/5
-            // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
-            // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
-          ),
+
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
           title: Row(
             children: [
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Select Category",
+                    "Select Group",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                         color: Colors.black,
@@ -543,7 +453,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: categoryList.length,
+                itemCount: groupModelList.length,
                 itemBuilder: (ctx, position) {
                   return SimpleDialogOption(
                     child: GestureDetector(
@@ -555,14 +465,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              categoryList[position].categoryName.toString(),
+                              groupModelList[position].groupName.toString(),
                               style: const TextStyle(
                                 color: Colors.black,
                               ),
                             ),
                           )),
                       onTap: () {
-                        Navigator.of(context).pop(categoryList[position]);
+                        Navigator.of(context).pop(groupModelList[position]);
                       },
                     ),
                   );
@@ -574,110 +484,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
       },
     );
   }
-
-  Future<SubCategoryModel> subCategoryDialog(
-      BuildContext context, List<SubCategoryModel> subCategoryList) async {
-    return await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          insetPadding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 4,
-            right: MediaQuery.of(context).size.width / 4,
-            // bottom: MediaQuery.of(context).size.height/5,
-            // top: MediaQuery.of(context).size.height/5
-            // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
-            // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
-          ),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0))),
-          title: Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Select SubCategory",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                child: const Align(
-                  child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.blueGrey,
-                      child: Icon(Icons.close, color: Colors.white),
-                    ),
-                  ),
-                  alignment: Alignment.topRight,
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: subCategoryList.length,
-                itemBuilder: (ctx, position) {
-                  return SimpleDialogOption(
-                    child: GestureDetector(
-                      child: Card(
-                          color: Colors.grey[100],
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(3)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              subCategoryList[position]
-                                  .subcategoryName
-                                  .toString(),
-                              style: const TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          )),
-                      onTap: () {
-                        Navigator.of(context).pop(subCategoryList[position]);
-                      },
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
-        );
-      },
-    );
-  }
-
   Future<UnitModel> unitDialog(
       BuildContext context, List<UnitModel> UnitList) async {
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          insetPadding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 4,
-            right: MediaQuery.of(context).size.width / 4,
-            // bottom: MediaQuery.of(context).size.height/5,
-            // top: MediaQuery.of(context).size.height/5
-            // top: MediaQuery.of(context).size.width < 700 ? 50 : 50,
-            // bottom: MediaQuery.of(context).size.width < 700 ? 50 : 50
-          ),
+
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15.0))),
           title: Row(
@@ -731,7 +544,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              UnitList[position].name.toString(),
+                              UnitList[position].unitName.toString(),
                               style: const TextStyle(
                                 color: Colors.black,
                               ),
@@ -779,14 +592,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
         selectedProduct = new ProductModel();
 
-        productNameController.text = "";
-        salesRateController.text = "";
-        mrpController.text = "";
-        barcodeController.text = "";
-        selectedCategory.categoryName="";
-        selectedSubCategory.subcategoryName="";
-        selectedProduct.productName = "";
-        selectedUnit.name="";
+        productNameController.clear();
+        salesRateController.clear();
+        mrpController.clear();
+        barcodeController.clear();
         setState(() {});
 
         getAllProduct(selectedProduct.brnId.toString(),selectedProduct.cmpId.toString());
@@ -806,52 +615,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
     // locationList = List<LocationModel>.from(data.map((x) => LocationModel.fromJson(x)));
     setState(() {});
   }
-
-  Future getAllCategory(String companyId, String branchId) async{
-    isLoading=true;
-    setState(() {
-    });
-
-    String url=Apis.CATEGORY_URL+companyId+"/"+branchId;
-    var response = await http.get(Uri.parse(url));
-
-    isLoading=false;
-    setState(() {
-
-    });
-
-    String responseData=response.body.toString();
-    var jsonData=jsonDecode(responseData);//check response string
-    // if(jsonData['success']) {
-    var data = jsonData['data'];//based on response string give array name
-    categoryList = List<CategoryModel>.from(data.map((x) => CategoryModel.fromJson(x)));
-    setState(() {
-
-    });
-  }
-  Future getAllSubCategory(String companyId, String branchId) async{
-    isLoading=true;
-    setState(() {
-    });
-
-    String url=Apis.SUBCATEGORY_URL+companyId+"/"+branchId;
-    var response = await http.get(Uri.parse(url));
-
-    isLoading=false;
-    setState(() {
-
-    });
-
-    String responseData=response.body.toString();
-    var jsonData=jsonDecode(responseData);//check response string
-    // if(jsonData['success']) {
-    var data = jsonData['data'];//based on response string give array name
-    subCategoryList = List<SubCategoryModel>.from(data.map((x) => SubCategoryModel.fromJson(x)));
-    setState(() {
-
-    });
-  }
-
   Future getAllUnits() async{
     isLoading=true;
     setState(() {
@@ -873,6 +636,31 @@ class _AddProductScreenState extends State<AddProductScreen> {
     setState(() {
 
     });
+  }
+
+  Future getAllGroup(String companyId, String branchId) async {
+    isLoading = true;
+    setState(() {});
+
+    String url = Apis.GROUP_URL + companyId + "/" + branchId;
+    var response = await http.get(Uri.parse(url));
+
+    isLoading = false;
+    setState(() {});
+
+    String responseData = response.body.toString();
+    var jsonData = jsonDecode(responseData);
+    var data = jsonData['data'];
+    groupModelList = [];
+    List<GroupModel> list = [];
+    list=List<GroupModel>.from(data.map((x) => GroupModel.fromJson(x)));
+    for (GroupModel groupModel in list) {
+      if (groupModel.groupUnder!>0) {
+        groupModelList.add(groupModel);
+
+      }
+    }
+    setState(() {});
   }
 
 }

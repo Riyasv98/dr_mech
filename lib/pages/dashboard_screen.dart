@@ -1,27 +1,14 @@
 
-import 'package:dr_mech/models/CategoryModelFile.dart';
-import 'package:dr_mech/models/ProductModelFile.dart';
-import 'package:dr_mech/models/SubCategoryModelFile.dart';
-import 'package:dr_mech/models/UnitModel.dart';
-import 'package:dr_mech/pages/Add_product.dart';
+
 import 'package:dr_mech/pages/AllUnits.dart';
 import 'package:dr_mech/pages/All_product.dart';
-import 'package:dr_mech/pages/add_unit_screen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
-import 'package:dr_mech/pages/subcategory_screen.dart';
+import 'package:dr_mech/pages/car_details_screen.dart';
+import 'package:dr_mech/pages/group_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:dr_mech/pages/login_page.dart';
-import 'package:dr_mech/pages/splash_screen.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
 
-import 'SalesScreen.dart';
-import 'all_category_screen.dart';
-import 'all_subcategory_screen.dart';
-import 'car_details_screen.dart';
-import 'add_staff_screen.dart';
-import 'category_screen.dart';
 
 class DashboardScreen extends StatefulWidget{
 
@@ -233,7 +220,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllCategoryScreen()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => GroupScreen()));
 
                                 },
                                 child: Container(
@@ -250,50 +237,15 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.search,size: 70,
+                                        Icons.category,size: 70,
                                       ),
-                                      Text("Category",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
+                                      Text("Group",style: TextStyle(
+                                          fontSize: 20,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
                                 ),
                               ),
-
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllSubCategoryScreen()));
-
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.search,size: 70,
-                                      ),
-                                      Text("Subcategory",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllUnitScreen()));
@@ -313,16 +265,22 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.search,size: 70,
+                                        Icons.ac_unit,size: 70,
                                       ),
                                       Text("Units",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
+                                          fontSize: 20,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
                                 ),
                               ),
+                            ],
+                          ),
 
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllProductScreen()));
@@ -342,21 +300,15 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.search,size: 70,
+                                        Icons.inventory,size: 70,
                                       ),
                                       Text("Products",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
+                                          fontSize: 20,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
                               GestureDetector(
                                 onTap: (){
                                   Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
@@ -378,7 +330,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                         Icons.receipt,size: 70,
                                       ),
                                       Text("Sales",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
+                                          fontSize: 20 ,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),

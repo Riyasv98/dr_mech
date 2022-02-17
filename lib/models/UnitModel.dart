@@ -10,24 +10,24 @@ String unitModelToJson(UnitModel data) => json.encode(data.toJson());
 
 class UnitModel {
   UnitModel({
-    this.id,
-    this.name,
+    this.unitId,
+    this.unitName,
     this.updatedBy,
     this.createdBy,
     this.updatedOn,
     this.createdOn,
   });
 
-  int ?id;
-  String ?name;
+  int ?unitId;
+  String ?unitName;
   String ?updatedBy;
   String ?createdBy;
   String ?updatedOn;
   String ?createdOn;
 
   factory UnitModel.fromJson(Map<String, dynamic> json) => UnitModel(
-    id: null!=json["id"]?json["id"] is int ? json["id"]: int.parse(json["id"]):-1,
-    name: json["name"],
+    unitId: null!=json["unitId"]?json["unitId"] is int ? json["unitId"]: int.parse(json["unitId"]):-1,
+    unitName: json["unitName"],
     updatedBy: json["updatedBy"],
     createdBy: json["createdBy"],
     updatedOn: json["updatedOn"],
@@ -35,8 +35,8 @@ class UnitModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
+    "unitId": unitId,
+    "unitName": unitName,
     "updatedBy": updatedBy,
     "createdBy": createdBy,
     "updatedOn": updatedOn,
