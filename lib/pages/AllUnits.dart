@@ -130,9 +130,9 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
                                               GestureDetector(
                                                 onTap: (){
                                                   selectedUnit=unitList[index];
-                                                  Constants.deleteDialog(context,unitList[index].name.toString()).then((value) {
+                                                  Constants.deleteDialog(context,unitList[index].unitName.toString()).then((value) {
                                                     if (value) {
-                                                      deleteBranch(selectedUnit.id!.toInt());
+                                                      deleteBranch(selectedUnit.unitId!.toInt());
                                                     }
                                                   });
                                                 },
@@ -170,7 +170,7 @@ class _AllUnitScreenState extends State<AllUnitScreen>{
 
                                                 Padding(
                                                   padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                                                  child: Text(unitList[index].name.toString(),textAlign: TextAlign.left,),
+                                                  child: Text(unitList[index].unitName.toString(),textAlign: TextAlign.left,),
                                                 ),
                                               ],
                                             ),

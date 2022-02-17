@@ -179,7 +179,7 @@ class _LoginPageState extends State<LoginPage>{
         String staffJson=staffModelToJson(staffModel);
 
         PreferenceFile().setStaffData(staffJson);
-        EasyLoading.showSuccess(errorObject[0]["message"]);
+        EasyLoading.dismiss();
 
         Navigator.push( context, MaterialPageRoute( builder: (context) => DashboardScreen()));
 

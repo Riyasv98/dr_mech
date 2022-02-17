@@ -14,11 +14,9 @@ class ProductModel {
     this.brnId,
     this.cmpId,
     this.productName,
-    this.categoryName,
-    this.subCategoryName,
+    this.groupName,
     this.unitName,
-    this.categoryId,
-    this.subCategoryId,
+    this.groupId,
     this.unitId,
     this.salesRate,
     this.mrp,
@@ -31,36 +29,32 @@ class ProductModel {
     this.createdBy,
   });
 
-  int ?productId;
-  int ?brnId;
-  int ?cmpId;
-  String ?productName;
-  String ?categoryName;
-  String ?subCategoryName;
-  String ?unitName;
-  int ?categoryId;
-  int ?subCategoryId;
-  int ?unitId;
-  String ?salesRate;
-  String ?mrp;
-  String ?isActive;
-  String ?barCode;
-  String?status;
-  String ?updatedOn;
-  String ?updatedBy;
-  String ?createdOn;
-  String ?createdBy;
+  int? productId;
+  int? brnId;
+  int? cmpId;
+  String? productName;
+  String? groupName;
+  String? unitName;
+  int? groupId;
+  int? unitId;
+  String? salesRate;
+  String? mrp;
+  String? isActive;
+  String? barCode;
+  String? status;
+  String? updatedOn;
+  String? updatedBy;
+  String? createdOn;
+  String? createdBy;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     productId:  null!=json["productId"]?json["productId"] is int ? json["productId"]: int.parse(json["productId"]):-1,
     brnId:  null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
     cmpId:  null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
     productName: json["productName"],
-    categoryName: json["categoryName"],
-    subCategoryName: json["subCategoryName"],
+    groupName: json["groupName"],
     unitName: json["unitName"],
-    categoryId: null!=json["categoryId"]?json["categoryId"] is int ? json["categoryId"]: int.parse(json["categoryId"]):-1,
-    subCategoryId: null!=json["subCategoryId"]?json["subCategoryId"] is int ? json["subCategoryId"]: int.parse(json["subCategoryId"]):-1,
+    groupId: null!=json["groupId"]?json["groupId"] is int ? json["groupId"]: int.parse(json["groupId"]):-1,
     unitId: null!=json["unitId"]?json["unitId"] is int ? json["unitId"]: int.parse(json["unitId"]):-1,
     salesRate: json["salesRate"],
     mrp: json["mrp"],
@@ -78,11 +72,9 @@ class ProductModel {
     "brnId": brnId,
     "cmpId": cmpId,
     "productName": productName,
-    "categoryName": categoryName,
-    "subCategoryName": subCategoryName,
+    "groupName": groupName,
     "unitName": unitName,
-    "categoryId": categoryId,
-    "subCategoryId": subCategoryId,
+    "groupId": groupId,
     "unitId": unitId,
     "salesRate": salesRate,
     "mrp": mrp,

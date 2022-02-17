@@ -56,7 +56,7 @@ class _AddUnitScreenState extends State<AddUnitScreen>{
   void initState() {
 
     if(widget.type==2 || widget.type==3) {
-      nameController.text = selectedUnit.name.toString();
+      nameController.text = selectedUnit.unitName.toString();
 
     }
 
@@ -105,7 +105,7 @@ class _AddUnitScreenState extends State<AddUnitScreen>{
                         ),
                         GestureDetector(
                           onTap: () {
-                            selectedUnit.name=nameController.text;
+                            selectedUnit.unitName=nameController.text;
 
                             if (nameController
                                 .text.isEmpty) {
@@ -129,9 +129,9 @@ class _AddUnitScreenState extends State<AddUnitScreen>{
                             else {
                               addEditUnit(selectedUnit,null !=
                                   selectedUnit
-                                      .id &&
+                                      .unitId &&
                                   selectedUnit
-                                      .id! >
+                                      .unitId! >
                                       0);
                             }
                           },
@@ -156,9 +156,9 @@ class _AddUnitScreenState extends State<AddUnitScreen>{
                               padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                               child: Text(null !=
                                   selectedUnit
-                                      .id &&
+                                      .unitId &&
                                   selectedUnit
-                                      .id! >
+                                      .unitId! >
                                       0
                                   ? "Update".toUpperCase()
                                   : "Add".toUpperCase(),
