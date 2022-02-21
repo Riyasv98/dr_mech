@@ -51,7 +51,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                       ),
                       child: Icon(Icons.person, size: 80, color: Colors.grey.shade300,),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 20,),
                     Container(
                       padding: EdgeInsets.all(10),
                       child: Column(
@@ -66,8 +66,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => CarDetailsPage()));
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
                                       gradient: LinearGradient(
@@ -79,10 +79,10 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.add_circle_outline_outlined,size: 70,
+                                        Icons.add_circle_outline_outlined,size: 50,
                                       ),
-                                      Text("New Repair",style: TextStyle(
-                                          fontSize: 20,fontWeight: FontWeight.bold
+                                      Text("New",style: TextStyle(
+                                          fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
@@ -93,8 +93,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllStaffScreen()));
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
                                       gradient: LinearGradient(
@@ -106,24 +106,19 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.people,size: 70,
+                                        Icons.people,size: 50,
                                       ),
                                       Text("Staff",style: TextStyle(
-                                          fontSize: 20,fontWeight: FontWeight.bold
+                                          fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+
                               Container(
-                                height: MediaQuery.of(context).size.height/6,
-                                width: MediaQuery.of(context).size.width/3,
+                                height: MediaQuery.of(context).size.height/8,
+                                width: MediaQuery.of(context).size.width/4,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(20)),
                                     gradient: LinearGradient(
@@ -135,32 +130,10 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                 child: Column(
                                   children: [
                                     Icon(
-                                      Icons.receipt,size: 70,
+                                      Icons.receipt,size: 50,
                                     ),
                                     Text("Billing",style: TextStyle(
-                                        fontSize: 20,fontWeight: FontWeight.bold
-                                    ),)
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: MediaQuery.of(context).size.height/6,
-                                width: MediaQuery.of(context).size.width/3,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                    )
-                                ),
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.search,size: 70,
-                                    ),
-                                    Text("Search",style: TextStyle(
-                                        fontSize: 20,fontWeight: FontWeight.bold
+                                        fontSize: 15,fontWeight: FontWeight.bold
                                     ),)
                                   ],
                                 ),
@@ -171,9 +144,10 @@ class _DashboardScreenState extends State<DashboardScreen>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+
                               Container(
-                                height: MediaQuery.of(context).size.height/6,
-                                width: MediaQuery.of(context).size.width/3,
+                                height: MediaQuery.of(context).size.height/8,
+                                width: MediaQuery.of(context).size.width/4.5,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(20)),
                                     gradient: LinearGradient(
@@ -185,17 +159,18 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                 child: Column(
                                   children: [
                                     Icon(
-                                      Icons.directions_car,size: 70,
+                                      Icons.search,size: 50,
                                     ),
-                                    Text("Stock",style: TextStyle(
-                                        fontSize: 20,fontWeight: FontWeight.bold
+                                    Text("Search",style: TextStyle(
+                                        fontSize: 15,fontWeight: FontWeight.bold
                                     ),)
                                   ],
                                 ),
                               ),
+
                               Container(
-                                height: MediaQuery.of(context).size.height/6,
-                                width: MediaQuery.of(context).size.width/3,
+                                height: MediaQuery.of(context).size.height/8,
+                                width: MediaQuery.of(context).size.width/4.5,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(20)),
                                     gradient: LinearGradient(
@@ -207,12 +182,39 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                 child: Column(
                                   children: [
                                     Icon(
-                                      Icons.notes,size: 70,
+                                      Icons.directions_car,size: 50,
                                     ),
-                                    Text("Notes",style: TextStyle(
-                                        fontSize: 20,fontWeight: FontWeight.bold
+                                    Text("Stock",style: TextStyle(
+                                        fontSize: 15,fontWeight: FontWeight.bold
                                     ),)
                                   ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
+                                },
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                                      )
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.receipt,size: 50,
+                                      ),
+                                      Text("Sales",style: TextStyle(
+                                          fontSize: 15 ,fontWeight: FontWeight.bold
+                                      ),)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -227,8 +229,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
 
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
                                       gradient: LinearGradient(
@@ -240,10 +242,10 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.category,size: 70,
+                                        Icons.category,size: 50,
                                       ),
                                       Text("Group",style: TextStyle(
-                                          fontSize: 20,fontWeight: FontWeight.bold
+                                          fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
@@ -255,8 +257,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
 
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
                                       gradient: LinearGradient(
@@ -268,10 +270,39 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   child: Column(
                                     children: [
                                       Icon(
-                                        Icons.ac_unit,size: 70,
+                                        Icons.ac_unit,size: 50,
                                       ),
                                       Text("Units",style: TextStyle(
-                                          fontSize: 20,fontWeight: FontWeight.bold
+                                          fontSize: 15,fontWeight: FontWeight.bold
+                                      ),)
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllProductScreen()));
+
+                                },
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                                      )
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.inventory,size: 50,
+                                      ),
+                                      Text("Products",style: TextStyle(
+                                          fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
@@ -284,61 +315,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => AllProductScreen()));
 
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.inventory,size: 70,
-                                      ),
-                                      Text("Products",style: TextStyle(
-                                          fontSize: 20,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: (){
-                                  // Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
-                                },
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height/6,
-                                  width: MediaQuery.of(context).size.width/3,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                      )
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.receipt,size: 70,
-                                      ),
-                                      Text("Sales",style: TextStyle(
-                                          fontSize: 20 ,fontWeight: FontWeight.bold
-                                      ),)
-                                    ],
-                                  ),
-                                ),
-                              ),
+
                             ],
                           ),
                           // Container(

@@ -30,7 +30,6 @@ class _AllProductScreenState extends State<AllProductScreen> {
   TextEditingController barcodeController = new TextEditingController();
 
   StaffModel selectedStaff = new StaffModel();
-  UnitModel selectedUnit = new UnitModel();
   ProductModel selectedProduct = new ProductModel();
 
   bool isLoading = false;
@@ -39,7 +38,6 @@ class _AllProductScreenState extends State<AllProductScreen> {
   StaffModel staffModel = new StaffModel();
 
   List<ProductModel> productList = [];
-  List<UnitModel> unitList = [];
 
   void initState() {
     // getAllUnits();
@@ -503,21 +501,4 @@ class _AllProductScreenState extends State<AllProductScreen> {
     }
   }
 
-  Future getAllUnits() async {
-    isLoading = true;
-    setState(() {});
-
-    String url = Apis.UNIT_URL;
-    var response = await http.get(Uri.parse(url));
-
-    isLoading = false;
-    setState(() {});
-
-    String responseData = response.body.toString();
-    var jsonData = jsonDecode(responseData); //check response string
-    // if(jsonData['success']) {
-    var data = jsonData['data']; //based on response string give array name
-    unitList = List<UnitModel>.from(data.map((x) => UnitModel.fromJson(x)));
-    setState(() {});
-  }
 }
