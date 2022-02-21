@@ -366,39 +366,42 @@ class _SalesScreenState extends State<SalesScreen>
                             //     }),
                             Column(
                               children: [
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment
-                                        .spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Name",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        "Unit",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        "Group",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        "Sales Rate",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        "MRP",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        "Barcode",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ],
+                                Container(
+                                  color: Colors.black12,
+                                  child: Padding(
+                                    padding:
+                                    const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Name",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                        Text(
+                                          "Unit",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                        Text(
+                                          "Group",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                        Text(
+                                          "Sales Rate",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                        Text(
+                                          "MRP",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                        Text(
+                                          "Barcode",
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 ListView.builder(
