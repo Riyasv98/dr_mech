@@ -556,7 +556,7 @@ class _SalesScreenState extends State<SalesScreen>
     isLoading = true;
     setState(() {});
 
-    String url = Apis.PRODUCT_URL + staffModel.brnId.toString() + "/" + staffModel.cmpId.toString();
+    String url = Apis.PRODUCT_URL + staffModel.brnId.toString() + "/" + staffModel.cmpId.toString()+"/true/";
     var response = await http.get(Uri.parse(url));
 
     isLoading = false;

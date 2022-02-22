@@ -386,11 +386,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 
-  Future getAllProduct(String companyId, String branchId) async {
+  Future getAllProduct() async {
     isLoading = true;
     setState(() {});
 
-    String url = Apis.PRODUCT_URL + companyId + "/" + branchId;
+    String url = Apis.PRODUCT_URL + staffModel.brnId.toString() + "/" + staffModel.cmpId.toString()+"/true/";
     var response = await http.get(Uri.parse(url));
 
     isLoading = false;
@@ -598,7 +598,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         barcodeController.clear();
         setState(() {});
 
-        getAllProduct(selectedProduct.brnId.toString(),selectedProduct.cmpId.toString());
+        getAllProduct();
       } else {
         EasyLoading.showError(jsonObject[0]["message"]);
       }

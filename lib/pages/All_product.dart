@@ -456,12 +456,10 @@ class _AllProductScreenState extends State<AllProductScreen> {
     isLoading = true;
     setState(() {});
 
-    String url = Apis.PRODUCT_URL + staffModel.brnId.toString() + "/" + staffModel.cmpId.toString();
+    String url = Apis.PRODUCT_URL + staffModel.brnId.toString() + "/" + staffModel.cmpId.toString()+"/true/";
     var response = await http.get(Uri.parse(url));
-
     isLoading = false;
     setState(() {});
-
     String responseData = response.body.toString();
     var jsonData = jsonDecode(responseData); //check response string
     // if(jsonData['success']) {
