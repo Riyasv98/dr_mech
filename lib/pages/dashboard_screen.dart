@@ -86,7 +86,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                         Icons.add_circle_outline_outlined,size: 50,
                                       ),
                                       Text("Job card",style: TextStyle(
-                                          fontSize: 20,fontWeight: FontWeight.bold
+                                          fontSize: 15,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
