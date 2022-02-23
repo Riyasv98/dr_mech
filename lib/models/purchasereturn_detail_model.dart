@@ -1,21 +1,23 @@
 // To parse this JSON data, do
 //
-//     final salesDetailModel = salesDetailModelFromJson(jsonString);
+//     final welcome = welcomeFromJson(jsonString);
 
 import 'dart:convert';
 
-SalesDetailModel salesDetailModelFromJson(String str) => SalesDetailModel.fromJson(json.decode(str));
+PurchaseReturnDetailModel purchaseReturnDetailModelFromJson(String str) => PurchaseReturnDetailModel.fromJson(json.decode(str));
 
-String salesDetailModelToJson(SalesDetailModel data) => json.encode(data.toJson());
+String purchaseReturnDetailModelToJson(PurchaseReturnDetailModel data) => json.encode(data.toJson());
 
-class SalesDetailModel {
-  SalesDetailModel({
-    this.salesDetailsId,
-    this.salesMasterId,
+
+class PurchaseReturnDetailModel {
+  PurchaseReturnDetailModel({
+    this.purchaseReturnDetailsId,
+    this.purchaseReturnMasterId,
     this.productId,
     this.qty,
     this.rate,
     this.unitId,
+    this.unitConversionId,
     this.discount,
     this.taxId,
     this.batchId,
@@ -26,6 +28,8 @@ class SalesDetailModel {
     this.netAmount,
     this.amount,
     this.slNo,
+    this.purchaseDetailsId,
+    this.extraDate,
     this.extra1,
     this.extra2,
     this.status,
@@ -37,12 +41,13 @@ class SalesDetailModel {
     this.createdOn,
   });
 
-  int? salesDetailsId;
-  int? salesMasterId;
-  String? productId;
+  int? purchaseReturnDetailsId;
+  int? purchaseReturnMasterId;
+  int? productId;
   double? qty;
   double? rate;
   int? unitId;
+  int? unitConversionId;
   double? discount;
   int? taxId;
   int? batchId;
@@ -52,7 +57,9 @@ class SalesDetailModel {
   double? grossAmount;
   double? netAmount;
   double? amount;
-  String? slNo;
+  int? slNo;
+  int? purchaseDetailsId;
+  String? extraDate;
   String? extra1;
   String? extra2;
   int? status;
@@ -63,13 +70,14 @@ class SalesDetailModel {
   String? updatedOn;
   String? createdOn;
 
-  factory SalesDetailModel.fromJson(Map<String, dynamic> json) => SalesDetailModel(
-    salesDetailsId: json["salesDetailsId"],
-    salesMasterId: json["salesMasterId"],
+  factory PurchaseReturnDetailModel.fromJson(Map<String, dynamic> json) => PurchaseReturnDetailModel(
+    purchaseReturnDetailsId: json["purchaseReturnDetailsId"],
+    purchaseReturnMasterId: json["purchaseReturnMasterId"],
     productId: json["productId"],
     qty: json["qty"],
     rate: json["rate"],
     unitId: json["unitId"],
+    unitConversionId: json["unitConversionId"],
     discount: json["discount"],
     taxId: json["taxId"],
     batchId: json["batchId"],
@@ -80,6 +88,8 @@ class SalesDetailModel {
     netAmount: json["netAmount"],
     amount: json["amount"],
     slNo: json["slNo"],
+    purchaseDetailsId: json["purchaseDetailsId"],
+    extraDate: json["extraDate"],
     extra1: json["extra1"],
     extra2: json["extra2"],
     status: json["status"],
@@ -92,12 +102,13 @@ class SalesDetailModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "salesDetailsId": salesDetailsId,
-    "salesMasterId": salesMasterId,
+    "purchaseReturnDetailsId": purchaseReturnDetailsId,
+    "purchaseReturnMasterId": purchaseReturnMasterId,
     "productId": productId,
     "qty": qty,
     "rate": rate,
     "unitId": unitId,
+    "unitConversionId": unitConversionId,
     "discount": discount,
     "taxId": taxId,
     "batchId": batchId,
@@ -108,6 +119,8 @@ class SalesDetailModel {
     "netAmount": netAmount,
     "amount": amount,
     "slNo": slNo,
+    "purchaseDetailsId": purchaseDetailsId,
+    "extraDate": extraDate,
     "extra1": extra1,
     "extra2": extra2,
     "status": status,
@@ -119,3 +132,5 @@ class SalesDetailModel {
     "createdOn": createdOn,
   };
 }
+
+
