@@ -181,7 +181,7 @@ class _LoginPageState extends State<LoginPage>{
         PreferenceFile().setStaffData(staffJson);
         EasyLoading.dismiss();
 
-        Navigator.push( context, MaterialPageRoute( builder: (context) => DashboardScreen()));
+        Navigator.push( context, MaterialPageRoute( builder: (context) => DashboardScreen(staffModel)));
 
       } else {
 
