@@ -224,6 +224,19 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                                           child: Text(
                                                               "Barcode :"),
                                                         ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsets
+                                                              .only(
+                                                              left:
+                                                              8.0,
+                                                              right:
+                                                              8,
+                                                              bottom:
+                                                              8),
+                                                          child: Text(
+                                                              "Current Stock :"),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -354,6 +367,26 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                                             textAlign:
                                                                 TextAlign
                                                                     .left,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsets
+                                                              .only(
+                                                              left:
+                                                              8.0,
+                                                              right:
+                                                              8,
+                                                              bottom:
+                                                              8),
+                                                          child: Text(
+                                                            productList[
+                                                            index]
+                                                                .currentStock
+                                                                .toString(),
+                                                            textAlign:
+                                                            TextAlign
+                                                                .left,
                                                           ),
                                                         ),
                                                       ],

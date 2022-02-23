@@ -66,20 +66,14 @@ class _SalesScreenState extends State<SalesScreen>
         child: Stack(
           children: [
             Container(
-              height: 150,
+              height: 120,
               child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
             ),
 
             Column(
               children: [
                 SizedBox(
-                  height: 20,
-                ),
-
-                Container(
-                  height: MediaQuery.of(context).size.height/13,
-                  width: MediaQuery.of(context).size.width/1.1,
-                  color: Colors.white,
+                  height: 5,
                 ),
                 isLoading
                     ? Center(
@@ -100,50 +94,120 @@ class _SalesScreenState extends State<SalesScreen>
                       ),
                     ]),
                     Container(
-                      color: Colors.white,
                       height: MediaQuery.of(context).size.height,
                       child: TabBarView(
                           controller: tabController,
                           children: [
                             Column(
                               children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
                                 Container(
-                                  color: Colors.black12,
+                                  height: MediaQuery.of(context).size.height/14,
+                                  width: MediaQuery.of(context).size.width/1.1,
+                                  color: Colors.white,
+                                  child: TextFormField(
+                                    // onChanged: ,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: 'Search',
+                                        prefixIcon: Icon(Icons.search)),
+                                    onTap: () {
+
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  color: Colors.deepOrangeAccent,
                                   child: Padding(
                                     padding:
                                     const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .spaceBetween,
+                                    child: Column(
                                       children: [
-                                        Text(
-                                          "Name",
-                                          textAlign: TextAlign.left,
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 5.0),
+                                          child: Text("Summary",style: TextStyle(fontSize: 10),),
                                         ),
-                                        Text(
-                                          "Unit",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Group",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Sales Rate",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "MRP",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Barcode",
-                                          textAlign: TextAlign.left,
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Qty: ",
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                Text("0")
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Disc: ",
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                Text("0")
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "Net: ",
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                Text("0")
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ),
+                                ),
+                                Container(
+                                  color: Colors.black12,
+                                  child: Padding(
+                                        padding:
+                                        const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Sl.No.",
+                                              // textAlign: TextAlign.left,
+                                            ),
+                                            Text(
+                                              "Name",
+                                              // textAlign: TextAlign.left,
+                                            ),
+                                            Text(
+                                              "Qty",
+                                              // textAlign: TextAlign.left,
+                                            ),
+                                            Text(
+                                              "Price",
+                                              // textAlign: TextAlign.left,
+                                            ),
+                                            Text(
+                                              "Disc",
+                                              // textAlign: TextAlign.left,
+                                            ),
+                                            Text(
+                                              "Total",
+                                              // textAlign: TextAlign.left,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+
                                 ),
                                 ListView.builder(
                                     physics:
@@ -162,28 +226,25 @@ class _SalesScreenState extends State<SalesScreen>
                                                 .spaceBetween,
                                             children: [
                                               Text(
-                                                productList[index]
-                                                    .productName
-                                                    .toString(),
-                                                textAlign: TextAlign.left,
+                                                  [index+1].toString()
                                               ),
                                               Text(
                                                 productList[index]
-                                                    .unitName
+                                                    .productName
                                                     .toString(),
-                                                textAlign: TextAlign.left,
+                                                // textAlign: TextAlign.left,
                                               ),
                                               Text(
                                                 productList[index]
                                                     .groupName
                                                     .toString(),
-                                                textAlign: TextAlign.left,
+                                                // textAlign: TextAlign.left,
                                               ),
                                               Text(
                                                 productList[index]
                                                     .salesRate
                                                     .toString(),
-                                                textAlign: TextAlign.left,
+                                                // textAlign: TextAlign.left,
                                               ),
                                               Text(
                                                 productList[index]
@@ -195,7 +256,7 @@ class _SalesScreenState extends State<SalesScreen>
                                                 productList[index]
                                                     .barCode
                                                     .toString(),
-                                                textAlign: TextAlign.left,
+                                                // textAlign: TextAlign.left,
                                               ),
                                               //     Row(
                                               //       mainAxisAlignment:
@@ -276,6 +337,32 @@ class _SalesScreenState extends State<SalesScreen>
                                         ),
                                       );
                                     }),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: <Color>[Theme
+                                                .of(context)
+                                                .primaryColor, Theme
+                                                .of(context)
+                                                .accentColor,
+                                            ]
+                                        )
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                      child: Text("Save".toUpperCase(),
+                                        style: TextStyle(fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
 

@@ -37,6 +37,9 @@ dependencies:
   shared_preferences:
   fluttertoast: ^8.0.8
   motion_toast: ^1.5.0
+  scroll_to_index:
+  get_storage:
+  provider: 
 
 
 dev_dependencies:
