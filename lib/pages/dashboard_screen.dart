@@ -1,10 +1,11 @@
 
 
+import 'package:dr_mech/models/StaffModel.dart';
 import 'package:dr_mech/pages/AllUnits.dart';
 import 'package:dr_mech/pages/All_product.dart';
 import 'package:dr_mech/pages/UnitScreen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
-import 'package:dr_mech/pages/car_details_screen.dart';
+import 'package:dr_mech/pages/job_card_screen.dart';
 import 'package:dr_mech/pages/group_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ import 'SalesScreen.dart';
 
 
 class DashboardScreen extends StatefulWidget{
+  DashboardScreen(this.staffModel);
+  StaffModel staffModel=new StaffModel();
 
   @override
   State<StatefulWidget> createState() {
@@ -51,7 +54,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
                       ),
                       child: Icon(Icons.person, size: 80, color: Colors.grey.shade300,),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 10,),
+                    Text(widget.staffModel.name!),
                     Container(
                       padding: EdgeInsets.all(10),
                       child: Column(
@@ -63,7 +67,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
                               GestureDetector(
                                 onTap: (){
-                                  Navigator.push( context, MaterialPageRoute( builder: (context) => CarDetailsPage()));
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) => JobCardScreen()));
                                 },
                                 child: Container(
                                   height: MediaQuery.of(context).size.height/8,
@@ -81,8 +85,8 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                       Icon(
                                         Icons.add_circle_outline_outlined,size: 50,
                                       ),
-                                      Text("New",style: TextStyle(
-                                          fontSize: 15,fontWeight: FontWeight.bold
+                                      Text("Job card",style: TextStyle(
+                                          fontSize: 20,fontWeight: FontWeight.bold
                                       ),)
                                     ],
                                   ),
