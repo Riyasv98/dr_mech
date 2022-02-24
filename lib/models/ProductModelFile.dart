@@ -1,93 +1,190 @@
 // To parse this JSON data, do
 //
-//     final productModel = productModelFromJson(jsonString);
+//     final group = groupFromJson(jsonString);
 
 import 'dart:convert';
 
-ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.decode(str));
+import 'package:flutter/cupertino.dart';
 
-String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
+/*class Group {
+  Group({
+    this.data,
+    this.errorData,
+  });
+
+  List<ItemModel> data;
+  List<ErrorDatum> errorData;
+
+  factory Group.fromJson(Map<String, dynamic> json) => Group(
+    data: List<ItemModel>.from(json["data"].map((x) => ItemModel.fromJson(x))),
+    errorData: List<ErrorDatum>.from(json["errorData"].map((x) => ErrorDatum.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "errorData": List<dynamic>.from(errorData.map((x) => x.toJson())),
+  };
+}*/
+ProductModel itemModelFromJson(String str) => ProductModel.fromJson(json.decode(str));
+
+String itemToJson(ProductModel data) => json.encode(data.toJson());
 class ProductModel {
   ProductModel({
     this.productId,
-    this.productName,
-    this.unitId,
-    this.groupId,
-    this.salesRate,
-    this.mrp,
-    this.isActive,
-    this.barCode,
-    this.status,
     this.brnId,
     this.cmpId,
-    this.updatedBy,
-    this.createdBy,
-    this.updatedOn,
-    this.createdOn,
-    this.groupName,
+    this.productCode,
+    this.productName,
+    this.groupId,
+    this.brandId,
+    this.unitId,
+    this.sizeId,
+    this.modelNoId,
+    this.taxId,
+    this.taxapplicableOn,
+    this.purchaseRate,
+    this.salesRate,
+    this.mrp,
+    this.minimumStock,
+    this.maximumStock,
+    this.reorderLevel,
+    this.downId,
+    this.rackId,
+    this.isallowBatch,
+    this.ismultipleunit,
+    this.isBom,
+    this.isopeningstock,
+    this.narration,
+    this.isActive,
+    this.isshowRemember,
+    this.barCode,
+    this.suppReferenceNo,
+    this.extraDate,
+    this.partNo,
+    this.alternativeName,
+    this.plu,
+    this.status,
     this.unitName,
-    this.currentStock,
+    this.groupName,this.focusNode,this.hsnCode,this.currentStock
   });
 
-  int ?productId;
-  String ?productName;
-  int ?unitId;
-  int ?groupId;
-  String ?salesRate;
-  String ?mrp;
-  String ?isActive;
-  String ?barCode;
-  String ?status;
-  int ?brnId;
-  int ?cmpId;
-  String ?updatedBy;
-  String ?createdBy;
-  String ?updatedOn;
-  String ?createdOn;
-  String ?groupName;
-  String ?unitName;
-  double ?currentStock;
-
+  int? productId;
+  int? brnId;
+  int? cmpId;
+  String? productCode;
+  String? productName;
+  int? groupId;
+  int? brandId;
+  int? unitId;
+  int? sizeId;
+  int? modelNoId;
+  int? taxId;
+  String? taxapplicableOn;
+  double? purchaseRate;
+  double? salesRate;
+  double? mrp;
+  double? minimumStock;
+  double? maximumStock;
+  double? reorderLevel;
+  int? downId;
+  int? rackId;
+  bool? isallowBatch;
+  bool?  ismultipleunit;
+  bool?  isBom;
+  bool?  isopeningstock;
+  String? narration;
+  bool? isActive;
+  bool? isshowRemember;
+  String? barCode;
+  String? suppReferenceNo;
+  String? extraDate;
+  String? partNo;
+  String? alternativeName;
+  String? plu;
+  int?status;
+  String?unitName;
+  String?groupName;
+  FocusNode? focusNode;
+  double ?hsnCode;
+  double?currentStock;
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-    productId: null!=json["productId"]?json["productId"] is int ? json["productId"]: int.parse(json["productId"]):-1,
+    productId: null!=json["productId"] ? json["productId"] is String ? int.parse(json["productId"]):json["productId"]:-1,
+    brnId: null!=json["brnId"] ? json["brnId"] is String ? int.parse(json["brnId"]):json["brnId"]:-1,
+    cmpId: null!=json["cmpId"] ? json["cmpId"] is String ? int.parse(json["cmpId"]):json["cmpId"]:-1,
+    productCode: json["productCode"],
     productName: json["productName"],
-    unitId: null!=json["unitId"]?json["unitId"] is int ? json["unitId"]: int.parse(json["unitId"]):-1,
-    groupId: null!=json["groupId"]?json["groupId"] is int ? json["groupId"]: int.parse(json["groupId"]):-1,
-    salesRate: json["salesRate"],
-    mrp: json["mrp"],
-    isActive: json["isActive"],
+    groupId:  null!=json["groupId"] ? json["groupId"] is String ? int.parse(json["groupId"]):json["groupId"]:-1,
+    brandId:  null!=json["brandId"] ? json["brandId"] is String ? int.parse(json["brandId"]):json["brandId"]:-1,
+    unitId: null!=json["unitId"] ? json["unitId"] is String ? int.parse(json["unitId"]):json["unitId"]:-1,
+    sizeId: null!=json["sizeId"] ? json["sizeId"] is String ? int.parse(json["sizeId"]):json["sizeId"]:-1,
+    modelNoId:null!=json["modelNoId"] ? json["modelNoId"] is String ? int.parse(json["modelNoId"]):json["modelNoId"]:-1,
+    taxId:null!=json["taxId"] ? json["taxId"] is String ? int.parse(json["taxId"]):json["taxId"]:-1,
+    taxapplicableOn: json["taxapplicableOn"],
+    purchaseRate: null!=json["purchaseRate"] ? json["purchaseRate"] is String ? double.parse(json["purchaseRate"]):json["purchaseRate"]:-1,
+    salesRate:null!=json["salesRate"] ? json["salesRate"] is String ? double.parse(json["salesRate"]):json["salesRate"]:-1,
+    mrp: null!=json["mrp"] ? json["mrp"] is String ? double.parse(json["mrp"]):json["mrp"]:-1,
+    minimumStock: null!=json["minimumStock"] ? json["minimumStock"] is String ? double.parse(json["minimumStock"]):json["minimumStock"]:-1,
+    maximumStock: null!=json["maximumStock"] ? json["maximumStock"] is String ? double.parse(json["maximumStock"]):json["maximumStock"]:-1,
+    reorderLevel: null!=json["reorderLevel"] ? json["reorderLevel"] is String ? double.parse(json["reorderLevel"]):json["reorderLevel"]:-1,
+    downId: null!=json["downId"] ? json["downId"] is String ? int.parse(json["downId"]):json["downId"]:-1,
+    rackId: null!=json["rackId"] ? json["rackId"] is String ? int.parse(json["rackId"]):json["rackId"]:-1,
+    isallowBatch: json["isallowBatch"]==1,
+    ismultipleunit: json["ismultipleunit"]==1,
+    isBom: json["isBom"]==1,
+    isopeningstock: json["isopeningstock"]==1,
+    narration: json["narration"],
+    isActive: json["isActive"]==1,
+    isshowRemember: json["isshowRemember"]==1,
     barCode: json["barCode"],
-    status: json["status"],
-    brnId: null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
-    cmpId: null!=json["cmpId"]?json["cmpId"] is int ? json["cmpId"]: int.parse(json["cmpId"]):-1,
-    updatedBy: json["updatedBy"],
-    createdBy: json["createdBy"],
-    updatedOn: json["updatedOn"],
-    createdOn: json["createdOn"],
-    groupName: json["groupName"],
+    suppReferenceNo: json["SuppReferenceNo"],
+    extraDate: json["extraDate"],
+    partNo: json["partNo"],
+    alternativeName: json["AlternativeName"],
+    plu: json["PLU"],
+    status: null!=json["status"] ? json["status"] is String ? int.parse(json["status"]):json["status"]:1,
     unitName: json["unitName"],
-    currentStock: null!=json["currentStock"]?json["currentStock"] is double ? json["currentStock"]: double.parse(json["currentStock"]):-1,
+    groupName: json["groupName"],
+    focusNode: new FocusNode(),
+    hsnCode: null!=json["HSN"] ? json["HSN"] is String ? double.parse(json["HSN"]):json["HSN"]:-1,
+    currentStock:  null!=json["currentStock"] ? json["currentStock"] is String ? double.parse(json["currentStock"]):json["currentStock"]:-1,
   );
 
   Map<String, dynamic> toJson() => {
     "productId": productId,
+    "productCode": productCode,
     "productName": productName,
-    "unitId": unitId,
     "groupId": groupId,
+    "brandId": brandId,
+    "unitId": unitId,
+    "sizeId": sizeId,
+    "modelNoId": modelNoId,
+    "taxId": taxId,
+    "taxapplicableOn": taxapplicableOn,
+    "purchaseRate": purchaseRate,
     "salesRate": salesRate,
     "mrp": mrp,
+    "minimumStock": minimumStock,
+    "maximumStock": maximumStock,
+    "reorderLevel": reorderLevel,
+    "downId": downId,
+    "rackId": rackId,
+    "isallowBatch": isallowBatch,
+    "ismultipleunit": ismultipleunit,
+    "isBom": isBom,
+    "isopeningstock": isopeningstock,
+    "narration": narration,
     "isActive": isActive,
+    "isshowRemember": isshowRemember,
     "barCode": barCode,
+    "SuppReferenceNo": suppReferenceNo,
+    "extraDate": extraDate,
+    "partNo": partNo,
+    "AlternativeName": alternativeName,
+    "PLU": plu,
     "status": status,
-    "brnId": brnId,
-    "cmpId": cmpId,
-    "updatedBy": updatedBy,
-    "createdBy": createdBy,
-    "updatedOn": updatedOn,
-    "createdOn": createdOn,
-    "groupName": groupName,
     "unitName": unitName,
-    "currentStock": currentStock,
+    "groupName": groupName,
   };
+
 }

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:dr_mech/Api/Api.dart';
-import 'package:dr_mech/Utils/EmailValidater.dart';
 import 'package:dr_mech/Utils/Preference.dart';
 import 'package:dr_mech/common/Contants.dart';
+import 'package:dr_mech/common/Provider.dart';
 import 'package:dr_mech/models/GroupModel.dart';
 import 'package:dr_mech/models/ProductModelFile.dart';
 import 'package:dr_mech/models/StaffModel.dart';
@@ -18,6 +18,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
+import 'package:provider/provider.dart';
 
 class SalesScreen extends StatefulWidget {
   @override
@@ -28,7 +29,6 @@ class SalesScreen extends StatefulWidget {
 
 class _SalesScreenState extends State<SalesScreen>
     with SingleTickerProviderStateMixin {
-
   StaffModel selectedStaff = new StaffModel();
   ProductModel selectedProduct = new ProductModel();
   StaffModel staffModel = new StaffModel();
@@ -47,7 +47,6 @@ class _SalesScreenState extends State<SalesScreen>
 
       setState(() {});
     });
-    // getAllSubCategory(staffModel.cmpId.toString(),staffModel.brnId.toString());
 
     super.initState();
   }
@@ -57,7 +56,7 @@ class _SalesScreenState extends State<SalesScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
-        Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+            Theme.of(context).colorScheme.secondary.withOpacity(0.4),
         title: Text("Sales"),
       ),
       resizeToAvoidBottomInset: false,
@@ -69,7 +68,6 @@ class _SalesScreenState extends State<SalesScreen>
               height: 120,
               child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
             ),
-
             Column(
               children: [
                 SizedBox(
@@ -77,560 +75,403 @@ class _SalesScreenState extends State<SalesScreen>
                 ),
                 isLoading
                     ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: CircularProgressIndicator(),
-                  ),
-                )
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
                     : null != productList && productList.length > 0
-                    ? Column(
-                  children: [
-                    TabBar(controller: tabController, tabs: [
-                      Tab(
-                        text: "Cart",
-                      ),
-                      Tab(
-                        text: "Items",
-                      ),
-                    ]),
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      child: TabBarView(
-                          controller: tabController,
-                          children: [
-                            Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
+                        ? Column(
+                            children: [
+                              TabBar(controller: tabController, tabs: [
+                                Tab(
+                                  text: "Cart",
                                 ),
-                                Container(
-                                  height: MediaQuery.of(context).size.height/14,
-                                  width: MediaQuery.of(context).size.width/1.1,
-                                  color: Colors.white,
-                                  child: TextFormField(
-                                    // onChanged: ,
-                                    decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Search',
-                                        prefixIcon: Icon(Icons.search)),
-                                    onTap: () {
+                                Tab(
+                                  text: "Items",
+                                ),
+                              ]),
+                              Container(
+                                height: MediaQuery.of(context).size.height,
+                                child: TabBarView(
+                                    controller: tabController,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                14,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.1,
+                                            color: Colors.white,
+                                            child: TextFormField(
+                                              onChanged: (text) {
+                                                Provider.of<ProductProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .filterItems(text);
+                                              },
+                                              decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText: 'Search',
+                                                  prefixIcon:
+                                                      Icon(Icons.search)),
+                                              onTap: () {},
+                                            ),
+                                          ),
+                                          searchListView(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            color: Colors.deepOrangeAccent,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 5.0),
+                                                    child: Text(
+                                                      "Summary",
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Qty: ",
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                          ),
+                                                          Text("0")
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Disc: ",
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                          ),
+                                                          Text("0")
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Net: ",
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                          ),
+                                                          Text("0")
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            color: Colors.black12,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(bottom: 5.0),
+                                                    child: Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(right: 8.0),
+                                                          child: Text(
+                                                            "Sl.No.",style: TextStyle(
+                                                              fontWeight: FontWeight.bold
+                                                          ),
+                                                            // textAlign: TextAlign.left,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "Name",style: TextStyle(
+                                                            fontWeight: FontWeight.bold
+                                                        ),
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
 
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  color: Colors.deepOrangeAccent,
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(bottom: 5.0),
-                                          child: Text("Summary",style: TextStyle(fontSize: 10),),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Qty: ",
-                                                  textAlign: TextAlign.left,
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Unit",
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Qty",
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Rate",
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Disc",
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Tax",
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "Total",
+                                                          // textAlign: TextAlign.left,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Consumer<ProductProvider>(builder:
+                                              (context, productProvider,
+                                                  child) {
+                                            return ListView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: productProvider
+                                                    .salesCartList.length,
+                                                itemBuilder: (context, index) {
+                                                  return Card(
+                                                    elevation: 1,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(bottom: 5.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Padding(
+                                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                                  child: Text([index + 1]
+                                                                      .toString(),style: TextStyle(
+                                                                    fontWeight: FontWeight.bold
+                                                                  ),),
+                                                                ),
+                                                                Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .productName
+                                                                      .toString(),style: TextStyle(
+                                                                    fontWeight: FontWeight.bold
+                                                                ),
+                                                                  // textAlign: TextAlign.left,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+
+                                                          Row(
+                                                            children: [
+                                                              Expanded(
+                                                                flex:1,
+                                                                child: Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .unitName
+                                                                      .toString(),
+                                                                  // textAlign: TextAlign.left,
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child:null!=  productProvider
+                                                                    .salesCartList[index].qty?
+                                                                Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .qty!
+                                                                      .toStringAsFixed(2),
+                                                                  // textAlign: TextAlign.left,
+                                                                ):Text("0"),
+                                                              ),
+                                                              Expanded(
+                                                                child:null!=productProvider
+                                                      .salesCartList[index].rate?
+                                                                Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .rate!
+                                                                      .toStringAsFixed(2),
+                                                                  // textAlign: TextAlign.left,
+                                                                ):Text("0"),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child:null!=  productProvider
+                                                      .salesCartList[index].discount?
+                                                                Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .discount!
+                                                                      .toStringAsFixed(2),
+                                                                  textAlign:
+                                                                  TextAlign.left,
+                                                                ):Text("0"),
+                                                              ),
+                                                              Expanded(
+                                                                child:null!=  productProvider
+                                                      .salesCartList[index].taxAmount?
+                                                                Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .taxAmount!
+                                                                      .toStringAsFixed(2),
+                                                                  textAlign:
+                                                                  TextAlign.left,
+                                                                ):Text("0")
+                                                              ),
+                                                              Expanded(
+                                                                flex: 1,
+                                                                child:null!= productProvider
+                                                      .salesCartList[index].amount?
+                                                                Text(
+                                                                  productProvider
+                                                                      .salesCartList[index]
+                                                                      .amount!
+                                                                      .toStringAsFixed(2),
+                                                                  textAlign:
+                                                                  TextAlign.left,
+                                                                ):Text("0")
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                });
+                                          }),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  gradient: LinearGradient(
+                                                      begin: Alignment.topLeft,
+                                                      end:
+                                                          Alignment.bottomRight,
+                                                      colors: <Color>[
+                                                        Theme.of(context)
+                                                            .primaryColor,
+                                                        Theme.of(context)
+                                                            .accentColor,
+                                                      ])),
+                                              child: Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    20, 5, 20, 5),
+                                                child: Text(
+                                                  "Save".toUpperCase(),
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white),
                                                 ),
-                                                Text("0")
-                                              ],
+                                              ),
                                             ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Disc: ",
-                                                  textAlign: TextAlign.left,
-                                                ),
-                                                Text("0")
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Net: ",
-                                                  textAlign: TextAlign.left,
-                                                ),
-                                                Text("0")
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  color: Colors.black12,
-                                  child: Padding(
-                                        padding:
-                                        const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Sl.No.",
-                                              // textAlign: TextAlign.left,
-                                            ),
-                                            Text(
-                                              "Name",
-                                              // textAlign: TextAlign.left,
-                                            ),
-                                            Text(
-                                              "Qty",
-                                              // textAlign: TextAlign.left,
-                                            ),
-                                            Text(
-                                              "Price",
-                                              // textAlign: TextAlign.left,
-                                            ),
-                                            Text(
-                                              "Disc",
-                                              // textAlign: TextAlign.left,
-                                            ),
-                                            Text(
-                                              "Total",
-                                              // textAlign: TextAlign.left,
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-
-                                ),
-                                ListView.builder(
-                                    physics:
-                                    NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: productList.length,
-                                    itemBuilder: (context, index) {
-                                      return Card(
-                                        elevation: 1,
-                                        child: Padding(
-                                          padding:
-                                          const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
-                                            children: [
-                                              Text(
-                                                  [index+1].toString()
+                                      Column(
+                                        children: [
+                                          Container(
+                                            color: Colors.black12,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "Name",
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  Text(
+                                                    "Unit",
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  Text(
+                                                    "Group",
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  Text(
+                                                    "Sales Rate",
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  Text(
+                                                    "MRP",
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  Text(
+                                                    "Barcode",
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                ],
                                               ),
-                                              Text(
-                                                productList[index]
-                                                    .productName
-                                                    .toString(),
-                                                // textAlign: TextAlign.left,
-                                              ),
-                                              Text(
-                                                productList[index]
-                                                    .groupName
-                                                    .toString(),
-                                                // textAlign: TextAlign.left,
-                                              ),
-                                              Text(
-                                                productList[index]
-                                                    .salesRate
-                                                    .toString(),
-                                                // textAlign: TextAlign.left,
-                                              ),
-                                              Text(
-                                                productList[index]
-                                                    .mrp
-                                                    .toString(),
-                                                textAlign: TextAlign.left,
-                                              ),
-                                              Text(
-                                                productList[index]
-                                                    .barCode
-                                                    .toString(),
-                                                // textAlign: TextAlign.left,
-                                              ),
-                                              //     Row(
-                                              //       mainAxisAlignment:
-                                              //       MainAxisAlignment.end,
-                                              //       children: [
-                                              //         GestureDetector(
-                                              //           onTap: () {
-                                              //             isGroupUnderVisible =
-                                              //             true;
-                                              //             List<GroupModel>
-                                              //             filtereGroupModelList =
-                                              //             [];
-                                              //
-                                              //             selectedGroupModel =
-                                              //             subgroupModelList[
-                                              //             index];
-                                              //             groupNameController
-                                              //                 .text =
-                                              //             subgroupModelList[
-                                              //             index]
-                                              //                 .groupName!;
-                                              //             filtereGroupModelList = groupModelList
-                                              //                 .where((element) =>
-                                              //             element
-                                              //                 .groupId ==
-                                              //                 selectedGroupModel
-                                              //                     .groupUnder)
-                                              //                 .toList();
-                                              //             groupUnderController
-                                              //                 .text =
-                                              //                 filtereGroupModelList[
-                                              //                 0]
-                                              //                     .groupName
-                                              //                     .toString();
-                                              //             setState(() {});
-                                              //           },
-                                              //           child: Padding(
-                                              //             padding:
-                                              //             const EdgeInsets
-                                              //                 .only(
-                                              //                 right: 8.0),
-                                              //             child: Icon(
-                                              //               Icons.edit,
-                                              //               size: 20,
-                                              //               color:
-                                              //               Colors.grey,
-                                              //             ),
-                                              //           ),
-                                              //         ),
-                                              //         GestureDetector(
-                                              //           onTap: () {
-                                              //             selectedGroupModel =
-                                              //             subgroupModelList[
-                                              //             index];
-                                              //             Constants.deleteDialog(
-                                              //                 context,
-                                              //                 subgroupModelList[
-                                              //                 index]
-                                              //                     .groupName
-                                              //                     .toString())
-                                              //                 .then((value) {
-                                              //               if (value) {
-                                              //                 deleteGroup(
-                                              //                     selectedGroupModel);
-                                              //               }
-                                              //             });
-                                              //           },
-                                              //           child: Icon(
-                                              //             Icons.delete,
-                                              //             size: 20,
-                                              //             color: Colors.red,
-                                              //           ),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    }),
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: <Color>[Theme
-                                                .of(context)
-                                                .primaryColor, Theme
-                                                .of(context)
-                                                .accentColor,
-                                            ]
-                                        )
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                                      child: Text("Save".toUpperCase(),
-                                        style: TextStyle(fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            // ListView.builder(
-                            //     physics:
-                            //     NeverScrollableScrollPhysics(),
-                            //     shrinkWrap: true,
-                            //     itemCount: groupModelList.length,
-                            //     itemBuilder: (context, index) {
-                            //       return Visibility(
-                            //         visible: groupModelList[index]
-                            //             .groupId! >
-                            //             0,
-                            //         child: Card(
-                            //           elevation: 1,
-                            //           child: Padding(
-                            //             padding:
-                            //             const EdgeInsets.all(8.0),
-                            //             child: Row(
-                            //               mainAxisAlignment:
-                            //               MainAxisAlignment
-                            //                   .spaceBetween,
-                            //               children: [
-                            //                 Text(
-                            //                   groupModelList[index]
-                            //                       .groupName
-                            //                       .toString(),
-                            //                   textAlign:
-                            //                   TextAlign.left,
-                            //                 ),
-                            //                 Row(
-                            //                   mainAxisAlignment:
-                            //                   MainAxisAlignment
-                            //                       .end,
-                            //                   children: [
-                            //                     GestureDetector(
-                            //                       onTap: () {
-                            //                         isGroupUnderVisible =
-                            //                         false;
-                            //                         selectedGroupModel =
-                            //                         groupModelList[
-                            //                         index];
-                            //                         groupNameController
-                            //                             .text =
-                            //                         groupModelList[
-                            //                         index]
-                            //                             .groupName!;
-                            //                         setState(() {});
-                            //                       },
-                            //                       child: Padding(
-                            //                         padding:
-                            //                         const EdgeInsets
-                            //                             .only(
-                            //                             right:
-                            //                             8.0),
-                            //                         child: Icon(
-                            //                           Icons.edit,
-                            //                           size: 20,
-                            //                           color:
-                            //                           Colors.grey,
-                            //                         ),
-                            //                       ),
-                            //                     ),
-                            //                     // GestureDetector(
-                            //                     //   onTap: () {
-                            //                     //     selectedGroupModel =
-                            //                     //         groupModelList[
-                            //                     //             index];
-                            //                     //     Constants.deleteDialog(context,groupModelList[index].categoryName.toString()).then((value) {
-                            //                     //       if (value) {
-                            //                     //         // deleteCategory(selectedCategory.categoryId!.toInt(),selectedCategory.cmpId!.toInt(),selectedCategory.brnId!.toInt());
-                            //                     //       }
-                            //                     //     });
-                            //                     //   },
-                            //                     //   child: Icon(
-                            //                     //     Icons.delete,
-                            //                     //     size: 20,
-                            //                     //     color: Colors.red,
-                            //                     //   ),
-                            //                     // ),
-                            //                   ],
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       );
-                            //     }),
-                            Column(
-                              children: [
-                                Container(
-                                  color: Colors.black12,
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Name",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Unit",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Group",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Sales Rate",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "MRP",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          "Barcode",
-                                          textAlign: TextAlign.left,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                ListView.builder(
-                                    physics:
-                                    NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: productList.length,
-                                    itemBuilder: (context, index) {
-                                      return Card(
-                                        elevation: 1,
-                                        child: Padding(
-                                          padding:
-                                          const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
-                                            children: [
-                                              Text(
-                                                productList[index]
-                                                    .productName
-                                                    .toString(),
-                                                textAlign: TextAlign.left,
-                                              ),
-                                        Text(
-                                          productList[index]
-                                              .unitName
-                                              .toString(),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          productList[index]
-                                              .groupName
-                                              .toString(),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          productList[index]
-                                              .salesRate
-                                              .toString(),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          productList[index]
-                                              .mrp
-                                              .toString(),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Text(
-                                          productList[index]
-                                              .barCode
-                                              .toString(),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                          //     Row(
-                                          //       mainAxisAlignment:
-                                          //       MainAxisAlignment.end,
-                                          //       children: [
-                                          //         GestureDetector(
-                                          //           onTap: () {
-                                          //             isGroupUnderVisible =
-                                          //             true;
-                                          //             List<GroupModel>
-                                          //             filtereGroupModelList =
-                                          //             [];
-                                          //
-                                          //             selectedGroupModel =
-                                          //             subgroupModelList[
-                                          //             index];
-                                          //             groupNameController
-                                          //                 .text =
-                                          //             subgroupModelList[
-                                          //             index]
-                                          //                 .groupName!;
-                                          //             filtereGroupModelList = groupModelList
-                                          //                 .where((element) =>
-                                          //             element
-                                          //                 .groupId ==
-                                          //                 selectedGroupModel
-                                          //                     .groupUnder)
-                                          //                 .toList();
-                                          //             groupUnderController
-                                          //                 .text =
-                                          //                 filtereGroupModelList[
-                                          //                 0]
-                                          //                     .groupName
-                                          //                     .toString();
-                                          //             setState(() {});
-                                          //           },
-                                          //           child: Padding(
-                                          //             padding:
-                                          //             const EdgeInsets
-                                          //                 .only(
-                                          //                 right: 8.0),
-                                          //             child: Icon(
-                                          //               Icons.edit,
-                                          //               size: 20,
-                                          //               color:
-                                          //               Colors.grey,
-                                          //             ),
-                                          //           ),
-                                          //         ),
-                                          //         GestureDetector(
-                                          //           onTap: () {
-                                          //             selectedGroupModel =
-                                          //             subgroupModelList[
-                                          //             index];
-                                          //             Constants.deleteDialog(
-                                          //                 context,
-                                          //                 subgroupModelList[
-                                          //                 index]
-                                          //                     .groupName
-                                          //                     .toString())
-                                          //                 .then((value) {
-                                          //               if (value) {
-                                          //                 deleteGroup(
-                                          //                     selectedGroupModel);
-                                          //               }
-                                          //             });
-                                          //           },
-                                          //           child: Icon(
-                                          //             Icons.delete,
-                                          //             size: 20,
-                                          //             color: Colors.red,
-                                          //           ),
-                                          //         ),
-                                          //       ],
-                                          //     ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              ],
-                            ),
-                          ]),
-                    )
-                  ],
-                )
-                    : Center(
-                  child: Text("No data found"),
-                )
+                                        ],
+                                      ),
+                                    ]),
+                              )
+                            ],
+                          )
+                        : Center(
+                            child: Text("No data found"),
+                          )
               ],
             ),
           ],
@@ -639,11 +480,51 @@ class _SalesScreenState extends State<SalesScreen>
     );
   }
 
+  Widget searchListView() {
+    return Consumer<ProductProvider>(
+        builder: (context, productProvider, child) {
+      return null != productProvider.filteredItemList &&
+              productProvider.filteredItemList.length > 0
+          ? ListView.builder(
+              physics: AlwaysScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: productProvider.filteredItemList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    elevation: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(productProvider
+                          .filteredItemList[index].productName
+                          .toString()),
+                    ),
+                  ),
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    productProvider.addToSalesCart(
+                        productProvider.filteredItemList[index], 1);
+                    productProvider.filteredItemList = [];
+                  },
+                );
+              })
+          : Container(
+              height: 0,
+            );
+    });
+  }
+
   Future getAllProduct() async {
     isLoading = true;
     setState(() {});
 
-    String url = Apis.PRODUCT_URL + staffModel.brnId.toString() + "/" + staffModel.cmpId.toString()+"/true/";
+    String url = Apis.PRODUCT_URL +
+        staffModel.brnId.toString() +
+        "/" +
+        staffModel.cmpId.toString() +
+        "/true/";
     var response = await http.get(Uri.parse(url));
 
     isLoading = false;
@@ -654,7 +535,10 @@ class _SalesScreenState extends State<SalesScreen>
     // if(jsonData['success']) {
     var data = jsonData['data']; //based on response string give array name
     productList =
-    List<ProductModel>.from(data.map((x) => ProductModel.fromJson(x)));
+        List<ProductModel>.from(data.map((x) => ProductModel.fromJson(x)));
+    Provider.of<ProductProvider>(context, listen: false)
+        .reloadItems(productList);
+
     setState(() {});
   }
 }

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
 
+import 'common/Provider.dart';
 import 'pages/splash_screen.dart';
 
 void main() {
-  runApp(LoginUiApp());
+  GetStorage().write("isInclusive", false);
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<ProductProvider>(
+        create: (context) => ProductProvider())
+  ], child: LoginUiApp()));
 }
 
 class LoginUiApp extends StatelessWidget {

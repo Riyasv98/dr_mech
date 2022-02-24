@@ -335,8 +335,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               selectedProduct.productName =
                                   productNameController.text;
                               selectedProduct.salesRate =
-                                  salesRateController.text;
-                              selectedProduct.mrp = mrpController.text;
+                                  double.parse(salesRateController.text);
+                              selectedProduct.mrp = double.parse(mrpController.text);
                               selectedProduct.barCode = barcodeController.text;
                               selectedProduct.brnId = staffModel.brnId;
                               selectedProduct.cmpId = staffModel.cmpId;
@@ -573,7 +573,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
     // branchDetailsModel.status = 1;
 
-    String dataJson = productModelToJson(productDetailsModel);
+    String dataJson = itemToJson(productDetailsModel);
 
     var data = jsonEncode({"jsonData": dataJson});
 
