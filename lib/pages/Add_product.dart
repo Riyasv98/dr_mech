@@ -311,26 +311,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                       position: MOTION_TOAST_POSITION.TOP,
                                       width: 300)
                                   .show(context);
-                            } else if (mrpController.text.isEmpty) {
-                              MotionToast.error(
-                                      title: "Error",
-                                      titleStyle: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      description: "Please type Mrp",
-                                      animationType: ANIMATION.FROM_LEFT,
-                                      position: MOTION_TOAST_POSITION.TOP,
-                                      width: 300)
-                                  .show(context);
-                            } else if (barcodeController.text.isEmpty) {
-                              MotionToast.error(
-                                      title: "Error",
-                                      titleStyle: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      description: "Please type barcode",
-                                      animationType: ANIMATION.FROM_LEFT,
-                                      position: MOTION_TOAST_POSITION.TOP,
-                                      width: 300)
-                                  .show(context);
                             } else {
                               selectedProduct.productName =
                                   productNameController.text;

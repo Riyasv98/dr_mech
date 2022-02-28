@@ -20,14 +20,14 @@ import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 import 'package:provider/provider.dart';
 
-class SalesScreen extends StatefulWidget {
+class PurchaseScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SalesScreenState();
+    return _PurchaseScreenState();
   }
 }
 
-class _SalesScreenState extends State<SalesScreen>
+class _PurchaseScreenState extends State<PurchaseScreen>
     with SingleTickerProviderStateMixin {
   StaffModel selectedStaff = new StaffModel();
   ProductModel selectedProduct = new ProductModel();
@@ -56,8 +56,8 @@ class _SalesScreenState extends State<SalesScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
-            Theme.of(context).colorScheme.secondary.withOpacity(0.4),
-        title: Text("Sales"),
+        Theme.of(context).colorScheme.secondary.withOpacity(0.4),
+        title: Text("Purchase"),
       ),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -121,13 +121,13 @@ class _SalesScreenState extends State<SalesScreen>
                               color: Colors.deepOrangeAccent,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.all(8.0),
+                                const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(
-                                              bottom: 5.0),
+                                      const EdgeInsets.only(
+                                          bottom: 5.0),
                                       child: Text(
                                         "Summary",
                                         style: TextStyle(
@@ -136,15 +136,15 @@ class _SalesScreenState extends State<SalesScreen>
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
+                                      MainAxisAlignment
+                                          .spaceBetween,
                                       children: [
                                         Row(
                                           children: [
                                             Text(
                                               "Qty: ",
                                               textAlign:
-                                                  TextAlign.left,
+                                              TextAlign.left,
                                             ),
                                             Text("0")
                                           ],
@@ -154,7 +154,7 @@ class _SalesScreenState extends State<SalesScreen>
                                             Text(
                                               "Disc: ",
                                               textAlign:
-                                                  TextAlign.left,
+                                              TextAlign.left,
                                             ),
                                             Text("0")
                                           ],
@@ -164,7 +164,7 @@ class _SalesScreenState extends State<SalesScreen>
                                             Text(
                                               "Net: ",
                                               textAlign:
-                                                  TextAlign.left,
+                                              TextAlign.left,
                                             ),
                                             Text("0")
                                           ],
@@ -179,11 +179,11 @@ class _SalesScreenState extends State<SalesScreen>
                               color: Colors.black12,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.all(8.0),
+                                const EdgeInsets.all(8.0),
                                 child: Column(
                                   mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .spaceBetween,
+                                  MainAxisAlignment
+                                      .spaceBetween,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(bottom: 5.0),
@@ -254,24 +254,24 @@ class _SalesScreenState extends State<SalesScreen>
                             ),
                             Consumer<ProductProvider>(builder:
                                 (context, productProvider,
-                                    child) {
+                                child) {
                               return ListView.builder(
                                   physics:
-                                      NeverScrollableScrollPhysics(),
+                                  NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: productProvider
-                                      .salesCartList.length,
+                                      .purchaseCartList.length,
                                   itemBuilder: (context, index) {
                                     return Card(
                                       elevation: 1,
                                       child: Padding(
                                         padding:
-                                            const EdgeInsets.all(
-                                                8.0),
+                                        const EdgeInsets.all(
+                                            8.0),
                                         child: Column(
                                           mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
+                                          MainAxisAlignment
+                                              .spaceBetween,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(bottom: 5.0),
@@ -281,12 +281,12 @@ class _SalesScreenState extends State<SalesScreen>
                                                     padding: const EdgeInsets.only(right: 8.0),
                                                     child: Text([index + 1]
                                                         .toString(),style: TextStyle(
-                                                      fontWeight: FontWeight.bold
+                                                        fontWeight: FontWeight.bold
                                                     ),),
                                                   ),
                                                   Text(
                                                     productProvider
-                                                        .salesCartList[index]
+                                                        .purchaseCartList[index]
                                                         .productName
                                                         .toString(),style: TextStyle(
                                                       fontWeight: FontWeight.bold
@@ -303,7 +303,7 @@ class _SalesScreenState extends State<SalesScreen>
                                                   flex:1,
                                                   child: Text(
                                                     productProvider
-                                                        .salesCartList[index]
+                                                        .purchaseCartList[index]
                                                         .unitName
                                                         .toString(),
                                                     // textAlign: TextAlign.left,
@@ -311,10 +311,10 @@ class _SalesScreenState extends State<SalesScreen>
                                                 ),
                                                 Expanded(
                                                   child:null!=  productProvider
-                                                      .salesCartList[index].qty?
+                                                      .purchaseCartList[index].qty?
                                                   Text(
                                                     productProvider
-                                                        .salesCartList[index]
+                                                        .purchaseCartList[index]
                                                         .qty!
                                                         .toStringAsFixed(2),
                                                     // textAlign: TextAlign.left,
@@ -322,10 +322,10 @@ class _SalesScreenState extends State<SalesScreen>
                                                 ),
                                                 Expanded(
                                                   child:null!=productProvider
-                                        .salesCartList[index].rate?
+                                                      .purchaseCartList[index].rate?
                                                   Text(
                                                     productProvider
-                                                        .salesCartList[index]
+                                                        .purchaseCartList[index]
                                                         .rate!
                                                         .toStringAsFixed(2),
                                                     // textAlign: TextAlign.left,
@@ -334,10 +334,10 @@ class _SalesScreenState extends State<SalesScreen>
                                                 Expanded(
                                                   flex: 1,
                                                   child:null!=  productProvider
-                                        .salesCartList[index].discount?
+                                                      .purchaseCartList[index].discount?
                                                   Text(
                                                     productProvider
-                                                        .salesCartList[index]
+                                                        .purchaseCartList[index]
                                                         .discount!
                                                         .toStringAsFixed(2),
                                                     textAlign:
@@ -345,29 +345,29 @@ class _SalesScreenState extends State<SalesScreen>
                                                   ):Text("0"),
                                                 ),
                                                 Expanded(
-                                                  child:null!=  productProvider
-                                        .salesCartList[index].taxAmount?
-                                                  Text(
-                                                    productProvider
-                                                        .salesCartList[index]
-                                                        .taxAmount!
-                                                        .toStringAsFixed(2),
-                                                    textAlign:
-                                                    TextAlign.left,
-                                                  ):Text("0")
+                                                    child:null!=  productProvider
+                                                        .purchaseCartList[index].taxAmount?
+                                                    Text(
+                                                      productProvider
+                                                          .purchaseCartList[index]
+                                                          .taxAmount!
+                                                          .toStringAsFixed(2),
+                                                      textAlign:
+                                                      TextAlign.left,
+                                                    ):Text("0")
                                                 ),
                                                 Expanded(
-                                                  flex: 1,
-                                                  child:null!= productProvider
-                                        .salesCartList[index].amount?
-                                                  Text(
-                                                    productProvider
-                                                        .salesCartList[index]
-                                                        .amount!
-                                                        .toStringAsFixed(2),
-                                                    textAlign:
-                                                    TextAlign.left,
-                                                  ):Text("0")
+                                                    flex: 1,
+                                                    child:null!= productProvider
+                                                        .purchaseCartList[index].amount?
+                                                    Text(
+                                                      productProvider
+                                                          .purchaseCartList[index]
+                                                          .amount!
+                                                          .toStringAsFixed(2),
+                                                      textAlign:
+                                                      TextAlign.left,
+                                                    ):Text("0")
                                                 ),
                                               ],
                                             ),
@@ -382,12 +382,12 @@ class _SalesScreenState extends State<SalesScreen>
                               child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(10)),
+                                    BorderRadius.all(
+                                        Radius.circular(10)),
                                     gradient: LinearGradient(
                                         begin: Alignment.topLeft,
                                         end:
-                                            Alignment.bottomRight,
+                                        Alignment.bottomRight,
                                         colors: <Color>[
                                           Theme.of(context)
                                               .primaryColor,
@@ -402,7 +402,7 @@ class _SalesScreenState extends State<SalesScreen>
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight:
-                                            FontWeight.bold,
+                                        FontWeight.bold,
                                         color: Colors.white),
                                   ),
                                 ),
@@ -416,11 +416,11 @@ class _SalesScreenState extends State<SalesScreen>
                               color: Colors.black12,
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.all(8.0),
+                                const EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .spaceBetween,
+                                  MainAxisAlignment
+                                      .spaceBetween,
                                   children: [
                                     Text(
                                       "Name",
@@ -465,9 +465,9 @@ class _SalesScreenState extends State<SalesScreen>
   Widget searchListView() {
     return Consumer<ProductProvider>(
         builder: (context, productProvider, child) {
-      return null != productProvider.filteredItemList &&
+          return null != productProvider.filteredItemList &&
               productProvider.filteredItemList.length > 0
-          ? ListView.builder(
+              ? ListView.builder(
               physics: AlwaysScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: productProvider.filteredItemList.length,
@@ -486,16 +486,16 @@ class _SalesScreenState extends State<SalesScreen>
                   ),
                   onTap: () {
                     FocusScope.of(context).requestFocus(FocusNode());
-                    productProvider.addToSalesCart(
+                    productProvider.addToPurchaseCart(
                         productProvider.filteredItemList[index], 1);
                     productProvider.filteredItemList = [];
                   },
                 );
               })
-          : Container(
-              height: 0,
-            );
-    });
+              : Container(
+            height: 0,
+          );
+        });
   }
 
   Future getAllProduct() async {
@@ -517,7 +517,7 @@ class _SalesScreenState extends State<SalesScreen>
     // if(jsonData['success']) {
     var data = jsonData['data']; //based on response string give array name
     productList =
-        List<ProductModel>.from(data.map((x) => ProductModel.fromJson(x)));
+    List<ProductModel>.from(data.map((x) => ProductModel.fromJson(x)));
     Provider.of<ProductProvider>(context, listen: false)
         .reloadItems(productList);
 

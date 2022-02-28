@@ -3,6 +3,7 @@
 import 'package:dr_mech/models/StaffModel.dart';
 import 'package:dr_mech/pages/AllUnits.dart';
 import 'package:dr_mech/pages/All_product.dart';
+import 'package:dr_mech/pages/PurchaseScreen.dart';
 import 'package:dr_mech/pages/UnitScreen.dart';
 import 'package:dr_mech/pages/all_staff_screen.dart';
 import 'package:dr_mech/pages/job_card_screen.dart';
@@ -172,26 +173,31 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                 ),
                               ),
 
-                              Container(
-                                height: MediaQuery.of(context).size.height/8,
-                                width: MediaQuery.of(context).size.width/4.5,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-                                    )
-                                ),
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.directions_car,size: 50,
-                                    ),
-                                    Text("Stock",style: TextStyle(
-                                        fontSize: 15,fontWeight: FontWeight.bold
-                                    ),)
-                                  ],
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push( context, MaterialPageRoute( builder: (context) =>PurchaseScreen()));
+                                },
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height/8,
+                                  width: MediaQuery.of(context).size.width/4.5,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+                                      )
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.directions_car,size: 50,
+                                      ),
+                                      Text("Purchase",style: TextStyle(
+                                          fontSize: 15,fontWeight: FontWeight.bold
+                                      ),)
+                                    ],
+                                  ),
                                 ),
                               ),
                               GestureDetector(
