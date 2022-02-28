@@ -30,24 +30,24 @@ class StaffModel {
     this.createdOn,
   });
 
-  int ?brnId;
-  int ?cmpId;
-  int ?employeeId;
-  String ?name;
-  String ?branchName;
-  String ?companyName;
-  String ?imgUrl;
-  String ?userName;
-  String ?password;
-  bool ?isAdmin;
-  String ?email;
-  String ?phone;
-  String ?address;
-  String ?status;
-  String ?updatedBy;
-  String ?createdBy;
-  String ?updatedOn;
-  String ?createdOn;
+  int? brnId;
+  int? cmpId;
+  int? employeeId;
+  String? name;
+  String? branchName;
+  String? companyName;
+  String? imgUrl;
+  String? userName;
+  String? password;
+  bool? isAdmin;
+  String? email;
+  String? phone;
+  String? address;
+  String? status;
+  String? updatedBy;
+  String? createdBy;
+  String? updatedOn;
+  String? createdOn;
 
   factory StaffModel.fromJson(Map<String, dynamic> json) => StaffModel(
     brnId: null!=json["brnId"]?json["brnId"] is int ? json["brnId"]: int.parse(json["brnId"]):-1,
@@ -64,8 +64,8 @@ class StaffModel {
     imgUrl: json["imgUrl"],
     address: json["address"],
     status: json["status"],
-    updatedBy: json["updatedBy"],
-    createdBy: json["createdBy"],
+    updatedBy: null!=json["updatedBy"]?json["updatedBy"] is int ? json["updatedBy"]: int.parse(json["updatedBy"]):-1,
+    createdBy: null!=json["createdBy"]?json["createdBy"] is int ? json["createdBy"]: int.parse(json["createdBy"]):-1,
     updatedOn: json["updatedOn"],
     createdOn: json["createdOn"],
   );

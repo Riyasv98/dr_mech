@@ -99,8 +99,8 @@ class PurchaseReturnHeaderModel {
     status: json["status"],
     brnId: json["brnId"],
     cmpId: json["cmpId"],
-    updatedBy: json["updatedBy"],
-    createdBy: json["createdBy"],
+    updatedBy: null!=json["updatedBy"]?json["updatedBy"] is int ? json["updatedBy"]: int.parse(json["updatedBy"]):-1,
+    createdBy: null!=json["createdBy"]?json["createdBy"] is int ? json["createdBy"]: int.parse(json["createdBy"]):-1,
     updatedOn: json["updatedOn"],
     createdOn: json["createdOn"],
   );

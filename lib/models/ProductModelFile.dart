@@ -66,7 +66,11 @@ class ProductModel {
     this.plu,
     this.status,
     this.unitName,
-    this.groupName,this.focusNode,this.hsnCode,this.currentStock
+    this.groupName,this.focusNode,this.hsnCode,this.currentStock,
+    this.updatedBy,
+    this.createdBy,
+    this.updatedOn,
+    this.createdOn,
   });
 
   int? productId;
@@ -108,6 +112,12 @@ class ProductModel {
   FocusNode? focusNode;
   double ?hsnCode;
   double?currentStock;
+  int? updatedBy;
+  int? createdBy;
+  String? updatedOn;
+  String? createdOn;
+
+
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     productId: null!=json["productId"] ? json["productId"] is String ? int.parse(json["productId"]):json["productId"]:-1,
     brnId: null!=json["brnId"] ? json["brnId"] is String ? int.parse(json["brnId"]):json["brnId"]:-1,
@@ -148,6 +158,12 @@ class ProductModel {
     focusNode: new FocusNode(),
     hsnCode: null!=json["HSN"] ? json["HSN"] is String ? double.parse(json["HSN"]):json["HSN"]:-1,
     currentStock:  null!=json["currentStock"] ? json["currentStock"] is String ? double.parse(json["currentStock"]):json["currentStock"]:-1,
+    updatedBy: null!=json["updatedBy"]?json["updatedBy"] is int ? json["updatedBy"]: int.parse(json["updatedBy"]):-1,
+    createdBy: null!=json["createdBy"]?json["createdBy"] is int ? json["createdBy"]: int.parse(json["createdBy"]):-1,
+    updatedOn:json["updatedOn"],
+    createdOn:json["createdOn"],
+
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -185,6 +201,12 @@ class ProductModel {
     "status": status,
     "unitName": unitName,
     "groupName": groupName,
+    "brnId": brnId,
+    "cmpId": cmpId,
+    "updatedBy": updatedBy,
+    "createdBy": createdBy,
+    "updatedOn": updatedOn,
+    "createdOn": createdOn,
   };
 
 }
