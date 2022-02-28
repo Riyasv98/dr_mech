@@ -28,8 +28,8 @@ class UnitModel {
   factory UnitModel.fromJson(Map<String, dynamic> json) => UnitModel(
     unitId: null!=json["unitId"]?json["unitId"] is int ? json["unitId"]: int.parse(json["unitId"]):-1,
     unitName: json["unitName"],
-    updatedBy: json["updatedBy"],
-    createdBy: json["createdBy"],
+    updatedBy: null!=json["updatedBy"]?json["updatedBy"] is int ? json["updatedBy"]: int.parse(json["updatedBy"]):-1,
+    createdBy: null!=json["createdBy"]?json["createdBy"] is int ? json["createdBy"]: int.parse(json["createdBy"]):-1,
     updatedOn: json["updatedOn"],
     createdOn: json["createdOn"],
   );
