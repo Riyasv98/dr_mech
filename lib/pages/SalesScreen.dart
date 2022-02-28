@@ -74,6 +74,10 @@ class _SalesScreenState extends State<SalesScreen>
                   height: 10,
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
                   height: MediaQuery.of(context)
                       .size
                       .height /
@@ -82,7 +86,6 @@ class _SalesScreenState extends State<SalesScreen>
                       .size
                       .width /
                       1.1,
-                  color: Colors.white,
                   child: TextFormField(
                     onChanged: (text) {
                       Provider.of<ProductProvider>(
@@ -219,31 +222,31 @@ class _SalesScreenState extends State<SalesScreen>
                                         Expanded(
                                           child: Text(
                                             "Qty",
-                                            // textAlign: TextAlign.left,
+                                            textAlign: TextAlign.start,
                                           ),
                                         ),
                                         Expanded(
                                           child: Text(
                                             "Rate",
-                                            // textAlign: TextAlign.left,
+                                            textAlign: TextAlign.right,
                                           ),
                                         ),
                                         Expanded(
                                           child: Text(
                                             "Disc",
-                                            // textAlign: TextAlign.left,
+                                            textAlign: TextAlign.right,
                                           ),
                                         ),
                                         Expanded(
                                           child: Text(
                                             "Tax",
-                                            // textAlign: TextAlign.left,
+                                            textAlign: TextAlign.right,
                                           ),
                                         ),
                                         Expanded(
                                           child: Text(
                                             "Total",
-                                            // textAlign: TextAlign.left,
+                                            textAlign: TextAlign.right,
                                           ),
                                         ),
                                       ],
@@ -300,13 +303,12 @@ class _SalesScreenState extends State<SalesScreen>
                                             Row(
                                               children: [
                                                 Expanded(
-                                                  flex:1,
                                                   child: Text(
                                                     productProvider
                                                         .salesCartList[index]
                                                         .unitName
                                                         .toString(),
-                                                    // textAlign: TextAlign.left,
+                                                    textAlign: TextAlign.start,
                                                   ),
                                                 ),
                                                 Expanded(
@@ -317,8 +319,8 @@ class _SalesScreenState extends State<SalesScreen>
                                                         .salesCartList[index]
                                                         .qty!
                                                         .toStringAsFixed(2),
-                                                    // textAlign: TextAlign.left,
-                                                  ):Text("0"),
+                                                    textAlign: TextAlign.start,
+                                                  ):Text("0",textAlign: TextAlign.start,),
                                                 ),
                                                 Expanded(
                                                   child:null!=productProvider
@@ -328,8 +330,8 @@ class _SalesScreenState extends State<SalesScreen>
                                                         .salesCartList[index]
                                                         .rate!
                                                         .toStringAsFixed(2),
-                                                    // textAlign: TextAlign.left,
-                                                  ):Text("0"),
+                                                    textAlign: TextAlign.right,
+                                                  ):Text("0",textAlign: TextAlign.right,),
                                                 ),
                                                 Expanded(
                                                   flex: 1,
@@ -340,9 +342,8 @@ class _SalesScreenState extends State<SalesScreen>
                                                         .salesCartList[index]
                                                         .discount!
                                                         .toStringAsFixed(2),
-                                                    textAlign:
-                                                    TextAlign.left,
-                                                  ):Text("0"),
+                                                    textAlign: TextAlign.right,
+                                                  ):Text("0",textAlign: TextAlign.right,),
                                                 ),
                                                 Expanded(
                                                   child:null!=  productProvider
@@ -352,9 +353,8 @@ class _SalesScreenState extends State<SalesScreen>
                                                         .salesCartList[index]
                                                         .taxAmount!
                                                         .toStringAsFixed(2),
-                                                    textAlign:
-                                                    TextAlign.left,
-                                                  ):Text("0")
+                                                    textAlign: TextAlign.right,
+                                                  ):Text("0",textAlign: TextAlign.right,)
                                                 ),
                                                 Expanded(
                                                   flex: 1,
@@ -365,9 +365,8 @@ class _SalesScreenState extends State<SalesScreen>
                                                         .salesCartList[index]
                                                         .amount!
                                                         .toStringAsFixed(2),
-                                                    textAlign:
-                                                    TextAlign.left,
-                                                  ):Text("0")
+                                                    textAlign: TextAlign.right,
+                                                  ):Text("0",textAlign: TextAlign.right,)
                                                 ),
                                               ],
                                             ),

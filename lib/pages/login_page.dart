@@ -174,14 +174,20 @@ class _LoginPageState extends State<LoginPage>{
         setState(() {
 
         });
-        StaffModel staffModel=new StaffModel();
-        staffModel=StaffModel.fromJson(dataObject[0]);
-        String staffJson=staffModelToJson(staffModel);
+        if(null!=dataObject && dataObject.length>0) {
+          StaffModel staffModel = new StaffModel();
+          staffModel = StaffModel.fromJson(dataObject[0]);
+          String staffJson = staffModelToJson(staffModel);
 
-        PreferenceFile().setStaffData(staffJson);
-        EasyLoading.dismiss();
+          PreferenceFile().setStaffData(staffJson);
+          EasyLoading.dismiss();
 
-        Navigator.push( context, MaterialPageRoute( builder: (context) => DashboardScreen(staffModel)));
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => DashboardScreen(staffModel)));
+        }else{
+          EasyLoading.showError("No user found");
+
+        }
 
       } else {
 

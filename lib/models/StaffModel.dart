@@ -44,8 +44,8 @@ class StaffModel {
   String? phone;
   String? address;
   String? status;
-  String? updatedBy;
-  String? createdBy;
+  int? updatedBy;
+  int? createdBy;
   String? updatedOn;
   String? createdOn;
 
