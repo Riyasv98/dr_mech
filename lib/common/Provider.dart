@@ -74,7 +74,7 @@ class ProductProvider extends ChangeNotifier{
   PurchaseDetailModel calculateValues(PurchaseDetailModel purchaseDetailModel){
 
 
-    double gstTotalP=GetStorage().read("taxPercentage");
+    double gstTotalP=18;
     double sgstP=gstTotalP/2;
     double cgstP=gstTotalP/2;
 

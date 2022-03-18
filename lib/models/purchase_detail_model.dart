@@ -9,6 +9,8 @@ class PurchaseDetailModel {
   PurchaseDetailModel({
     this.purchaseDetailsId,
     this.purchaseMasterId,
+    this.purchaseRate,
+    this.salesRate,
     this.receiptDetailsId,
     this.orderDetailsId,
     this.productId,
@@ -42,7 +44,7 @@ class PurchaseDetailModel {
   int? purchaseDetailsId, purchaseMasterId, receiptDetailsId,orderDetailsId,productId,
       unitId,unitConversionId,taxId,batchId,downId,rackId;
 
-  double? qty,rate, discount,taxAmount,grossAmount,netAmount,amount;
+  double? qty,rate,purchaseRate,salesRate, discount,taxAmount,grossAmount,netAmount,amount;
   int? slNo;
   String? extraDate;
   String? extra1;
@@ -83,6 +85,10 @@ class PurchaseDetailModel {
       productName: json["productName"],
       qty: null != json["qty"] && json["qty"] is String ? double.parse(
           json["qty"]) : json["qty"],
+      purchaseRate: null != json["purchaseRate"] && json["purchaseRate"] is String ? double.parse(
+          json["purchaseRate"]) : json["purchaseRate"],
+      salesRate: null != json["salesRate"] && json["salesRate"] is String ? double.parse(
+          json["salesRate"]) : json["salesRate"],
       rate: null != json["rate"] && json["rate"] is String ? double.parse(
           json["rate"]) : json["rate"],
       unitId: null != json["unitId"] ? json["unitId"] is String ? int.parse(
@@ -131,6 +137,8 @@ class PurchaseDetailModel {
 
   Map<String, dynamic> toJson() => {
     "purchaseDetailsId": purchaseDetailsId,
+    "purchaseRate": purchaseRate,
+    "salesRate": salesRate,
     "purchaseMasterId": purchaseMasterId,
     "receiptDetailsId": receiptDetailsId,
     "orderDetailsId": orderDetailsId,

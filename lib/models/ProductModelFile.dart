@@ -42,6 +42,7 @@ class ProductModel {
     this.sizeId,
     this.modelNoId,
     this.taxId,
+    this.rate,
     this.taxapplicableOn,
     this.purchaseRate,
     this.salesRate,
@@ -86,6 +87,7 @@ class ProductModel {
   int? taxId;
   String? taxapplicableOn;
   double? purchaseRate;
+  double? rate;
   double? salesRate;
   double? mrp;
   double? minimumStock;
@@ -131,7 +133,8 @@ class ProductModel {
     modelNoId:null!=json["modelNoId"] ? json["modelNoId"] is String ? int.parse(json["modelNoId"]):json["modelNoId"]:-1,
     taxId:null!=json["taxId"] ? json["taxId"] is String ? int.parse(json["taxId"]):json["taxId"]:-1,
     taxapplicableOn: json["taxapplicableOn"],
-    purchaseRate: null!=json["purchaseRate"] ? json["purchaseRate"] is String ? double.parse(json["purchaseRate"]):json["purchaseRate"]:-1,
+    purchaseRate:  null!=json["purchaseRate"] ? json["purchaseRate"] is String ? double.parse(json["purchaseRate"]):json["purchaseRate"]:-1,
+    rate:  null!=json["rate"] ? json["rate"] is String ? double.parse(json["rate"]):json["rate"]:-1,
     salesRate:null!=json["salesRate"] ? json["salesRate"] is String ? double.parse(json["salesRate"]):json["salesRate"]:-1,
     mrp: null!=json["mrp"] ? json["mrp"] is String ? double.parse(json["mrp"]):json["mrp"]:-1,
     minimumStock: null!=json["minimumStock"] ? json["minimumStock"] is String ? double.parse(json["minimumStock"]):json["minimumStock"]:-1,
@@ -176,6 +179,7 @@ class ProductModel {
     "sizeId": sizeId,
     "modelNoId": modelNoId,
     "taxId": taxId,
+    "rate": rate,
     "taxapplicableOn": taxapplicableOn,
     "purchaseRate": purchaseRate,
     "salesRate": salesRate,

@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dr_mech/common/theme_helper.dart';
 import 'package:dr_mech/pages/widgets/header_widget.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
@@ -30,15 +31,23 @@ class SalesScreen extends StatefulWidget {
 class _SalesScreenState extends State<SalesScreen>
     with SingleTickerProviderStateMixin {
   StaffModel selectedStaff = new StaffModel();
-  ProductModel selectedProduct = new ProductModel();
   StaffModel staffModel = new StaffModel();
   List<ProductModel> productList = [];
 
   bool isLoading = false;
   TabController? tabController;
 
+  TextEditingController quantityController = new TextEditingController();
+  TextEditingController rateController = new TextEditingController();
+
+
   @override
   void initState() {
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
+      Provider.of<ProductProvider>(context, listen: false)
+          .clearPurchaseCart();
+    });
+
     tabController = new TabController(length: 2, vsync: this);
 
     PreferenceFile().getStaffData().then((value) {
@@ -76,29 +85,33 @@ class _SalesScreenState extends State<SalesScreen>
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20))
+                      borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   height: MediaQuery.of(context)
                       .size
                       .height /
-                      14,
+                      17,
                   width: MediaQuery.of(context)
                       .size
                       .width /
                       1.1,
-                  child: TextFormField(
-                    onChanged: (text) {
-                      Provider.of<ProductProvider>(
-                          context,
-                          listen: false)
-                          .filterItems(text);
-                    },
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search',
-                        prefixIcon:
-                        Icon(Icons.search)),
-                    onTap: () {},
+                  // color: Colors.white,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextFormField(
+                      onChanged: (text) {
+                        Provider.of<ProductProvider>(
+                            context,
+                            listen: false)
+                            .filterItems(text);
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Search',
+                          prefixIcon:
+                          Icon(Icons.search)),
+                      onTap: () {},
+                    ),
                   ),
                 ),
                 searchListView(),
@@ -216,7 +229,7 @@ class _SalesScreenState extends State<SalesScreen>
                                         Expanded(
                                           child: Text(
                                             "Unit",
-                                            // textAlign: TextAlign.left,
+                                            textAlign: TextAlign.start,
                                           ),
                                         ),
                                         Expanded(
@@ -449,6 +462,7 @@ class _SalesScreenState extends State<SalesScreen>
                                 ),
                               ),
                             ),
+
                           ],
                         ),
                       ]),
@@ -484,10 +498,17 @@ class _SalesScreenState extends State<SalesScreen>
                     ),
                   ),
                   onTap: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    productProvider.addToSalesCart(
-                        productProvider.filteredItemList[index], 1);
-                    productProvider.filteredItemList = [];
+                    qtyDialog(context).then((value) {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      ProductModel productModel = new ProductModel();
+                      productModel =  productProvider.filteredItemList[index];
+                      productModel.salesRate= null!=value?double.parse(value[1]):0;
+
+                      productProvider.addToSalesCart(
+                          productModel, null!=value?double.parse(value[0]):1);
+
+                      productProvider.filteredItemList = [];
+                    });
                   },
                 );
               })
@@ -495,6 +516,87 @@ class _SalesScreenState extends State<SalesScreen>
               height: 0,
             );
     });
+  }
+
+  Future qtyDialog(
+      BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+          title: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Quantity",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8),
+              child: Container(
+                child: TextFormField(
+                  decoration: ThemeHelper().textInputDecoration(
+                      ' Quantity', 'Enter quantity'),
+                  controller: quantityController,
+                ),
+                decoration: ThemeHelper()
+                    .inputBoxDecorationShaddow(),
+              ),
+            ),
+            SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8),
+              child: Container(
+                child: TextFormField(
+                  decoration: ThemeHelper().textInputDecoration(
+                      ' Rate', 'Enter purchase rate'),
+                  controller: rateController,
+                ),
+                decoration: ThemeHelper()
+                    .inputBoxDecorationShaddow(),
+              ),
+            ),
+            SizedBox(height: 20,),
+
+            GestureDetector(
+              child: const Align(
+                child: Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Save"),
+                      )
+                  ),
+                ),
+                alignment: Alignment.center,
+              ),
+              onTap: () {
+
+                Navigator.of(context).pop([quantityController.text,rateController.text]);
+
+              },
+            ),
+
+
+          ],
+        );
+      },
+    );
   }
 
   Future getAllProduct() async {

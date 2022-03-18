@@ -39,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
               Container(height: 100, child: HeaderWidget(100,false,Icons.house_rounded),),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.fromLTRB(25, 10, 25, 10),
+                margin: EdgeInsets.fromLTRB(25, 50, 25, 10),
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Column(
                   children: [
@@ -71,7 +71,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => JobCardScreen()));
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -98,7 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => AllStaffScreen()));
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -122,7 +122,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                               ),
 
                               Container(
-                                height: MediaQuery.of(context).size.height/8,
+                                height: MediaQuery.of(context).size.height/10,
                                 width: MediaQuery.of(context).size.width/4,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -151,7 +151,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                             children: [
 
                               Container(
-                                height: MediaQuery.of(context).size.height/8,
+                                height: MediaQuery.of(context).size.height/10,
                                 width: MediaQuery.of(context).size.width/4.5,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -178,7 +178,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   Navigator.push( context, MaterialPageRoute( builder: (context) =>PurchaseScreen()));
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -205,7 +205,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
                                   Navigator.push( context, MaterialPageRoute( builder: (context) =>SalesScreen()));
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -239,7 +239,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
 
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -267,7 +267,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
 
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -296,7 +296,7 @@ class _DashboardScreenState extends State<DashboardScreen>{
 
                                 },
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height/8,
+                                  height: MediaQuery.of(context).size.height/10,
                                   width: MediaQuery.of(context).size.width/4.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(20)),
