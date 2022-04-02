@@ -12,7 +12,8 @@ class PreferenceFile {
   Future<StaffModel> getStaffData() async {
     StaffModel staffModel=new StaffModel();
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String jsonData=preferences.getString('staffModel')!;
+    String jsonData= null != preferences.getString('staffModel')!?
+    preferences.getString('staffModel')!:"";
     staffModel=staffModelFromJson(jsonData);
     return staffModel;
   }

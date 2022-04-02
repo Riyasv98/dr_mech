@@ -59,5 +59,6 @@ class Apis {
   // static const String DELETE_STAFF_URL = BASE_URL+"employee/deleteemployee/";
   //
   // static const String DELETE_STAFF_URL = BASE_URL+"employee/deleteemployee/";
+  static const String ADD_SALE = BASE_URL+"Sales/addsale/";
 
 }

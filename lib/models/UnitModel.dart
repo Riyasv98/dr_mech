@@ -20,8 +20,8 @@ class UnitModel {
 
   int ?unitId;
   String ?unitName;
-  String ?updatedBy;
-  String ?createdBy;
+  int ?updatedBy;
+  int ?createdBy;
   String ?updatedOn;
   String ?createdOn;
 
